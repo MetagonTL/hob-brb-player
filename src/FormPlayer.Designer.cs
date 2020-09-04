@@ -32,16 +32,17 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormPlayer));
             this.tmrTenthSecond = new System.Windows.Forms.Timer(this.components);
             this.pnlUIInterBRB = new System.Windows.Forms.Panel();
+            this.dispNextBRBName = new System.Windows.Forms.Label();
             this.dispCountdown = new System.Windows.Forms.Label();
             this.dispCurrentChapterNumber = new System.Windows.Forms.Label();
             this.lblRandomHobEmote = new System.Windows.Forms.Label();
             this.dispMoreInfoOnBRB = new System.Windows.Forms.Label();
-            this.dispNextBRBName = new System.Windows.Forms.Label();
             this.lblNextUp = new System.Windows.Forms.Label();
             this.picRandomHobEmote = new System.Windows.Forms.PictureBox();
             this.dispHobIsTakingABreak = new System.Windows.Forms.Label();
             this.lblBRBManagerCreditsInter = new System.Windows.Forms.Label();
             this.pnlUIPreBRB = new System.Windows.Forms.Panel();
+            this.btnSwitchScreen = new System.Windows.Forms.Button();
             this.btnConfirmBRBPlayback = new System.Windows.Forms.Button();
             this.lblChecklistForHob = new System.Windows.Forms.Label();
             this.dispWelcomeToBRBBreak = new System.Windows.Forms.Label();
@@ -66,9 +67,8 @@
             this.btnFinishBRBPlayback = new System.Windows.Forms.Button();
             this.lblChecklistForHobPostBRB = new System.Windows.Forms.Label();
             this.lblThanksForWatching = new System.Windows.Forms.Label();
-            this.lblBRBManagerCreditsPostBRB = new System.Windows.Forms.Label();
+            this.lblBRBManagerCreditsPost = new System.Windows.Forms.Label();
             this.videoView = new LibVLCSharp.WinForms.VideoView();
-            this.btnSwitchScreen = new System.Windows.Forms.Button();
             this.tooltipManager = new System.Windows.Forms.ToolTip(this.components);
             this.pnlUIInterBRB.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picRandomHobEmote)).BeginInit();
@@ -90,11 +90,11 @@
             // 
             this.pnlUIInterBRB.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.pnlUIInterBRB.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.pnlUIInterBRB.Controls.Add(this.dispNextBRBName);
             this.pnlUIInterBRB.Controls.Add(this.dispCountdown);
             this.pnlUIInterBRB.Controls.Add(this.dispCurrentChapterNumber);
             this.pnlUIInterBRB.Controls.Add(this.lblRandomHobEmote);
             this.pnlUIInterBRB.Controls.Add(this.dispMoreInfoOnBRB);
-            this.pnlUIInterBRB.Controls.Add(this.dispNextBRBName);
             this.pnlUIInterBRB.Controls.Add(this.lblNextUp);
             this.pnlUIInterBRB.Controls.Add(this.picRandomHobEmote);
             this.pnlUIInterBRB.Controls.Add(this.dispHobIsTakingABreak);
@@ -105,12 +105,22 @@
             this.pnlUIInterBRB.TabIndex = 1;
             this.pnlUIInterBRB.Visible = false;
             // 
+            // dispNextBRBName
+            // 
+            this.dispNextBRBName.AutoSize = true;
+            this.dispNextBRBName.Font = new System.Drawing.Font("Verdana", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dispNextBRBName.Location = new System.Drawing.Point(119, 68);
+            this.dispNextBRBName.Name = "dispNextBRBName";
+            this.dispNextBRBName.Size = new System.Drawing.Size(121, 25);
+            this.dispNextBRBName.TabIndex = 4;
+            this.dispNextBRBName.Text = "None.mp4";
+            // 
             // dispCountdown
             // 
             this.dispCountdown.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.dispCountdown.Font = new System.Drawing.Font("Arial", 48F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dispCountdown.ForeColor = System.Drawing.Color.MediumBlue;
-            this.dispCountdown.Location = new System.Drawing.Point(880, 79);
+            this.dispCountdown.Location = new System.Drawing.Point(880, 81);
             this.dispCountdown.Name = "dispCountdown";
             this.dispCountdown.Size = new System.Drawing.Size(161, 75);
             this.dispCountdown.TabIndex = 7;
@@ -148,16 +158,6 @@
             this.dispMoreInfoOnBRB.Size = new System.Drawing.Size(327, 18);
             this.dispMoreInfoOnBRB.TabIndex = 5;
             this.dispMoreInfoOnBRB.Text = "Filename: None.mp4  –  Authors: Kitty";
-            // 
-            // dispNextBRBName
-            // 
-            this.dispNextBRBName.AutoSize = true;
-            this.dispNextBRBName.Font = new System.Drawing.Font("Verdana", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dispNextBRBName.Location = new System.Drawing.Point(119, 68);
-            this.dispNextBRBName.Name = "dispNextBRBName";
-            this.dispNextBRBName.Size = new System.Drawing.Size(121, 25);
-            this.dispNextBRBName.TabIndex = 4;
-            this.dispNextBRBName.Text = "None.mp4";
             // 
             // lblNextUp
             // 
@@ -216,6 +216,17 @@
             this.pnlUIPreBRB.Size = new System.Drawing.Size(1920, 190);
             this.pnlUIPreBRB.TabIndex = 7;
             this.pnlUIPreBRB.Visible = false;
+            // 
+            // btnSwitchScreen
+            // 
+            this.btnSwitchScreen.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSwitchScreen.Location = new System.Drawing.Point(1117, 133);
+            this.btnSwitchScreen.Name = "btnSwitchScreen";
+            this.btnSwitchScreen.Size = new System.Drawing.Size(40, 40);
+            this.btnSwitchScreen.TabIndex = 8;
+            this.tooltipManager.SetToolTip(this.btnSwitchScreen, "Move player to a different screen");
+            this.btnSwitchScreen.UseVisualStyleBackColor = true;
+            this.btnSwitchScreen.Click += new System.EventHandler(this.btnSwitchScreen_Click);
             // 
             // btnConfirmBRBPlayback
             // 
@@ -462,7 +473,7 @@
             this.pnlUIPostBRB.Controls.Add(this.btnFinishBRBPlayback);
             this.pnlUIPostBRB.Controls.Add(this.lblChecklistForHobPostBRB);
             this.pnlUIPostBRB.Controls.Add(this.lblThanksForWatching);
-            this.pnlUIPostBRB.Controls.Add(this.lblBRBManagerCreditsPostBRB);
+            this.pnlUIPostBRB.Controls.Add(this.lblBRBManagerCreditsPost);
             this.pnlUIPostBRB.Location = new System.Drawing.Point(0, 678);
             this.pnlUIPostBRB.Name = "pnlUIPostBRB";
             this.pnlUIPostBRB.Size = new System.Drawing.Size(1920, 153);
@@ -506,16 +517,16 @@
             this.lblThanksForWatching.Text = "This was the last BRB video of the playlist. Thank you for watching! Hob will be " +
     "back from his break shortly.";
             // 
-            // lblBRBManagerCreditsPostBRB
+            // lblBRBManagerCreditsPost
             // 
-            this.lblBRBManagerCreditsPostBRB.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblBRBManagerCreditsPostBRB.Font = new System.Drawing.Font("Verdana", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblBRBManagerCreditsPostBRB.Location = new System.Drawing.Point(1323, 121);
-            this.lblBRBManagerCreditsPostBRB.Name = "lblBRBManagerCreditsPostBRB";
-            this.lblBRBManagerCreditsPostBRB.Size = new System.Drawing.Size(590, 23);
-            this.lblBRBManagerCreditsPostBRB.TabIndex = 0;
-            this.lblBRBManagerCreditsPostBRB.Text = "The_Happy_Hob BRB Manager and Player by MetagonTL – Version n/a";
-            this.lblBRBManagerCreditsPostBRB.TextAlign = System.Drawing.ContentAlignment.BottomRight;
+            this.lblBRBManagerCreditsPost.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblBRBManagerCreditsPost.Font = new System.Drawing.Font("Verdana", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblBRBManagerCreditsPost.Location = new System.Drawing.Point(1323, 121);
+            this.lblBRBManagerCreditsPost.Name = "lblBRBManagerCreditsPost";
+            this.lblBRBManagerCreditsPost.Size = new System.Drawing.Size(590, 23);
+            this.lblBRBManagerCreditsPost.TabIndex = 0;
+            this.lblBRBManagerCreditsPost.Text = "The_Happy_Hob BRB Manager and Player by MetagonTL – Version n/a";
+            this.lblBRBManagerCreditsPost.TextAlign = System.Drawing.ContentAlignment.BottomRight;
             // 
             // videoView
             // 
@@ -527,17 +538,7 @@
             this.videoView.Size = new System.Drawing.Size(1920, 1080);
             this.videoView.TabIndex = 10;
             this.videoView.Text = "videoView1";
-            // 
-            // btnSwitchScreen
-            // 
-            this.btnSwitchScreen.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSwitchScreen.Location = new System.Drawing.Point(1117, 133);
-            this.btnSwitchScreen.Name = "btnSwitchScreen";
-            this.btnSwitchScreen.Size = new System.Drawing.Size(40, 40);
-            this.btnSwitchScreen.TabIndex = 8;
-            this.tooltipManager.SetToolTip(this.btnSwitchScreen, "Move player to a different screen");
-            this.btnSwitchScreen.UseVisualStyleBackColor = true;
-            this.btnSwitchScreen.Click += new System.EventHandler(this.btnSwitchScreen_Click);
+            this.videoView.MouseEnter += new System.EventHandler(this.videoView_MouseEnter);
             // 
             // FormPlayer
             // 
@@ -552,6 +553,7 @@
             this.Controls.Add(this.pnlUIPreBRB);
             this.Controls.Add(this.pnlUIInterBRB);
             this.Controls.Add(this.videoView);
+            this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
@@ -618,7 +620,7 @@
         private System.Windows.Forms.Button btnFinishBRBPlayback;
         private System.Windows.Forms.Label lblChecklistForHobPostBRB;
         private System.Windows.Forms.Label lblThanksForWatching;
-        private System.Windows.Forms.Label lblBRBManagerCreditsPostBRB;
+        private System.Windows.Forms.Label lblBRBManagerCreditsPost;
         private LibVLCSharp.WinForms.VideoView videoView;
         private System.Windows.Forms.Button btnSwitchScreen;
         private System.Windows.Forms.ToolTip tooltipManager;

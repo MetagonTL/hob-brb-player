@@ -95,21 +95,27 @@ namespace Hob_BRB_Player
 
 		private long lastScrubUpdateTicks = 0;
 
-		// Should never be called
-		public FormPlayer()
-        {
+		public FormPlayer(List<BRBEpisode> brbsToPlay)
+		{
 			InitializeComponent();
-			// Make sure "PAUSED" is centered properly
-			Rectangle oldbounds = pnlPaused.Bounds;
-			pnlPaused.SetBounds(Screen.FromControl(this).Bounds.Width / 2 - pnlPaused.Width / 2, oldbounds.Y, oldbounds.Width, oldbounds.Height);
+			ReCenterControls();
+
+			// Display correct app version at the bottom in every screen
+			lblBRBManagerCreditsPre.Text = "The_Happy_Hob BRB Manager and Player by MetagonTL – Version " + Config.Version;
+			lblBRBManagerCreditsInter.Text = "The_Happy_Hob BRB Manager and Player by MetagonTL – Version " + Config.Version;
+			lblBRBManagerCreditsPost.Text = "The_Happy_Hob BRB Manager and Player by MetagonTL – Version " + Config.Version;
+			lblBRBManagerCreditsHobbVLC.Text = "The_Happy_Hob BRB Manager and Player by MetagonTL – Version " + Config.Version;
+			lblBRBManagerCreditsError.Text = "The_Happy_Hob BRB Manager and Player by MetagonTL – Version " + Config.Version;
 
 			// Load the VLC media player in for convenience
 			VLCPlayer = Program.VLCPlayer;
 			videoView.MediaPlayer = VLCPlayer;
 
+			this.TopMost = Config.MakePlayerTopMost;
+
 			LoadIcons();
 
-			BRBPlaylist = new List<BRBEpisode>();
+			BRBPlaylist = brbsToPlay;
 		}
 
 		private void LoadIcons()
@@ -119,20 +125,6 @@ namespace Hob_BRB_Player
 			btnFinishBRBPlayback.Image = Image‌.FromFile("icons\\closeplayer.png");
 			picHobbVLC.Image = new Bitmap(Image.FromFile("images\\hobEmotes\\hobbVLC.png"), 100, 100);
 		}
-
-		public FormPlayer(List<BRBEpisode> brbsToPlay)
-		{
-			InitializeComponent();
-			ReCenterControls();
-
-			// Load the VLC media player in for convenience
-			VLCPlayer = Program.VLCPlayer;
-			videoView.MediaPlayer = VLCPlayer;
-
-			LoadIcons();
-
-			BRBPlaylist = brbsToPlay;
-        }
 
 		public void ReCenterControls()
         {
@@ -181,7 +173,7 @@ namespace Hob_BRB_Player
 					else
                     {
 						secondCountdown -= 0.1;
-						dispNextBRBName.Text = NextOrCurrentBRB.Name != "" ? NextOrCurrentBRB.Name : NextOrCurrentBRB.Filename;
+						dispNextBRBName.Text = NextOrCurrentBRB.Title != "" ? NextOrCurrentBRB.Title : NextOrCurrentBRB.Filename;
 						dispCountdown.Text = ((int)Math.Ceiling(secondCountdown)).ToString();
 					}
 					break;
@@ -205,7 +197,7 @@ namespace Hob_BRB_Player
 					else
 					{
 						secondCountdown -= 0.1;
-						dispNextBRBNameHobbVLC.Text = NextOrCurrentBRB.Name != "" ? NextOrCurrentBRB.Name : NextOrCurrentBRB.Filename;
+						dispNextBRBNameHobbVLC.Text = NextOrCurrentBRB.Title != "" ? NextOrCurrentBRB.Title : NextOrCurrentBRB.Filename;
 						dispCountdownHobbVLC.Text = ((int)Math.Ceiling(secondCountdown)).ToString();
 					}
 					break;
@@ -274,9 +266,9 @@ namespace Hob_BRB_Player
 			int remMins = (int)Math.Round(GetRemainingBreakTime().TotalMinutes);
 			dispHobIsTakingABreak.Text = "Hob is taking a break. He will be back in about " + remMins + " minute" + (remMins == 1 ? "" : "s") + ". In the meantime, please enjoy the memes.";
 
-			dispNextBRBName.Text = NextOrCurrentBRB.Name != "" ? NextOrCurrentBRB.Name : NextOrCurrentBRB.Filename;
+			dispNextBRBName.Text = NextOrCurrentBRB.Title != "" ? NextOrCurrentBRB.Title : NextOrCurrentBRB.Filename;
 			dispCountdown.Text = ((int)Math.Ceiling(secondCountdown)).ToString();
-			dispMoreInfoOnBRB.Text = NextOrCurrentBRB.Name != "" ? "Filename: " + NextOrCurrentBRB.Filename + (NextOrCurrentBRB.Credits != "" ? "  –  " : "") : "";
+			dispMoreInfoOnBRB.Text = NextOrCurrentBRB.Title != "" ? "Filename: " + NextOrCurrentBRB.Filename + (NextOrCurrentBRB.Credits != "" ? "  –  " : "") : "";
 			dispMoreInfoOnBRB.Text += NextOrCurrentBRB.Credits != "" ? "Authors: " + NextOrCurrentBRB‌.Credits : "";
 
 			string randomEmote = GetRandomHobEmote();
@@ -306,9 +298,9 @@ namespace Hob_BRB_Player
 			dispWelcomeToHobbVLC.Text = "Maybe not – it seems we have a hobbVLC situation on our hands. Please enjoy one more BRB video of about "
 				                        + remMins + " minute" + (remMins == 1 ? "" : "s") + ".";
 
-			dispNextBRBNameHobbVLC.Text = NextOrCurrentBRB.Name != "" ? NextOrCurrentBRB.Name : NextOrCurrentBRB.Filename;
+			dispNextBRBNameHobbVLC.Text = NextOrCurrentBRB.Title != "" ? NextOrCurrentBRB.Title : NextOrCurrentBRB.Filename;
 			dispCountdownHobbVLC.Text = ((int)Math.Ceiling(secondCountdown)).ToString();
-			dispMoreInfoOnBRBHobbVLC.Text = NextOrCurrentBRB.Name != "" ? "Filename: " + NextOrCurrentBRB.Filename + (NextOrCurrentBRB.Credits != "" ? "  –  " : "") : "";
+			dispMoreInfoOnBRBHobbVLC.Text = NextOrCurrentBRB.Title != "" ? "Filename: " + NextOrCurrentBRB.Filename + (NextOrCurrentBRB.Credits != "" ? "  –  " : "") : "";
 			dispMoreInfoOnBRBHobbVLC.Text += NextOrCurrentBRB.Credits != "" ? "Authors: " + NextOrCurrentBRB‌.Credits : "";
 
 			dispCurrentChapterNumberHobbVLC.Text = "The current chapter is " + Config.Chapter + ". If this is wrong, please remind Hob to update it.";
@@ -437,6 +429,15 @@ namespace Hob_BRB_Player
 				// Ignore, user should try to open a new player form instead, or do something else to try and fix the error
 			}
 			// In other cases: TODO
+		}
+
+		// Hide cursor if mouse enters video player
+		private void videoView_MouseEnter(object sender, EventArgs e)
+		{
+			if (PlayerState == BRBPlayerState.Playback && !Paused)
+            {
+				Program.HideCursor();
+            }
 		}
 
 		// If a BRB video is playing, go back to its InterBRB screen
@@ -617,7 +618,7 @@ namespace Hob_BRB_Player
 				File.AppendAllLines("MediaError.log", new string[] { "Error at " + DateTime.Now.ToShortDateString() + " " + DateTime.Now.ToLongTimeString()
 															         + " while playing the BRB episode " + NextOrCurrentBRB.Filename });
 			}
-			catch
+			catch (IOException)
 			{
 				MessageBox.Show("Cannot write to file MediaError.log. Ensure the application has write permissions in its directory.", "Error writing media error to file",
 								MessageBoxButtons.OK, MessageBoxIcon.Warning);

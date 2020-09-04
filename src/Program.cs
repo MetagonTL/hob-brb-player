@@ -83,7 +83,12 @@ namespace Hob_BRB_Player
             {
                 VLC.SetLogFile("VLC.log");
             }
-            catch
+            catch (IOException)
+            {
+                MessageBox.Show("Cannot set the file VLC.log as the VLC log file. Ensure the application has write permissions in its directory.", "Error setting the log file for VLC",
+                                MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            catch (VLCException)
             {
                 MessageBox.Show("Cannot set the file VLC.log as the VLC log file. Ensure the application has write permissions in its directory.", "Error setting the log file for VLC",
                                 MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -106,7 +111,7 @@ namespace Hob_BRB_Player
                 }
                 else
                 {
-                    MessageBox.Show("Could not write to file config.json, Initial Setup could not be completed.\r\n\r\nEnsure the application has write permissions in its directory and try again.",
+                    MessageBox.Show("Could not write to file config.json. Initial Setup could not be completed.\r\n\r\nEnsure the application has write permissions in its directory and try again.",
                                     "No write access in application directory", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }

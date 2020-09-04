@@ -25,17 +25,14 @@ namespace Hob_BRB_Player
         private Image iconVolumeMuted = Image.FromFile("icons\\volumemuted.png");
 
         private string durationOfCurrentBRBFormatted;
+        private int currentBRBListSortColumn = 1;
+        private bool currentBRBListSortInverted = false; // At the beginning, sort by filename ascending
 
         public FormMain()
         {
             InitializeComponent();
 
             LoadIcons();
-
-            // Set Volume to standard value
-            trkVolume.Value = Config.StandardPlayerVolume;
-            txtVolume.Text = trkVolume.Value.ToString();
-            Program.VLCPlayer.Volume = trkVolume.Value;
 
             FillInConfigAndBRBData();
         }
@@ -59,65 +56,186 @@ namespace Hob_BRB_Player
             btnReplayBRB.Image = Image.FromFile("icons\\replaybrb.png");
             btnNextBRB.Image = Image.FromFile("icons\\nextbrb.png");
             chkMuted.Image = iconVolume;
+            picSearch.Image = Image.FromFile("icons\\search.png");
         }
 
         private void FillInConfigAndBRBData()
         {
-            lnkChapterNumber.Text = Config.Chapter.ToString();
+            UpdateConfigValues();
+            // Since this method is only called on startup, enable the Chapter Increment link
+            lnkChapterNumber.LinkColor = Color.Blue;
+            lnkChapterNumber.LinkBehavior = LinkBehavior.AlwaysUnderline;
 
+            lstAllBRBs.Columns.Add("Fv", 25);
             lstAllBRBs.Columns.Add("Filename", 180);
             lstAllBRBs.Columns.Add("Dur", 40);
-            lstAllBRBs.Columns.Add("Description", 245);
+            lstAllBRBs.Columns.Add("Description", 240);
             lstAllBRBs.Columns.Add("Last", 40);
-            lstAllBRBs.Columns.Add("Wt", 40);
-            lstAllBRBs.Columns.Add("Prio", 40);
+            lstAllBRBs.Columns.Add("Wt", 30);
+            lstAllBRBs.Columns.Add("Prio", 30);
 
             lstBRBPlaylist.Columns.Add("Filename", 180);
             lstBRBPlaylist.Columns.Add("Dur", 44);
             lstBRBPlaylist.Columns.Add("Wt", 40);
             lstBRBPlaylist.Columns.Add("Add Reason", 90);
 
+            drpSearchWhere.SelectedIndex = 0;
+
             UpdateBRBData();
         }
 
-        public void UpdateBRBData()
+        private void UpdateConfigValues()
         {
-            lblAvailableBRBs.Text = "Availabe BRBs (" + BRBManager.BRBEpisodes.Count + "):";
+            // Set Volume to standard value
+            trkVolume.Value = Config.StandardPlayerVolume;
+            txtVolume.Text = trkVolume.Value.ToString();
+            Program.VLCPlayer.Volume = trkVolume.Value;
 
-            lstAllBRBs.Items.Clear();
-            foreach (BRBEpisode episode in BRBManager.BRBEpisodes)
-            {
-                int weight = episode.GetWeight();
-                ListViewItem item = new ListViewItem(new string[] { episode.Filename, BRBManager.TimeSpanToMMSS(episode.Duration), episode.Description, episode.LatestPlaybackChapter.ToString(),
-                                                                    weight.ToString(), episode.PriorityChar.ToString() });
-                item.UseItemStyleForSubItems = false;
-                item.SubItems[4].Font = new Font(item.SubItems[4].Font, FontStyle.Bold);
-                item.SubItems[4].ForeColor = weight <= 4 ? Color.DarkGreen : (weight <= 9 ? Color.Orange : Color.Red);
-                if (item.SubItems[5].Text != "N")
-                {
-                    item.SubItems[5].Font = new Font(item.SubItems[5].Font, FontStyle.Bold);
-                }
-                lstAllBRBs.Items.Add(item);
-            }
+            lnkChapterNumber.Text = Config.Chapter.ToString();
+            lnkChapterNumber.LinkColor = Color.Black;
+            lnkChapterNumber.LinkBehavior = LinkBehavior.NeverUnderline;
         }
 
         private void FormMain_Shown(object sender, EventArgs e)
         {
-            // Nothing yet
+            CheckAndAddNewFiles();
+        }
+
+        public void UpdateBRBData()
+        {
+            lstAllBRBs.BeginUpdate();
+            lstAllBRBs.Items.Clear();
+
+            List<ListViewItem> newItems = new List<ListViewItem>(BRBManager.AvailableBRBEpisodes.Count);
+
+            foreach (BRBEpisode episode in BRBManager.AvailableBRBEpisodes)
+            {
+                if (txtSearch.Text == "" || episode.ContainsTextAtField(txtSearch.Text, drpSearchWhere.SelectedIndex))
+                {
+                    int weight = episode.GetWeight();
+                    ListViewItem item = new ListViewItem(new string[] { episode.Favourite ? "\u2605" : "", episode.Filename, BRBManager.TimeSpanToMMSS(episode.Duration), episode.Description,
+                                                                    episode.LatestPlaybackChapter.ToString(), weight.ToString(), episode.PriorityChar.ToString() });
+                    item.UseItemStyleForSubItems = false;
+                    item.SubItems[0].Font = new Font(item.SubItems[0].Font, FontStyle.Bold);
+                    item.SubItems[0].ForeColor = Color.Gold;
+                    item.SubItems[5].Font = new Font(item.SubItems[5].Font, FontStyle.Bold);
+                    item.SubItems[5].ForeColor = weight <= 4 ? Color.DarkGreen : (weight <= 9 ? Color.Orange : Color.Red);
+                    if (item.SubItems[6].Text != "N")
+                    {
+                        item.SubItems[6].Font = new Font(item.SubItems[6].Font, FontStyle.Bold);
+                    }
+                    newItems.Add(item);
+                }
+            }
+
+            lstAllBRBs.Items.AddRange(newItems.ToArray());
+
+            lstAllBRBs.ListViewItemSorter = new BRBListComparer(currentBRBListSortColumn, currentBRBListSortInverted);
+            lstAllBRBs.Sort();
+            lstAllBRBs.ListViewItemSorter = null; // This is supposed to improve performance
+
+            lstAllBRBs.EndUpdate();
+
+            if (txtSearch.Text == "")
+            {
+                lblAvailableBRBs.Text = "Available BRBs (" + BRBManager.AvailableBRBEpisodes.Count + "):";
+            }
+            else
+            {
+                lblAvailableBRBs.Text = "Available BRBs (filtered, " + lstAllBRBs.Items.Count + " / " + BRBManager.AvailableBRBEpisodes.Count + "):";
+            }
+        }
+
+        // Look for new BRB files that are yet unknown to the manager's list
+        private void CheckAndAddNewFiles()
+        {
+            List<string> knownFilenames = BRBManager.GetBRBFilenameList();
+
+            foreach (string diskPath in Directory.GetFiles(Config.BRBDirectory))
+            {
+                if (!knownFilenames.Contains(Path.GetFileName(diskPath)))
+                {
+                    if (MessageBox.Show("A new file has been found in the BRB directory. Would you like to add \"" + Path.GetFileName(diskPath) + "\" to the BRB list now?\r\n\r\n" +
+                                        "Note: The new BRB will automatically receive " + Config.AutoGuaranteedPlaysForNewBRBs +
+                                        " \"Guaranteed\" and " + Config.AutoPriorityPlaysForNewBRBs + " \"Priority\" plays.\r\n\r\n" +
+                                        "If this is a renamed or updated BRB file, please select \"No\" and use the \"Replace with new version\" button in \"Manage BRBs\".",
+                                        "New BRB found", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) == DialogResult.Yes)
+                    {
+                        if (!BRBManager.RegisterNewBRB(Path.GetFileName(diskPath)))
+                        {
+                            MessageBox.Show("Could not register the new BRB file. Make sure it is a valid video file (in a format compatible with VLC) " +
+                                            "and the application has read permissions on it.",
+                                            "Adding new BRB failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                        else if (!BRBManager‌.SaveEpisodes())
+                        {
+                            MessageBox.Show("Could not write to file brbepisodes.json. The new BRB is available for playback, but its existence could not be saved to disk.\r\n\r\n" +
+                                            "It is recommended you investigate this problem as soon as possible, since playback data is difficult to replace if lost.",
+                                            "Writing BRB data to disk failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                    }
+                }
+            }
+
+            UpdateBRBData();
+        }
+
+        // The chapter increment link will activate to be clickable on every app restart, and also daily at 07:00 UTC (which is 07:00 GMT and 08:00 BST)
+        private void lnkChapterNumber_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            // Only allow clicking while no BRB is playing
+            if (Program.AppState == ApplicationState.Idle && lnkChapterNumber.LinkBehavior == LinkBehavior.AlwaysUnderline)
+            {
+                Config.Chapter++;
+                Config.SaveConfig();
+                UpdateConfigValues(); // This also disables the link
+                UpdateBRBData();
+
+                // Activate the timer for 07:00
+                StartLinkReactivateTimer();
+            }
+        }
+
+        private void StartLinkReactivateTimer()
+        {
+            DateTime utcNow = DateTime.UtcNow;
+            long currentTickOfDay = utcNow.Hour * TimeSpan.TicksPerHour + utcNow.Minute * TimeSpan.TicksPerMinute + utcNow.Second * TimeSpan.TicksPerSecond;
+            long activationTickOfDay = 7 * TimeSpan.TicksPerHour;
+
+            // Only take the next 07:00 if it is at least 1 hour away. Otherwise, go to the next day
+            if (currentTickOfDay <= activationTickOfDay - TimeSpan.TicksPerHour)
+            {
+                tmrAllowChapterIncrement.Interval = (int)((activationTickOfDay - currentTickOfDay) / TimeSpan.TicksPerMillisecond);
+            }
+            else
+            {
+                tmrAllowChapterIncrement.Interval = (int)((activationTickOfDay - currentTickOfDay) / TimeSpan.TicksPerMillisecond + 1000 * 60 * 60 * 24);
+            }
+            tmrAllowChapterIncrement.Enabled = true;
+        }
+
+        private void tmrAllowChapterIncrement_Tick(object sender, EventArgs e)
+        {
+            tmrAllowChapterIncrement.Enabled = false;
+
+            lnkChapterNumber.LinkColor = Color.Blue;
+            lnkChapterNumber.LinkBehavior = LinkBehavior.AlwaysUnderline;
         }
 
         private class BRBListComparer : IComparer
         {
             private int subItemIndex;
+            private bool inverted;
 
-            public BRBListComparer(int subitem)
+            public BRBListComparer(int subitem, bool inverted)
             {
                 subItemIndex = subitem;
+                this.inverted = inverted;
             }
 
-            public int Compare(object x, object y)
+            public int NonInvertedCompare(object x, object y)
             {
-                if (subItemIndex > 5 || subItemIndex > 5)
+                if (subItemIndex > 6 || subItemIndex < 0)
                 {
                     return 0;
                 }
@@ -127,20 +245,23 @@ namespace Hob_BRB_Player
                 }
                 switch (subItemIndex)
                 {
-                    case 0: // Filename
-                    case 1: // Duration (can be sorted by String just fine)
-                    case 2: // Description
+                    case 0: // Favourite
+                        return ((ListViewItem)x).SubItems[subItemIndex].Text == "" ? 1 : -1;
+                    // If string is not empty, then item has priority
+                    case 1: // Filename
+                    case 2: // Duration (can be sorted by String just fine)
+                    case 3: // Description
                         return String.Compare(((ListViewItem)x).SubItems[subItemIndex].Text, ((ListViewItem)y).SubItems[subItemIndex].Text);
 
-                    case 3: // Last play
+                    case 4: // Last play
                         return Convert.ToInt32(((ListViewItem)x).SubItems[subItemIndex].Text) < Convert.ToInt32(((ListViewItem)y).SubItems[subItemIndex].Text) ? -1 : 1;
                     // "<" since smaller means it has been longer since playing, so higher priority
 
-                    case 4: // Weight
+                    case 5: // Weight
                         return Convert.ToInt32(((ListViewItem)x).SubItems[subItemIndex].Text) > Convert.ToInt32(((ListViewItem)y).SubItems[subItemIndex].Text) ? -1 : 1;
                     // ">" since bigger means higher priority
 
-                    case 5: // Priority
+                    case 6: // Priority
                     default:
                         switch (((ListViewItem)x).SubItems[subItemIndex].Text)
                         {
@@ -154,12 +275,41 @@ namespace Hob_BRB_Player
                         }
                 }
             }
+
+            public int Compare(object x, object y)
+            {
+                return inverted ? -NonInvertedCompare(x, y) : NonInvertedCompare(x, y);
+            }
         }
 
         private void lstAllBRBs_ColumnClick(object sender, ColumnClickEventArgs e)
         {
-            lstAllBRBs.ListViewItemSorter = new BRBListComparer(e.Column);
+            if (currentBRBListSortColumn == e.Column)
+            {
+                currentBRBListSortInverted = !currentBRBListSortInverted;
+            }
+            else
+            {
+                currentBRBListSortColumn = e.Column;
+                currentBRBListSortInverted = false;
+            }
+            lstAllBRBs.ListViewItemSorter = new BRBListComparer(currentBRBListSortColumn, currentBRBListSortInverted);
             lstAllBRBs.Sort();
+            lstAllBRBs.ListViewItemSorter = null; // This is supposed to improve performance
+        }
+
+        // Automatically update BRB data if the search text changes
+        private void txtSearch_TextChanged(object sender, EventArgs e)
+        {
+            UpdateBRBData();
+        }
+
+        private void drpSearchWhere_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (txtSearch.Text != "")
+            {
+                UpdateBRBData();
+            }
         }
 
         private void btnGenerate_Click(object sender, EventArgs e)
@@ -174,7 +324,7 @@ namespace Hob_BRB_Player
             }
             long targetDurationTicks = (int)numMinutes.Value * TimeSpan.TicksPerMinute;
             TimeSpan targetDuration = new TimeSpan(targetDurationTicks);
-            TimeSpan minDuration = new TimeSpan(targetDurationTicks / 100 * Config.PermittedUndertimePercent);
+            TimeSpan minDuration = new TimeSpan(targetDurationTicks / 100 * (100 - Config.PermittedUndertimePercent));
             TimeSpan maxDuration = new TimeSpan(targetDurationTicks + Config.PermittedOvertimeMinutes * TimeSpan.TicksPerMinute + TimeSpan.TicksPerMinute / 2);
 
             List<string> addReason = new List<string>();
@@ -185,7 +335,7 @@ namespace Hob_BRB_Player
             {
                 MessageBox.Show("The playlist generator failed compiling a BRB playlist with the given restrictions.\r\n\r\n"
                                 + "You can try the following steps:\r\n"
-                                + "– Try generating a playlist again. If there are only few possible options, the generator can sometimes maneuver itself into a dead end.\r\n"
+                                + "– Try generating a playlist again. If there are only few possible options, the generator can sometimes manoeuvre itself into a dead end.\r\n"
                                 + "– Change the target running time of your break‌.\r\n"
                                 + "– Configure permitted over- and undertime to be more lenient.\r\n"
                                 + "– If you have many BRB episodes marked as \"Guaranteed\", unmark some of them.", "Not enough BRB episodes", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -269,21 +419,21 @@ namespace Hob_BRB_Player
                 bool alreadyAdded = false;
                 foreach (ListViewItem playlistItem in lstBRBPlaylist.Items)
                 {
-                    if (item.Text == playlistItem.Text)
+                    if (item.SubItems[1].Text == playlistItem.Text)
                     {
                         alreadyAdded = true;
                     }
                 }
 
-                if (!alreadyAdded || MessageBox.Show("The BRB \"" + item.SubItems[0].Text + "\" is already present on the playlist. Would you like to add it again?",
+                if (!alreadyAdded || MessageBox.Show("The BRB \"" + item.SubItems[1].Text + "\" is already present on the playlist. Would you like to add it again?",
                                                      "Please confirm: Playing a BRB video multiple times", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1)
                                      == DialogResult.Yes)
                 {
-                    lstBRBPlaylist.Items.Add(new ListViewItem(new string[] { item.SubItems[0].Text, item.SubItems[1].Text, item.SubItems[4].Text, "Manual" }));
+                    lstBRBPlaylist.Items.Add(new ListViewItem(new string[] { item.SubItems[1].Text, item.SubItems[2].Text, item.SubItems[5].Text, "Manual" }));
 
                     if (Program.AppState == ApplicationState.PlayerActive)
                     {
-                        Program.PlayerForm.AppendBRB(BRBManager.GetEpisode(item.SubItems[0].Text));
+                        Program.PlayerForm.AppendBRB(BRBManager.GetEpisode(item.SubItems[1].Text));
                     }
                 }
             }
@@ -463,6 +613,14 @@ namespace Hob_BRB_Player
 
             // In case playback was aborted from a paused player state
             this.TopMost = false;
+
+            // Try saving BRB playback data (again)
+            if (!BRBManager.SaveEpisodes())
+            {
+                MessageBox.Show("Could not write to file brbepisodes.json. The playback data of your break could not be saved.\r\n\r\n" +
+                                "It is recommended you investigate this problem as soon as possible, since playback data is difficult to replace if lost.",
+                                "Writing BRB data to disk failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void btnPlayPause_Click(object sender, EventArgs e)
@@ -484,7 +642,10 @@ namespace Hob_BRB_Player
             btnPlayPause.Image = iconPlay;
 
             // Give focus to form
-            this.TopMost = true;
+            if (Config.MakePlayerTopMost)
+            {
+                this.TopMost = true;
+            }
             this.Focus();
         }
 
@@ -500,18 +661,18 @@ namespace Hob_BRB_Player
 
         public bool AppendHobbVLCEpisode()
         {
-            BRBEpisode episode = BRBManager.GetRandomBRBEpisode(Program.PlayerForm.HobbVLCsTriggered < Config.HobbVLCIgnoreMaxDurationAfterTries ?
+            BRBEpisode episode = BRBManager.GetRandomBRBEpisode(Config.HobbVLCIgnoreMaxDurationAfterTries == -1 || Program.PlayerForm.HobbVLCsTriggered < Config.HobbVLCIgnoreMaxDurationAfterTries ?
                                                                 new TimeSpan(Config.HobbVLCMaxDuration * TimeSpan.TicksPerMinute + TimeSpan.TicksPerMinute / 2) : (TimeSpan?)null,
                                                                 true, Program.PlayerForm.BRBPlaylist);
             if (episode == null)
             {
-                episode = BRBManager.GetRandomBRBEpisode(Program.PlayerForm.HobbVLCsTriggered < Config.HobbVLCIgnoreMaxDurationAfterTries ?
+                episode = BRBManager.GetRandomBRBEpisode(Config.HobbVLCIgnoreMaxDurationAfterTries == -1 || Program.PlayerForm.HobbVLCsTriggered < Config.HobbVLCIgnoreMaxDurationAfterTries ?
                                                          new TimeSpan(Config.HobbVLCMaxDuration * TimeSpan.TicksPerMinute + TimeSpan.TicksPerMinute / 2) : (TimeSpan?)null,
                                                          false, Program.PlayerForm.BRBPlaylist);
             }
             if (episode == null)
             {
-                episode = BRBManager.GetRandomBRBEpisode(Program.PlayerForm.HobbVLCsTriggered < Config.HobbVLCIgnoreMaxDurationAfterTries ?
+                episode = BRBManager.GetRandomBRBEpisode(Config.HobbVLCIgnoreMaxDurationAfterTries == -1 || Program.PlayerForm.HobbVLCsTriggered < Config.HobbVLCIgnoreMaxDurationAfterTries ?
                                                          new TimeSpan(Config.HobbVLCMaxDuration * TimeSpan.TicksPerMinute + TimeSpan.TicksPerMinute / 2) : (TimeSpan?)null,
                                                          false);
             }
@@ -682,6 +843,38 @@ namespace Hob_BRB_Player
                     Program.HideCursor();
                 }
             }
+        }
+
+        private void btnManageBRBs_Click(object sender, EventArgs e)
+        {
+            FormManageBRBs manageForm = new FormManageBRBs();
+            manageForm.ShowDialog(this);
+
+            UpdateBRBData();
+        }
+
+        private void btnSettings_Click(object sender, EventArgs e)
+        {
+            FormConfig configForm = new FormConfig();
+            configForm.ShowDialog(this);
+
+            UpdateConfigValues();
+            UpdateBRBData();
+            StartLinkReactivateTimer();
+        }
+
+        private void btnCreditsAndSupport_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("The current app version is " + Config.Version + ".\r\n\r\n" +
+                            "App design and coding by MetagonTL, https://www.twitch.tv/metagontl . For any technical issues, questions or suggestions, MetagonTL can be reached on Twitch. " +
+                            "For longer messages or emergencies, contact MetagonTL via e-mail.\r\n\r\n" +
+                            "General app feedback, InterBRB screen design and graphics by KaufLive, https://www.twitch.tv/kauflive . " +
+                            "MetagonTL is very grateful to Kauf for his invaluable help while boosting the app to a stream-ready state.\r\n\r\n" +
+                            "Icons for the various app buttons provided by Boxicons, https://boxicons.com , under the CC-BY 4.0 licence, https://creativecommons.org/licenses/by/4.0/ .\r\n\r\n" +
+                            "Made for the stream of The_Happy_Hob. MetagonTL thanks Hob himself, Megatron, LadyZoe, KaufLive, KittyPurrFace, all past and present mods and cycle mods, " +
+                            "and Chat for innumerable hours of entertainment. He also especially thanks the authors of all BRB videos for creating the \"Best Part Of The Stream\", " +
+                            "eventually inspiring him to develop this application.",
+                            "Application Credits", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         // If control form is closed by user (unless via Task Manager etc.) while BRBs are playing, ask for confirmation before closing

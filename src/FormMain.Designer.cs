@@ -64,6 +64,8 @@
             this.trkScrubber = new System.Windows.Forms.TrackBar();
             this.trkVolume = new System.Windows.Forms.TrackBar();
             this.chkMuted = new System.Windows.Forms.CheckBox();
+            this.txtSearch = new System.Windows.Forms.TextBox();
+            this.drpSearchWhere = new System.Windows.Forms.ComboBox();
             this.txtVolume = new System.Windows.Forms.TextBox();
             this.lblManagerShouldSuggestPlaylist = new System.Windows.Forms.Label();
             this.lblVerDiv1 = new System.Windows.Forms.Label();
@@ -74,9 +76,12 @@
             this.lblRemainingBreakTime = new System.Windows.Forms.Label();
             this.dispRemainingBreakTime = new System.Windows.Forms.Label();
             this.tmrUpdateBRBPlaybackData = new System.Windows.Forms.Timer(this.components);
+            this.tmrAllowChapterIncrement = new System.Windows.Forms.Timer(this.components);
+            this.picSearch = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.numMinutes)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trkScrubber)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trkVolume)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picSearch)).BeginInit();
             this.SuspendLayout();
             // 
             // btnSettings
@@ -93,6 +98,7 @@
             this.tooltipsManager.SetToolTip(this.btnSettings, "Change various aspects of playlist generation and the media player, including Int" +
         "erBRBs and how to deal with hobbVLC situations");
             this.btnSettings.UseVisualStyleBackColor = true;
+            this.btnSettings.Click += new System.EventHandler(this.btnSettings_Click);
             // 
             // btnManageBRBs
             // 
@@ -108,6 +114,7 @@
             this.tooltipsManager.SetToolTip(this.btnManageBRBs, "Edit information of your BRB videos, mark them as \"Priority\" or \"Guaranteed Plays" +
         "\"");
             this.btnManageBRBs.UseVisualStyleBackColor = true;
+            this.btnManageBRBs.Click += new System.EventHandler(this.btnManageBRBs_Click);
             // 
             // lblGeneratePlaylist
             // 
@@ -301,7 +308,6 @@
             this.lstAllBRBs.Name = "lstAllBRBs";
             this.lstAllBRBs.ShowItemToolTips = true;
             this.lstAllBRBs.Size = new System.Drawing.Size(610, 278);
-            this.lstAllBRBs.Sorting = System.Windows.Forms.SortOrder.Ascending;
             this.lstAllBRBs.TabIndex = 2;
             this.lstAllBRBs.UseCompatibleStateImageBehavior = false;
             this.lstAllBRBs.View = System.Windows.Forms.View.Details;
@@ -334,7 +340,7 @@
             // 
             this.lblBRBsToPlay.AutoSize = true;
             this.lblBRBsToPlay.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblBRBsToPlay.Location = new System.Drawing.Point(308, 128);
+            this.lblBRBsToPlay.Location = new System.Drawing.Point(308, 123);
             this.lblBRBsToPlay.Name = "lblBRBsToPlay";
             this.lblBRBsToPlay.Size = new System.Drawing.Size(89, 16);
             this.lblBRBsToPlay.TabIndex = 36;
@@ -345,7 +351,7 @@
             this.lblAvailableBRBs.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblAvailableBRBs.AutoSize = true;
             this.lblAvailableBRBs.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblAvailableBRBs.Location = new System.Drawing.Point(736, 128);
+            this.lblAvailableBRBs.Location = new System.Drawing.Point(736, 123);
             this.lblAvailableBRBs.Name = "lblAvailableBRBs";
             this.lblAvailableBRBs.Size = new System.Drawing.Size(106, 16);
             this.lblAvailableBRBs.TabIndex = 39;
@@ -382,6 +388,7 @@
             this.tooltipsManager.SetToolTip(this.btnCreditsAndSupport, "Displays information about the software and how to contact MetagonTL if you have " +
         "questions/feedback or if something goes wrong");
             this.btnCreditsAndSupport.UseVisualStyleBackColor = true;
+            this.btnCreditsAndSupport.Click += new System.EventHandler(this.btnCreditsAndSupport_Click);
             // 
             // btnResetBRBs
             // 
@@ -409,18 +416,21 @@
             this.lnkChapterNumber.AutoSize = true;
             this.lnkChapterNumber.DisabledLinkColor = System.Drawing.Color.Black;
             this.lnkChapterNumber.Font = new System.Drawing.Font("Microsoft Sans Serif", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lnkChapterNumber.LinkBehavior = System.Windows.Forms.LinkBehavior.AlwaysUnderline;
+            this.lnkChapterNumber.LinkColor = System.Drawing.Color.Blue;
             this.lnkChapterNumber.Location = new System.Drawing.Point(623, 18);
             this.lnkChapterNumber.Name = "lnkChapterNumber";
             this.lnkChapterNumber.Size = new System.Drawing.Size(132, 55);
             this.lnkChapterNumber.TabIndex = 12;
             this.lnkChapterNumber.TabStop = true;
             this.lnkChapterNumber.Text = "9999";
-            this.tooltipsManager.SetToolTip(this.lnkChapterNumber, "Click to increment. Visit Settings to manually readjust");
+            this.tooltipsManager.SetToolTip(this.lnkChapterNumber, "Click to increment when blue. Visit Settings to manually readjust");
+            this.lnkChapterNumber.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkChapterNumber_LinkClicked);
             // 
             // tooltipsManager
             // 
             this.tooltipsManager.AutoPopDelay = 30000;
-            this.tooltipsManager.InitialDelay = 1000;
+            this.tooltipsManager.InitialDelay = 500;
             this.tooltipsManager.ReshowDelay = 100;
             // 
             // btnPlayPause
@@ -488,12 +498,12 @@
             // 
             this.trkVolume.Enabled = false;
             this.trkVolume.Location = new System.Drawing.Point(1269, 523);
-            this.trkVolume.Maximum = 100;
+            this.trkVolume.Maximum = 200;
             this.trkVolume.Name = "trkVolume";
             this.trkVolume.Orientation = System.Windows.Forms.Orientation.Vertical;
             this.trkVolume.Size = new System.Drawing.Size(45, 97);
             this.trkVolume.TabIndex = 18;
-            this.trkVolume.TickFrequency = 10;
+            this.trkVolume.TickFrequency = 20;
             this.tooltipsManager.SetToolTip(this.trkVolume, "Volume slider");
             this.trkVolume.Value = 50;
             this.trkVolume.Scroll += new System.EventHandler(this.trkVolume_Scroll);
@@ -509,6 +519,34 @@
             this.tooltipsManager.SetToolTip(this.chkMuted, "Mute/Unmute");
             this.chkMuted.UseVisualStyleBackColor = true;
             this.chkMuted.CheckedChanged += new System.EventHandler(this.chkMuted_CheckedChanged);
+            // 
+            // txtSearch
+            // 
+            this.txtSearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtSearch.Location = new System.Drawing.Point(992, 122);
+            this.txtSearch.Name = "txtSearch";
+            this.txtSearch.Size = new System.Drawing.Size(252, 20);
+            this.txtSearch.TabIndex = 43;
+            this.tooltipsManager.SetToolTip(this.txtSearch, "Enter some text to filter the BRBs displayed below");
+            this.txtSearch.TextChanged += new System.EventHandler(this.txtSearch_TextChanged);
+            // 
+            // drpSearchWhere
+            // 
+            this.drpSearchWhere.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.drpSearchWhere.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.drpSearchWhere.FormattingEnabled = true;
+            this.drpSearchWhere.Items.AddRange(new object[] {
+            "(any field)",
+            "Filename",
+            "Title",
+            "Authors",
+            "Description"});
+            this.drpSearchWhere.Location = new System.Drawing.Point(1250, 121);
+            this.drpSearchWhere.Name = "drpSearchWhere";
+            this.drpSearchWhere.Size = new System.Drawing.Size(90, 21);
+            this.drpSearchWhere.TabIndex = 48;
+            this.tooltipsManager.SetToolTip(this.drpSearchWhere, "Select where the text you gave should be looked for");
+            this.drpSearchWhere.SelectedIndexChanged += new System.EventHandler(this.drpSearchWhere_SelectedIndexChanged);
             // 
             // txtVolume
             // 
@@ -603,12 +641,29 @@
             this.tmrUpdateBRBPlaybackData.Interval = 250;
             this.tmrUpdateBRBPlaybackData.Tick += new System.EventHandler(this.tmrUpdateBRBPlaybackData_Tick);
             // 
+            // tmrAllowChapterIncrement
+            // 
+            this.tmrAllowChapterIncrement.Interval = 1000000;
+            this.tmrAllowChapterIncrement.Tick += new System.EventHandler(this.tmrAllowChapterIncrement_Tick);
+            // 
+            // picSearch
+            // 
+            this.picSearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.picSearch.Location = new System.Drawing.Point(962, 120);
+            this.picSearch.Name = "picSearch";
+            this.picSearch.Size = new System.Drawing.Size(24, 24);
+            this.picSearch.TabIndex = 42;
+            this.picSearch.TabStop = false;
+            // 
             // FormMain
             // 
             this.AcceptButton = this.btnStartOrAbortPlayer;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1352, 642);
+            this.Controls.Add(this.drpSearchWhere);
+            this.Controls.Add(this.txtSearch);
+            this.Controls.Add(this.picSearch);
             this.Controls.Add(this.dispRemainingBreakTime);
             this.Controls.Add(this.lblRemainingBreakTime);
             this.Controls.Add(this.dispRunningTime);
@@ -661,6 +716,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.numMinutes)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trkScrubber)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trkVolume)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picSearch)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -712,5 +768,9 @@
         private System.Windows.Forms.Label lblRemainingBreakTime;
         private System.Windows.Forms.Label dispRemainingBreakTime;
         private System.Windows.Forms.Timer tmrUpdateBRBPlaybackData;
+        private System.Windows.Forms.Timer tmrAllowChapterIncrement;
+        private System.Windows.Forms.PictureBox picSearch;
+        private System.Windows.Forms.TextBox txtSearch;
+        private System.Windows.Forms.ComboBox drpSearchWhere;
     }
 }
