@@ -135,6 +135,7 @@
             this.lblOfApproxDuration.Size = new System.Drawing.Size(140, 16);
             this.lblOfApproxDuration.TabIndex = 27;
             this.lblOfApproxDuration.Text = "It should contain about";
+            this.tooltipsManager.SetToolTip(this.lblOfApproxDuration, "By default, a small overtime is permitted. Visit Settings to change");
             // 
             // numMinutes
             // 
@@ -169,6 +170,7 @@
             this.lblMinutes.Size = new System.Drawing.Size(57, 16);
             this.lblMinutes.TabIndex = 28;
             this.lblMinutes.Text = "minutes.";
+            this.tooltipsManager.SetToolTip(this.lblMinutes, "By default, a small overtime is permitted. Visit Settings to change");
             // 
             // lblHorDiv1
             // 
@@ -567,6 +569,7 @@
             this.lblManagerShouldSuggestPlaylist.Size = new System.Drawing.Size(265, 16);
             this.lblManagerShouldSuggestPlaylist.TabIndex = 26;
             this.lblManagerShouldSuggestPlaylist.Text = "Automatically suggest a playlist for a break.";
+            this.tooltipsManager.SetToolTip(this.lblManagerShouldSuggestPlaylist, "By default, a small overtime is permitted. Visit Settings to change");
             // 
             // lblVerDiv1
             // 
@@ -654,6 +657,7 @@
             this.picSearch.Size = new System.Drawing.Size(24, 24);
             this.picSearch.TabIndex = 42;
             this.picSearch.TabStop = false;
+            this.tooltipsManager.SetToolTip(this.picSearch, "Enter some text to filter the BRBs displayed below");
             // 
             // FormMain
             // 

@@ -291,6 +291,8 @@
             this.lblTitle.Size = new System.Drawing.Size(68, 16);
             this.lblTitle.TabIndex = 25;
             this.lblTitle.Text = "BRB Title:";
+            this.tooltipsManager.SetToolTip(this.lblTitle, "This title will be shown to viewers during the InterBRB screen. If empty, the fil" +
+        "ename is displayed instead.");
             // 
             // lblAuthors
             // 
@@ -301,6 +303,8 @@
             this.lblAuthors.Size = new System.Drawing.Size(56, 16);
             this.lblAuthors.TabIndex = 28;
             this.lblAuthors.Text = "Authors:";
+            this.tooltipsManager.SetToolTip(this.lblAuthors, "If the authors of the BRB are entered here, they will be displayed to viewers dur" +
+        "ing the InterBRB screen.");
             // 
             // lblDescription
             // 
@@ -311,6 +315,8 @@
             this.lblDescription.Size = new System.Drawing.Size(79, 16);
             this.lblDescription.TabIndex = 30;
             this.lblDescription.Text = "Description:";
+            this.tooltipsManager.SetToolTip(this.lblDescription, "A description for the BRB where any additional information can be entered. This w" +
+        "ill not be displayed in the BRB player.");
             // 
             // lblPlaybackData
             // 

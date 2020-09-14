@@ -99,22 +99,8 @@ namespace Hob_BRB_Player
             if (!IsApplicationSetup())
             {
                 appState = ApplicationState.InitialSetup;
-                // TODO: First setup form to be shown here
-                Config.BRBDirectory = @"C:\Users\Eingeschraenkt\Videos\Captures\"; // TEMP
-                Config.Chapter = 1234;
-                Config.StartPlayerOnDifferentScreen = true;
-                if (Config.GenerateAndSaveStandardConfig())
-                {
-                    appState = ApplicationState.Idle;
-                    mainForm = new FormMain();
-                    mainForm.Show();
-                }
-                else
-                {
-                    MessageBox.Show("Could not write to file config.json. Initial Setup could not be completed.\r\n\r\nEnsure the application has write permissions in its directory and try again.",
-                                    "No write access in application directory", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                }
+                FormInitialSetup initialSetupForm = new FormInitialSetup();
+                initialSetupForm.Show();
             }
             else
             {
@@ -122,7 +108,6 @@ namespace Hob_BRB_Player
                 {
                     if (BRBManager.LoadEpisodes())
                     {
-                        // TODO: Compare with actual file list, etc.
                         appState = ApplicationState.Idle;
                         mainForm = new FormMain();
                         mainForm.Show();
@@ -150,6 +135,32 @@ namespace Hob_BRB_Player
         private static bool IsApplicationSetup()
         {
             return File.Exists("config.json");
+        }
+
+        public static void OnInitialSetupCompleted()
+        {
+            if (Config.GenerateAndSaveStandardConfig())
+            {
+                if (BRBManager.LoadEpisodes())
+                {
+                    appState = ApplicationState.Idle;
+                    mainForm = new FormMain();
+                    mainForm.Show();
+                }
+                else
+                {
+                    MessageBox.Show("Could not properly load file brbepisodes.json. The application cannot retrieve the provided data about BRB episodes and will exit.\r\n\r\n"
+                                    + "If you think you made a mistake during Initial Setup, try reinstalling the application. Otherwise, please contact MetagonTL for assistance.",
+                                    "Failed loading BRB episodes and playback data", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    ExitApplication();
+                }
+            }
+            else
+            {
+                MessageBox.Show("Could not write to file config.json. Initial Setup could not be completed.\r\n\r\nEnsure the application has write permissions in its directory and try again.",
+                                "No write access in application directory", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                ExitApplication();
+            }
         }
 
         // Called by control form when "Start BRB player" is clicked
@@ -267,13 +278,6 @@ namespace Hob_BRB_Player
 
         public static void ExitApplication()
         {
-            switch (appState)
-            {
-                // TODO: Rest of states
-                case ApplicationState.Idle:
-                    break;
-            }
-
             appState = ApplicationState.Exiting;
             Application.Exit();
         }

@@ -53,7 +53,7 @@ namespace Hob_BRB_Player
         public BRBEpisode(string filename)
         {
             Filename = filename;
-            Media media = new Media(Program.VLC, new Uri(Path.Combine(Config.BRBDirectory, filename)));
+            Media media = new Media(Program.VLC, new Uri(Path.GetFullPath(Path.Combine(Config.BRBDirectory, filename))));
             Task<MediaParsedStatus> parseTask = media.Parse();
             parseTask.Wait();
             Duration = new TimeSpan(media.Duration > -1 ? media.Duration * TimeSpan.TicksPerMillisecond : 0);
@@ -71,7 +71,7 @@ namespace Hob_BRB_Player
         public BRBEpisode(string filename, string title, string description, string credits)
         {
             Filename = filename;
-            Media media = new Media(Program.VLC, new Uri(Path.Combine(Config.BRBDirectory, filename)));
+            Media media = new Media(Program.VLC, new Uri(Path.GetFullPath(Path.Combine(Config.BRBDirectory, filename))));
             Task<MediaParsedStatus> parseTask = media.Parse();
             parseTask.Wait();
             Duration = new TimeSpan(media.Duration > -1 ? media.Duration * TimeSpan.TicksPerMillisecond : 0);
@@ -103,7 +103,7 @@ namespace Hob_BRB_Player
 
         public void RefreshDuration()
         {
-            Media media = new Media(Program.VLC, new Uri(Path.Combine(Config.BRBDirectory, Filename)));
+            Media media = new Media(Program.VLC, new Uri(Path.GetFullPath(Path.Combine(Config.BRBDirectory, Filename))));
             Task<MediaParsedStatus> parseTask = media.Parse();
             parseTask.Wait();
             Duration = new TimeSpan(media.Duration > -1 ? media.Duration * TimeSpan.TicksPerMillisecond : 0);

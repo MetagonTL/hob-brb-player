@@ -40,10 +40,13 @@
             this.numChapter = new System.Windows.Forms.NumericUpDown();
             this.lblChapter = new System.Windows.Forms.Label();
             this.lblBRBDirectoryExpl = new System.Windows.Forms.Label();
-            this.btnChangeDirectory = new System.Windows.Forms.Button();
-            this.btnShowDirectory = new System.Windows.Forms.Button();
+            this.btnShowOrUpdateDirectory = new System.Windows.Forms.Button();
             this.lblBRBDirectory = new System.Windows.Forms.Label();
             this.pgeGenerator = new System.Windows.Forms.TabPage();
+            this.numAutoPriority = new System.Windows.Forms.NumericUpDown();
+            this.label2 = new System.Windows.Forms.Label();
+            this.numAutoGuaranteed = new System.Windows.Forms.NumericUpDown();
+            this.lblAutoGuaranteed = new System.Windows.Forms.Label();
             this.drpSortingMode = new System.Windows.Forms.ComboBox();
             this.lblSortingMode = new System.Windows.Forms.Label();
             this.txtFavouritesMultiplier = new System.Windows.Forms.TextBox();
@@ -78,15 +81,13 @@
             this.pnlTabList = new System.Windows.Forms.Panel();
             this.btnCloseWithoutSaving = new System.Windows.Forms.Button();
             this.btnSaveAndClose = new System.Windows.Forms.Button();
-            this.numAutoGuaranteed = new System.Windows.Forms.NumericUpDown();
-            this.lblAutoGuaranteed = new System.Windows.Forms.Label();
-            this.numAutoPriority = new System.Windows.Forms.NumericUpDown();
-            this.label2 = new System.Windows.Forms.Label();
             this.tabSections.SuspendLayout();
             this.pgeGeneral.SuspendLayout();
             this.pnlBRBPlayerOpenBehaviour.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numChapter)).BeginInit();
             this.pgeGenerator.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numAutoPriority)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numAutoGuaranteed)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trkMultiplierFavourites10)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numReservedChanceForPrio)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numPreferredAfter)).BeginInit();
@@ -102,8 +103,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.numInterBRBCountdown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numStandardPlayerVolume)).BeginInit();
             this.pnlTabList.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numAutoGuaranteed)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numAutoPriority)).BeginInit();
             this.SuspendLayout();
             // 
             // tabSections
@@ -125,8 +124,7 @@
             this.pgeGeneral.Controls.Add(this.numChapter);
             this.pgeGeneral.Controls.Add(this.lblChapter);
             this.pgeGeneral.Controls.Add(this.lblBRBDirectoryExpl);
-            this.pgeGeneral.Controls.Add(this.btnChangeDirectory);
-            this.pgeGeneral.Controls.Add(this.btnShowDirectory);
+            this.pgeGeneral.Controls.Add(this.btnShowOrUpdateDirectory);
             this.pgeGeneral.Controls.Add(this.lblBRBDirectory);
             this.pgeGeneral.Location = new System.Drawing.Point(4, 22);
             this.pgeGeneral.Name = "pgeGeneral";
@@ -139,7 +137,7 @@
             // chkTestMode
             // 
             this.chkTestMode.AutoSize = true;
-            this.chkTestMode.Location = new System.Drawing.Point(9, 179);
+            this.chkTestMode.Location = new System.Drawing.Point(9, 153);
             this.chkTestMode.Name = "chkTestMode";
             this.chkTestMode.Size = new System.Drawing.Size(113, 17);
             this.chkTestMode.TabIndex = 9;
@@ -157,7 +155,7 @@
             this.pnlBRBPlayerOpenBehaviour.Controls.Add(this.chkMakePlayerTopMost);
             this.pnlBRBPlayerOpenBehaviour.Controls.Add(this.rdoPlayerOnDifferentScreen);
             this.pnlBRBPlayerOpenBehaviour.Controls.Add(this.rdoPlayerOnSameScreen);
-            this.pnlBRBPlayerOpenBehaviour.Location = new System.Drawing.Point(6, 115);
+            this.pnlBRBPlayerOpenBehaviour.Location = new System.Drawing.Point(6, 88);
             this.pnlBRBPlayerOpenBehaviour.Name = "pnlBRBPlayerOpenBehaviour";
             this.pnlBRBPlayerOpenBehaviour.Size = new System.Drawing.Size(560, 58);
             this.pnlBRBPlayerOpenBehaviour.TabIndex = 8;
@@ -198,7 +196,7 @@
             // 
             // numChapter
             // 
-            this.numChapter.Location = new System.Drawing.Point(129, 78);
+            this.numChapter.Location = new System.Drawing.Point(129, 51);
             this.numChapter.Maximum = new decimal(new int[] {
             99999,
             0,
@@ -224,7 +222,7 @@
             // lblChapter
             // 
             this.lblChapter.AutoSize = true;
-            this.lblChapter.Location = new System.Drawing.Point(6, 80);
+            this.lblChapter.Location = new System.Drawing.Point(6, 53);
             this.lblChapter.Name = "lblChapter";
             this.lblChapter.Size = new System.Drawing.Size(117, 13);
             this.lblChapter.TabIndex = 4;
@@ -235,29 +233,18 @@
             this.lblBRBDirectoryExpl.AutoSize = true;
             this.lblBRBDirectoryExpl.Location = new System.Drawing.Point(6, 38);
             this.lblBRBDirectoryExpl.Name = "lblBRBDirectoryExpl";
-            this.lblBRBDirectoryExpl.Size = new System.Drawing.Size(555, 13);
+            this.lblBRBDirectoryExpl.Size = new System.Drawing.Size(0, 13);
             this.lblBRBDirectoryExpl.TabIndex = 3;
-            this.lblBRBDirectoryExpl.Text = "In order to physically move the BRB files, it is recommended to first click the a" +
-    "bove button and follow the instructions.";
             // 
-            // btnChangeDirectory
+            // btnShowOrUpdateDirectory
             // 
-            this.btnChangeDirectory.Location = new System.Drawing.Point(170, 10);
-            this.btnChangeDirectory.Name = "btnChangeDirectory";
-            this.btnChangeDirectory.Size = new System.Drawing.Size(75, 23);
-            this.btnChangeDirectory.TabIndex = 2;
-            this.btnChangeDirectory.Text = "Change";
-            this.btnChangeDirectory.UseVisualStyleBackColor = true;
-            this.btnChangeDirectory.Click += new System.EventHandler(this.OnSettingChanged);
-            // 
-            // btnShowDirectory
-            // 
-            this.btnShowDirectory.Location = new System.Drawing.Point(89, 10);
-            this.btnShowDirectory.Name = "btnShowDirectory";
-            this.btnShowDirectory.Size = new System.Drawing.Size(75, 23);
-            this.btnShowDirectory.TabIndex = 1;
-            this.btnShowDirectory.Text = "Show";
-            this.btnShowDirectory.UseVisualStyleBackColor = true;
+            this.btnShowOrUpdateDirectory.Location = new System.Drawing.Point(89, 10);
+            this.btnShowOrUpdateDirectory.Name = "btnShowOrUpdateDirectory";
+            this.btnShowOrUpdateDirectory.Size = new System.Drawing.Size(130, 23);
+            this.btnShowOrUpdateDirectory.TabIndex = 1;
+            this.btnShowOrUpdateDirectory.Text = "Show or Update...";
+            this.btnShowOrUpdateDirectory.UseVisualStyleBackColor = true;
+            this.btnShowOrUpdateDirectory.Click += new System.EventHandler(this.btnShowOrUpdateDirectory_Click);
             // 
             // lblBRBDirectory
             // 
@@ -298,6 +285,52 @@
             this.pgeGenerator.TabIndex = 1;
             this.pgeGenerator.Text = "Playlist Generator";
             this.pgeGenerator.UseVisualStyleBackColor = true;
+            // 
+            // numAutoPriority
+            // 
+            this.numAutoPriority.Location = new System.Drawing.Point(476, 145);
+            this.numAutoPriority.Maximum = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            this.numAutoPriority.Name = "numAutoPriority";
+            this.numAutoPriority.Size = new System.Drawing.Size(41, 20);
+            this.numAutoPriority.TabIndex = 27;
+            this.tooltipsManager.SetToolTip(this.numAutoPriority, "When a new BRB is added to the system, it automatically receives this many Priori" +
+        "ty playbacks.");
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(288, 147);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(136, 13);
+            this.label2.TabIndex = 26;
+            this.label2.Text = "Priority plays for new BRBs:";
+            // 
+            // numAutoGuaranteed
+            // 
+            this.numAutoGuaranteed.Location = new System.Drawing.Point(173, 145);
+            this.numAutoGuaranteed.Maximum = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
+            this.numAutoGuaranteed.Name = "numAutoGuaranteed";
+            this.numAutoGuaranteed.Size = new System.Drawing.Size(41, 20);
+            this.numAutoGuaranteed.TabIndex = 25;
+            this.tooltipsManager.SetToolTip(this.numAutoGuaranteed, "When a new BRB is added to the system, it automatically receives this many Guaran" +
+        "teed playbacks.");
+            // 
+            // lblAutoGuaranteed
+            // 
+            this.lblAutoGuaranteed.AutoSize = true;
+            this.lblAutoGuaranteed.Location = new System.Drawing.Point(6, 147);
+            this.lblAutoGuaranteed.Name = "lblAutoGuaranteed";
+            this.lblAutoGuaranteed.Size = new System.Drawing.Size(161, 13);
+            this.lblAutoGuaranteed.TabIndex = 24;
+            this.lblAutoGuaranteed.Text = "Guaranteed plays for new BRBs:";
             // 
             // drpSortingMode
             // 
@@ -786,52 +819,6 @@
             this.btnSaveAndClose.UseVisualStyleBackColor = true;
             this.btnSaveAndClose.Click += new System.EventHandler(this.btnSaveAndClose_Click);
             // 
-            // numAutoGuaranteed
-            // 
-            this.numAutoGuaranteed.Location = new System.Drawing.Point(173, 145);
-            this.numAutoGuaranteed.Maximum = new decimal(new int[] {
-            5,
-            0,
-            0,
-            0});
-            this.numAutoGuaranteed.Name = "numAutoGuaranteed";
-            this.numAutoGuaranteed.Size = new System.Drawing.Size(41, 20);
-            this.numAutoGuaranteed.TabIndex = 25;
-            this.tooltipsManager.SetToolTip(this.numAutoGuaranteed, "When a new BRB is added to the system, it automatically receives this many Guaran" +
-        "teed playbacks.");
-            // 
-            // lblAutoGuaranteed
-            // 
-            this.lblAutoGuaranteed.AutoSize = true;
-            this.lblAutoGuaranteed.Location = new System.Drawing.Point(6, 147);
-            this.lblAutoGuaranteed.Name = "lblAutoGuaranteed";
-            this.lblAutoGuaranteed.Size = new System.Drawing.Size(161, 13);
-            this.lblAutoGuaranteed.TabIndex = 24;
-            this.lblAutoGuaranteed.Text = "Guaranteed plays for new BRBs:";
-            // 
-            // numAutoPriority
-            // 
-            this.numAutoPriority.Location = new System.Drawing.Point(476, 145);
-            this.numAutoPriority.Maximum = new decimal(new int[] {
-            10,
-            0,
-            0,
-            0});
-            this.numAutoPriority.Name = "numAutoPriority";
-            this.numAutoPriority.Size = new System.Drawing.Size(41, 20);
-            this.numAutoPriority.TabIndex = 27;
-            this.tooltipsManager.SetToolTip(this.numAutoPriority, "When a new BRB is added to the system, it automatically receives this many Priori" +
-        "ty playbacks.");
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(288, 147);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(136, 13);
-            this.label2.TabIndex = 26;
-            this.label2.Text = "Priority plays for new BRBs:";
-            // 
             // FormConfig
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -855,6 +842,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.numChapter)).EndInit();
             this.pgeGenerator.ResumeLayout(false);
             this.pgeGenerator.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numAutoPriority)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numAutoGuaranteed)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trkMultiplierFavourites10)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numReservedChanceForPrio)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numPreferredAfter)).EndInit();
@@ -871,8 +860,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.numInterBRBCountdown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numStandardPlayerVolume)).EndInit();
             this.pnlTabList.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.numAutoGuaranteed)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numAutoPriority)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -882,8 +869,7 @@
         private System.Windows.Forms.TabControl tabSections;
         private System.Windows.Forms.TabPage pgeGeneral;
         private System.Windows.Forms.TabPage pgeGenerator;
-        private System.Windows.Forms.Button btnChangeDirectory;
-        private System.Windows.Forms.Button btnShowDirectory;
+        private System.Windows.Forms.Button btnShowOrUpdateDirectory;
         private System.Windows.Forms.Label lblBRBDirectory;
         private System.Windows.Forms.TabPage pgePlayback;
         private System.Windows.Forms.Label lblBRBDirectoryExpl;

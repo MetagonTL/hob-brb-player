@@ -70,6 +70,9 @@
             this.lblBRBManagerCreditsPost = new System.Windows.Forms.Label();
             this.videoView = new LibVLCSharp.WinForms.VideoView();
             this.tooltipManager = new System.Windows.Forms.ToolTip(this.components);
+            this.pnlTestMode = new System.Windows.Forms.Panel();
+            this.lblTestMode = new System.Windows.Forms.Label();
+            this.lblScreamAtHobForTestMode = new System.Windows.Forms.Label();
             this.pnlUIInterBRB.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picRandomHobEmote)).BeginInit();
             this.pnlUIPreBRB.SuspendLayout();
@@ -79,6 +82,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.picHobbVLC)).BeginInit();
             this.pnlUIPostBRB.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.videoView)).BeginInit();
+            this.pnlTestMode.SuspendLayout();
             this.SuspendLayout();
             // 
             // tmrTenthSecond
@@ -175,6 +179,7 @@
             this.picRandomHobEmote.Location = new System.Drawing.Point(1804, 9);
             this.picRandomHobEmote.Name = "picRandomHobEmote";
             this.picRandomHobEmote.Size = new System.Drawing.Size(100, 100);
+            this.picRandomHobEmote.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.picRandomHobEmote.TabIndex = 2;
             this.picRandomHobEmote.TabStop = false;
             // 
@@ -540,12 +545,47 @@
             this.videoView.Text = "videoView1";
             this.videoView.MouseEnter += new System.EventHandler(this.videoView_MouseEnter);
             // 
+            // pnlTestMode
+            // 
+            this.pnlTestMode.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.pnlTestMode.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.pnlTestMode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlTestMode.Controls.Add(this.lblScreamAtHobForTestMode);
+            this.pnlTestMode.Controls.Add(this.lblTestMode);
+            this.pnlTestMode.Location = new System.Drawing.Point(682, 899);
+            this.pnlTestMode.Name = "pnlTestMode";
+            this.pnlTestMode.Size = new System.Drawing.Size(556, 66);
+            this.pnlTestMode.TabIndex = 10;
+            // 
+            // lblTestMode
+            // 
+            this.lblTestMode.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.lblTestMode.Font = new System.Drawing.Font("Verdana", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTestMode.ForeColor = System.Drawing.Color.DarkRed;
+            this.lblTestMode.Location = new System.Drawing.Point(143, 6);
+            this.lblTestMode.Name = "lblTestMode";
+            this.lblTestMode.Size = new System.Drawing.Size(267, 39);
+            this.lblTestMode.TabIndex = 1;
+            this.lblTestMode.Text = "T E S T   M O D E";
+            // 
+            // lblScreamAtHobForTestMode
+            // 
+            this.lblScreamAtHobForTestMode.AutoSize = true;
+            this.lblScreamAtHobForTestMode.Font = new System.Drawing.Font("Verdana", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblScreamAtHobForTestMode.ForeColor = System.Drawing.Color.DarkRed;
+            this.lblScreamAtHobForTestMode.Location = new System.Drawing.Point(25, 40);
+            this.lblScreamAtHobForTestMode.Name = "lblScreamAtHobForTestMode";
+            this.lblScreamAtHobForTestMode.Size = new System.Drawing.Size(500, 18);
+            this.lblScreamAtHobForTestMode.TabIndex = 7;
+            this.lblScreamAtHobForTestMode.Text = "If you ever see this on stream, please scream at Hob to turn it off";
+            // 
             // FormPlayer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
             this.ClientSize = new System.Drawing.Size(1920, 1080);
+            this.Controls.Add(this.pnlTestMode);
             this.Controls.Add(this.pnlUIPostBRB);
             this.Controls.Add(this.pnlUIHobbVLC);
             this.Controls.Add(this.pnlPaused);
@@ -579,6 +619,8 @@
             this.pnlUIPostBRB.ResumeLayout(false);
             this.pnlUIPostBRB.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.videoView)).EndInit();
+            this.pnlTestMode.ResumeLayout(false);
+            this.pnlTestMode.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -624,6 +666,9 @@
         private LibVLCSharp.WinForms.VideoView videoView;
         private System.Windows.Forms.Button btnSwitchScreen;
         private System.Windows.Forms.ToolTip tooltipManager;
+        private System.Windows.Forms.Panel pnlTestMode;
+        private System.Windows.Forms.Label lblScreamAtHobForTestMode;
+        private System.Windows.Forms.Label lblTestMode;
     }
 }
 

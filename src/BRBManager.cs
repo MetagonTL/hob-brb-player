@@ -336,14 +336,15 @@ namespace Hob_BRB_Player
 
             foreach (BRBEpisode ep in dataset)
             {
-                for (int i = 0; i < ep.GetWeight(); i++)
+                int weight = ep.GetWeight();
+                for (int i = 0; i < weight; i++)
                 {
                     weightedFilenameList.Add(ep.Filename);
                 }
             }
 
             Random rand = new Random();
-            int randomIndex = rand.Next(0, weightedFilenameList.Count - 1);
+            int randomIndex = rand.Next(0, weightedFilenameList.Count);
 
             return GetEpisode(weightedFilenameList[randomIndex]);
         }
@@ -351,6 +352,12 @@ namespace Hob_BRB_Player
         // Adds the playback to the episode data
         public static void OnPlayedBack(BRBEpisode episode)
         {
+            if (Config.TestMode)
+            {
+                // In Test Mode, save no playback data
+                return;
+            }
+
             episode.PlaybackChapters.Add(Config.Chapter);
 
             if (episode.GuaranteedPlays > 0)

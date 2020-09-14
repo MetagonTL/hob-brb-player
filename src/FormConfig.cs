@@ -36,6 +36,8 @@ namespace Hob_BRB_Player
             chkMakePlayerTopMost.Checked = Config.MakePlayerTopMost;
             chkTestMode.Checked = Config.TestMode;
 
+            numChapter.Minimum = Config.CurrentReleaseChapter;
+
             numPermittedOvertime.Value = Config.PermittedOvertimeMinutes;
             numPermittedUntertime.Value = Config.PermittedUndertimePercent;
             numChapterHistory.Value = Config.ChapterHistoryConsidered;
@@ -211,6 +213,12 @@ namespace Hob_BRB_Player
                     }
                 }
             }
+        }
+
+        private void btnShowOrUpdateDirectory_Click(object sender, EventArgs e)
+        {
+            FormUpdateBRBDirectory updateDirectoryForm = new FormUpdateBRBDirectory();
+            updateDirectoryForm.ShowDialog(this);
         }
     }
 }

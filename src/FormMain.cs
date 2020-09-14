@@ -555,7 +555,6 @@ namespace Hob_BRB_Player
             dispPlayingOrNextUp.Visible = true;
             lblRemainingBreakTime.Visible = true;
             dispRemainingBreakTime.Visible = true;
-            // TODO: Break timer
 
             // Change out BRB player button
             btnStartOrAbortPlayer.Text = "Abort BRB Playback";

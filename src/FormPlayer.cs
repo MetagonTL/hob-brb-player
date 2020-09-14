@@ -17,34 +17,34 @@ using System.Windows.Forms;
 
 namespace Hob_BRB_Player
 {
-    public partial class FormPlayer : Form
-    {
-        public bool Paused { get; private set; } = false;
-        public BRBPlayerState PlayerState { get; private set; } = BRBPlayerState.Undefined;
+	public partial class FormPlayer : Form
+	{
+		public bool Paused { get; private set; } = false;
+		public BRBPlayerState PlayerState { get; private set; } = BRBPlayerState.Undefined;
 		public int HobbVLCsTriggered { get; private set; } = 0;
-        private double secondCountdown;
+		private double secondCountdown;
 		public double RemSecsInCurrentInterBRB
-        {
+		{
 			get
-            {
+			{
 				if (PlayerState == BRBPlayerState.InBetweenBRBs || PlayerState == BRBPlayerState.HobbVLC)
-                {
+				{
 					return secondCountdown;
-                }
+				}
 				else if (PlayerState == BRBPlayerState.BeginningOfBreak)
-                {
+				{
 					return Config.InterBRBCountdown;
-                }
+				}
 				else
-                {
+				{
 					return 0;
-                }
-            }
-        }
+				}
+			}
+		}
 		public double RemSecsInCurrentBRB
-        {
+		{
 			get
-            {
+			{
 				if (PlayerState == BRBPlayerState.Playback)
 				{
 					return NextOrCurrentBRB.Duration.TotalSeconds - VLCPlayer.Position * (double)VLCPlayer.Length / 1000.0;
@@ -54,33 +54,33 @@ namespace Hob_BRB_Player
 					return NextOrCurrentBRB.Duration.TotalSeconds;
 				}
 				else
-                {
+				{
 					return 0;
-                }
+				}
 			}
-        }
+		}
 
-        public int NextOrCurrentBRBIndex { get; private set; }
+		public int NextOrCurrentBRBIndex { get; private set; }
 
-        public List<BRBEpisode> BRBPlaylist { get; private set; }
+		public List<BRBEpisode> BRBPlaylist { get; private set; }
 
 		// Called by control form if the playlist is changed during playback. The control form ensures only future BRB videos are changed
 		public void UpdateBRBPlaylist(List<BRBEpisode> newPlaylist)
-        {
+		{
 			BRBPlaylist = newPlaylist;
-        }
+		}
 
 		// Called by control form if a new episode is added during playback (which may be done manually or triggered by HobbVLC)
 		public void AppendBRB(BRBEpisode episode)
-        {
+		{
 			BRBPlaylist.Add(episode);
 			if (PlayerState == BRBPlayerState‌.EndOfBreak)
-            {
+			{
 				// Episode was added manually at end of break. Automatically play this new BRB
 				ChangePlayerState(BRBPlayerState.InBetweenBRBs);
 				UnpauseAndHideControls();
 			}
-        }
+		}
 
 		public BRBEpisode NextOrCurrentBRB
 		{
@@ -94,6 +94,99 @@ namespace Hob_BRB_Player
 		public MediaPlayer VLCPlayer { get; }
 
 		private long lastScrubUpdateTicks = 0;
+
+		// Common = Wt 25, Uncommon = Wt 10, Rare = Wt 5, Epic = Wt 2, Legendary = Wt 1
+		private string[] hobEmotes = {
+			"E|2Head.png",
+			"C|AYAYA.png",
+			"U|FeelsMattMan.png",
+			"L|HeyListen.gif",
+			"E|hobbAim.png",
+			"R|hobbBald.png",
+			"E|hobbBeep.png",
+			"U|hobbBlanket.png",
+			"R|hobbBowl.png",
+			"U|hobbBrexit.png",
+			"C|hobbBrit.png",
+			"C|hobbBrow.png",
+			"R|hobbBuffer.gif",
+			"E|hobbChoke.png",
+			"R|hobbClap.gif",
+			"R|hobbCloud.png",
+			"U|hobbCray.png",
+			"E|hobbCrazy.png",
+			"C|hobbCry.png",
+			"C|hobbDab.png",
+			"C|hobbDerp.png",
+			"L|hobbDiva.png",
+			"U|hobbDuck.png",
+			"R|hobbEmo.png",
+			"E|hobbF.png",
+			"U|hobbFart.png",
+			"C|hobbGasm.png",
+			"C|hobbH.png",
+			"C|hobbHands.png",
+			"C|hobbHi.png",
+			"R|hobbHOP.gif",
+			"U|hobbHype.png",
+			"U|hobbIncel.png",
+			"C|hobbJedi.png",
+			"L|hobbK.png",
+			"R|hobbKEK.png",
+			"E|hobbKet.png",
+			"U|hobbKeys.png",
+			"C|hobbLink.png",
+			"C|hobbLUL.png",
+			"R|hobbLurk.png",
+			"E|hobbMan.png",
+			"R|hobbMind.png",
+			"L|hobbMorg.png",
+			"R|hobbNan.png",
+			"U|hobbNed.png",
+			"E|hobbNGT.png",
+			"U|hobbNotes.png",
+			"L|hobbP.png",
+			"C|hobbPega.png",
+			"U|hobbPoo.png",
+			"E|hobbPray.png",
+			"R|hobbPride.png",
+			"U|hobbRage.png",
+			"U|hobbRed.png",
+			"R|hobbRings.png",
+			"C|hobbS.png",
+			"C|hobbSif.png",
+			"U|hobbT.png",
+			"C|hobbTos.png",
+			"C|hobbTroll.png",
+			"L|hobbUnagi.png",
+			"L|hobbVIP.png",
+			"U|hobbW.png",
+			"C|hobbWeird.png",
+			"R|hobbWheel.gif",
+			"U|hobbWoah.png",
+			"C|hobbY.png",
+			"U|hobbYoda.png",
+			"C|KEKW.png",
+			"C|PETHOB.gif",
+			"U|PETLINK.gif",
+			"R|PETTHEMATT.gif",
+			"E|PotPie.png",
+			"L|RareHob.gif",
+			"L|sumSmash.gif"
+		};
+
+		// Common: AYAYA, hobbBrit, hobbBrow, hobbCry, hobbDab, hobbDerp, hobbGasm, hobbH, hobbHands, hobbHi, hobbJedi, hobbLink, hobbLUL, hobbPega, hobbS, hobbSif, hobbTos, hobbTroll,
+		//         hobbWeird, hobbY, KEKW, PETHOB (22)
+		// Uncommon: FeelsMattMan, hobbBlanket, hobbBrexit, hobbCray, hobbDuck, hobbFart, hobbHype, hobbIncel, hobbKeys, hobbNed, hobbNotes, hobbPoo, hobbRage, hobbRed, hobbT, hobbW,
+		//         hobbWoah, hobbYoda, PETLINK (19)
+		// Rare: hobbBald, hobbBowl, hobbBuffer, hobbClap, hobbCloud, hobbEmo, hobbHOP, hobbKEK, hobbLurk, hobbMind, hobbNan, hobbPride, hobbRings, hobbWheel, PETTHEMATT (15)
+		// Epic: 2Head, hobbAim, hobbBeep, hobbChoke, hobbCrazy, hobbF, hobbKet, hobbMan, hobbNGT, hobbPray, PotPie (11)
+		// Legendary: HeyListen, hobbDiva, hobbK, hobbMorg, hobbP, hobbUnagi, hobbVIP, RareHob, sumSmash (9)
+		// SUM: 76 with wt 846; Common 65.0 %, 2.96 % each; Uncommon 22.5 %, 1.18 % each; Rare 8.87 %, 0.59 % each; Epic 2.60 %, 0.24 % each; Legendary 1.06 %, 0.12 % each
+
+
+		private List<string> weightedHobEmotes = new List<string>(); // Compiled only once, then saved for future uses
+
 
 		public FormPlayer(List<BRBEpisode> brbsToPlay)
 		{
@@ -110,6 +203,8 @@ namespace Hob_BRB_Player
 			// Load the VLC media player in for convenience
 			VLCPlayer = Program.VLCPlayer;
 			videoView.MediaPlayer = VLCPlayer;
+
+			pnlTestMode.Visible = Config.TestMode;
 
 			this.TopMost = Config.MakePlayerTopMost;
 
@@ -128,9 +223,11 @@ namespace Hob_BRB_Player
 
 		public void ReCenterControls()
         {
-			// Make sure "PAUSED" is centered properly
+			// Make sure "PAUSED" (and "TEST MODE") are centered properly
 			Rectangle oldbounds = pnlPaused.Bounds;
 			pnlPaused.SetBounds(Screen.FromControl(this).Bounds.Width / 2 - pnlPaused.Width / 2, oldbounds.Y, oldbounds.Width, oldbounds.Height);
+			oldbounds = pnlTestMode.Bounds;
+			pnlTestMode.SetBounds(Screen.FromControl(this).Bounds.Width / 2 - pnlTestMode.Width / 2, oldbounds.Y, oldbounds.Width, oldbounds.Height);
 
 			oldbounds = pnlUIPreBRB.Bounds;
 			pnlUIPreBRB.SetBounds(0, Screen.FromControl(this).Bounds.Height / 2 - pnlUIPreBRB.Height / 2, Screen.FromControl(this).Bounds.Width, oldbounds.Height);
@@ -272,8 +369,16 @@ namespace Hob_BRB_Player
 			dispMoreInfoOnBRB.Text += NextOrCurrentBRB.Credits != "" ? "Authors: " + NextOrCurrentBRB‌.Credits : "";
 
 			string randomEmote = GetRandomHobEmote();
-			picRandomHobEmote.Image = new Bitmap(Image.FromFile("images\\hobEmotes\\" + randomEmote.Split('|')[1] + ".png"), 100, 100);
-			lblRandomHobEmote.Text = "Random Hob Emote –\r\n" + randomEmote.Split('|')[0];
+			picRandomHobEmote.Image = Image.FromFile("images\\hobEmotes\\" + randomEmote.Split('|')[1]);
+			lblRandomHobEmote.Text = "Random Hob Emote –\r\n";
+			switch (randomEmote.Split('|')[0])
+			{
+				case "C": lblRandomHobEmote.Text += "Common"; break;
+				case "U": lblRandomHobEmote.Text += "Uncommon"; break;
+				case "R": lblRandomHobEmote.Text += "Rare"; break;
+				case "E": lblRandomHobEmote.Text += "Epic"; break;
+				case "L": default: lblRandomHobEmote.Text += "Legendary"; break;
+			}
 
 			dispCurrentChapterNumber.Text = "The current chapter is " + Config.Chapter + ". If this is wrong, please remind Hob to update it.";
 
@@ -328,8 +433,30 @@ namespace Hob_BRB_Player
 
 		private string GetRandomHobEmote()
         {
-			// TODO
-			return "Common|hobbBrow";
+			if (weightedHobEmotes.Count == 0)
+            {
+				foreach (string emoteInfo in hobEmotes)
+                {
+					int weight;
+					switch (emoteInfo.Split('|')[0])
+                    {
+						case "C": weight = 25; break;
+						case "U": weight = 10; break;
+						case "R": weight = 5; break;
+						case "E": weight = 2; break;
+						case "L": default: weight = 1; break;
+					}
+					for (int i = 0; i < weight; i++)
+                    {
+						weightedHobEmotes.Add(emoteInfo);
+                    }
+                }
+            }
+
+			Random rand = new Random();
+			int randomIndex = rand.Next(0, weightedHobEmotes.Count);
+
+			return weightedHobEmotes[randomIndex];
 		}
 
 		private void btnSwitchScreen_Click(object sender, EventArgs e)
@@ -395,7 +522,6 @@ namespace Hob_BRB_Player
                 Program.MainForm.OnBRBPause();
 				Paused = true;
             }
-			// In other cases: TODO
 		}
 
 		public void UnpauseAndHideControls()
@@ -428,7 +554,6 @@ namespace Hob_BRB_Player
 			{
 				// Ignore, user should try to open a new player form instead, or do something else to try and fix the error
 			}
-			// In other cases: TODO
 		}
 
 		// Hide cursor if mouse enters video player
@@ -547,7 +672,7 @@ namespace Hob_BRB_Player
 
 				case BRBPlayerState.Playback:
 					HideAllUIScreens();
-					VLCPlayer.Media = new Media(Program.VLC, new Uri(Path.Combine(Config.BRBDirectory, BRBPlaylist[NextOrCurrentBRBIndex].Filename)));
+					VLCPlayer.Media = new Media(Program.VLC, new Uri(Path.GetFullPath(Path.Combine(Config.BRBDirectory, BRBPlaylist[NextOrCurrentBRBIndex].Filename))));
 					videoView.Visible = true;
 					if (!Paused)
 					{
@@ -588,6 +713,7 @@ namespace Hob_BRB_Player
 
 		public void CloseGracefully()
 		{
+			VLCPlayer.Stop();
 			PlayerState = BRBPlayerState.Exiting;
 			this.Close();
 		}

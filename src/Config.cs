@@ -12,13 +12,15 @@ namespace Hob_BRB_Player
 {
     static class Config
     {
+        public const int CurrentReleaseChapter = 1710; // When the current app version was released; this is used as the minimum chapter the user can set in the app
+
         // Fills the config with standard values and saves it to file.
-        // However, does not touch Initial Setup values (BRBDirectory, StartPlayerOnDifferentScreen, Chapter), this should be done beforehand
+        // However, does not touch Initial Setup values (BRBDirectory, StartPlayerOnDifferentScreen, MakePlayerTopMost, Chapter), this should be done beforehand
         public static bool GenerateAndSaveStandardConfig()
         {
-            Version = "0.1";
+            Version = "0.2";
             PermittedOvertimeMinutes = 2;
-            PermittedUndertimePercent = 90;
+            PermittedUndertimePercent = 10;
             AvoidForChaptersAfterPlay = 3;
             PreferredPlayAfterChapters = 100;
             ChapterHistoryConsidered = 200;
@@ -27,6 +29,7 @@ namespace Hob_BRB_Player
             AutoPriorityPlaysForNewBRBs = 3;
             FavouriteMultiplier = 1.5;
             SortingMode = BRBPlaylistSortingMode.Interwoven;
+            StandardPlayerVolume = 80;
             InterBRBCountdown = 10;
             TimeUntilHobbVLC = 30;
             HobbVLCCountdown = 10;
@@ -183,8 +186,8 @@ namespace Hob_BRB_Player
         // Config variables
 
         // General / Initial Setup
-        public static string Version { get; private set; } // The current app version.
-        public static string BRBDirectory { get; set; } // Path of the BRB episodes (video files). Includes backslash at the end of the string
+        public static string Version { get; private set; } // The current app version
+        public static string BRBDirectory { get; set; } // Path of the BRB episodes (video files)
         public static bool StartPlayerOnDifferentScreen { get; set; } // Whether the player form should always try to display on a different screen than the main form
         public static bool MakePlayerTopMost { get; set; } // Whether the player form should be topmost (for the purpose of display recording)
         public static int Chapter { get; set; } // The chapter number of the currently or soon running stream
@@ -197,8 +200,8 @@ namespace Hob_BRB_Player
         public static int PreferredPlayAfterChapters { get; set; } // When a BRB isn't chosen for that many chapters, it will be played very soon
         public static int ChapterHistoryConsidered { get; set; } // How many previous chapters should be considered for the statistics
         public static int ReservedChanceForPriorityBRBs { get; set; } // When a BRB is chosen, there should be this chance that it is one of the priority ones, if there are any
-        public static int AutoGuaranteedPlaysForNewBRBs { get; set; } // New BRBs automatically get assigned this many "Guaranteed" plays
-        public static int AutoPriorityPlaysForNewBRBs { get; set; } // New BRBs automatically get assigned this many "Priority" plays
+        public static int AutoGuaranteedPlaysForNewBRBs { get; set; } = 0; // New BRBs automatically get assigned this many "Guaranteed" plays. Initial Setup will use 0 here; this is intended
+        public static int AutoPriorityPlaysForNewBRBs { get; set; } = 0; // New BRBs automatically get assigned this many "Priority" plays. Initial Setup will use 0 here; this is intended
         public static double FavouriteMultiplier { get; set; } // If a BRB is marked as favourite, its urgency score is multiplied by this number
         public static BRBPlaylistSortingMode SortingMode { get; set; } // How the generator should sort the playlist at the end. "Interwoven" means long-short-long-short-etc.
 

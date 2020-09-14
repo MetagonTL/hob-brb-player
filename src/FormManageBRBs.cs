@@ -209,7 +209,7 @@ namespace Hob_BRB_Player
             }
         }
 
-        // Replaces the selected BRB file with a new version. TODO
+        // Replaces the selected BRB file with a new version.
         private void btnReplaceBRB_Click(object sender, EventArgs e)
         {
             if (selectedBRB != null)
