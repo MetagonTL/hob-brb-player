@@ -50,7 +50,7 @@
             this.drpSortingMode = new System.Windows.Forms.ComboBox();
             this.lblSortingMode = new System.Windows.Forms.Label();
             this.txtFavouritesMultiplier = new System.Windows.Forms.TextBox();
-            this.trkMultiplierFavourites10 = new System.Windows.Forms.TrackBar();
+            this.trkMultiplierFavourites100 = new System.Windows.Forms.TrackBar();
             this.numReservedChanceForPrio = new System.Windows.Forms.NumericUpDown();
             this.lblReservedChanceForPrio = new System.Windows.Forms.Label();
             this.lblFavouriteMultiplier = new System.Windows.Forms.Label();
@@ -88,7 +88,7 @@
             this.pgeGenerator.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numAutoPriority)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numAutoGuaranteed)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trkMultiplierFavourites10)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trkMultiplierFavourites100)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numReservedChanceForPrio)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numPreferredAfter)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numReplayAvoidance)).BeginInit();
@@ -114,7 +114,7 @@
             this.tabSections.Location = new System.Drawing.Point(0, 0);
             this.tabSections.Name = "tabSections";
             this.tabSections.SelectedIndex = 0;
-            this.tabSections.Size = new System.Drawing.Size(584, 230);
+            this.tabSections.Size = new System.Drawing.Size(589, 230);
             this.tabSections.TabIndex = 0;
             // 
             // pgeGeneral
@@ -129,7 +129,7 @@
             this.pgeGeneral.Location = new System.Drawing.Point(4, 22);
             this.pgeGeneral.Name = "pgeGeneral";
             this.pgeGeneral.Padding = new System.Windows.Forms.Padding(3);
-            this.pgeGeneral.Size = new System.Drawing.Size(576, 204);
+            this.pgeGeneral.Size = new System.Drawing.Size(581, 204);
             this.pgeGeneral.TabIndex = 0;
             this.pgeGeneral.Text = "General";
             this.pgeGeneral.UseVisualStyleBackColor = true;
@@ -157,7 +157,7 @@
             this.pnlBRBPlayerOpenBehaviour.Controls.Add(this.rdoPlayerOnSameScreen);
             this.pnlBRBPlayerOpenBehaviour.Location = new System.Drawing.Point(6, 88);
             this.pnlBRBPlayerOpenBehaviour.Name = "pnlBRBPlayerOpenBehaviour";
-            this.pnlBRBPlayerOpenBehaviour.Size = new System.Drawing.Size(560, 58);
+            this.pnlBRBPlayerOpenBehaviour.Size = new System.Drawing.Size(565, 58);
             this.pnlBRBPlayerOpenBehaviour.TabIndex = 8;
             // 
             // chkMakePlayerTopMost
@@ -264,7 +264,7 @@
             this.pgeGenerator.Controls.Add(this.drpSortingMode);
             this.pgeGenerator.Controls.Add(this.lblSortingMode);
             this.pgeGenerator.Controls.Add(this.txtFavouritesMultiplier);
-            this.pgeGenerator.Controls.Add(this.trkMultiplierFavourites10);
+            this.pgeGenerator.Controls.Add(this.trkMultiplierFavourites100);
             this.pgeGenerator.Controls.Add(this.numReservedChanceForPrio);
             this.pgeGenerator.Controls.Add(this.lblReservedChanceForPrio);
             this.pgeGenerator.Controls.Add(this.lblFavouriteMultiplier);
@@ -281,7 +281,7 @@
             this.pgeGenerator.Location = new System.Drawing.Point(4, 22);
             this.pgeGenerator.Name = "pgeGenerator";
             this.pgeGenerator.Padding = new System.Windows.Forms.Padding(3);
-            this.pgeGenerator.Size = new System.Drawing.Size(576, 204);
+            this.pgeGenerator.Size = new System.Drawing.Size(581, 204);
             this.pgeGenerator.TabIndex = 1;
             this.pgeGenerator.Text = "Playlist Generator";
             this.pgeGenerator.UseVisualStyleBackColor = true;
@@ -343,7 +343,7 @@
             "Random"});
             this.drpSortingMode.Location = new System.Drawing.Point(476, 45);
             this.drpSortingMode.Name = "drpSortingMode";
-            this.drpSortingMode.Size = new System.Drawing.Size(90, 21);
+            this.drpSortingMode.Size = new System.Drawing.Size(95, 21);
             this.drpSortingMode.TabIndex = 23;
             this.tooltipsManager.SetToolTip(this.drpSortingMode, "How a playlist should be sorted after it has been generated. \"Interwoven\" means l" +
         "onger and shorter BRBs should alternate.");
@@ -363,26 +363,26 @@
             this.txtFavouritesMultiplier.Location = new System.Drawing.Point(540, 12);
             this.txtFavouritesMultiplier.Name = "txtFavouritesMultiplier";
             this.txtFavouritesMultiplier.ReadOnly = true;
-            this.txtFavouritesMultiplier.Size = new System.Drawing.Size(26, 20);
+            this.txtFavouritesMultiplier.Size = new System.Drawing.Size(31, 20);
             this.txtFavouritesMultiplier.TabIndex = 21;
-            this.txtFavouritesMultiplier.Text = "1.0";
+            this.txtFavouritesMultiplier.Text = "1.00";
             this.txtFavouritesMultiplier.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.tooltipsManager.SetToolTip(this.txtFavouritesMultiplier, resources.GetString("txtFavouritesMultiplier.ToolTip"));
             // 
-            // trkMultiplierFavourites10
+            // trkMultiplierFavourites100
             // 
-            this.trkMultiplierFavourites10.AutoSize = false;
-            this.trkMultiplierFavourites10.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.trkMultiplierFavourites10.Location = new System.Drawing.Point(472, 13);
-            this.trkMultiplierFavourites10.Maximum = 20;
-            this.trkMultiplierFavourites10.Minimum = 10;
-            this.trkMultiplierFavourites10.Name = "trkMultiplierFavourites10";
-            this.trkMultiplierFavourites10.Size = new System.Drawing.Size(65, 19);
-            this.trkMultiplierFavourites10.TabIndex = 20;
-            this.trkMultiplierFavourites10.TickFrequency = 5;
-            this.tooltipsManager.SetToolTip(this.trkMultiplierFavourites10, resources.GetString("trkMultiplierFavourites10.ToolTip"));
-            this.trkMultiplierFavourites10.Value = 10;
-            this.trkMultiplierFavourites10.Scroll += new System.EventHandler(this.trkMultiplierFavourites10_Scroll);
+            this.trkMultiplierFavourites100.AutoSize = false;
+            this.trkMultiplierFavourites100.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.trkMultiplierFavourites100.Location = new System.Drawing.Point(472, 13);
+            this.trkMultiplierFavourites100.Maximum = 200;
+            this.trkMultiplierFavourites100.Minimum = 100;
+            this.trkMultiplierFavourites100.Name = "trkMultiplierFavourites100";
+            this.trkMultiplierFavourites100.Size = new System.Drawing.Size(65, 19);
+            this.trkMultiplierFavourites100.TabIndex = 20;
+            this.trkMultiplierFavourites100.TickFrequency = 50;
+            this.tooltipsManager.SetToolTip(this.trkMultiplierFavourites100, resources.GetString("trkMultiplierFavourites100.ToolTip"));
+            this.trkMultiplierFavourites100.Value = 100;
+            this.trkMultiplierFavourites100.Scroll += new System.EventHandler(this.trkMultiplierFavourites10_Scroll);
             // 
             // numReservedChanceForPrio
             // 
@@ -580,7 +580,7 @@
             this.pgePlayback.Location = new System.Drawing.Point(4, 22);
             this.pgePlayback.Name = "pgePlayback";
             this.pgePlayback.Padding = new System.Windows.Forms.Padding(3);
-            this.pgePlayback.Size = new System.Drawing.Size(576, 204);
+            this.pgePlayback.Size = new System.Drawing.Size(581, 204);
             this.pgePlayback.TabIndex = 2;
             this.pgePlayback.Text = "BRB Playback";
             this.pgePlayback.UseVisualStyleBackColor = true;
@@ -796,7 +796,7 @@
             this.pnlTabList.Controls.Add(this.tabSections);
             this.pnlTabList.Location = new System.Drawing.Point(0, 0);
             this.pnlTabList.Name = "pnlTabList";
-            this.pnlTabList.Size = new System.Drawing.Size(584, 230);
+            this.pnlTabList.Size = new System.Drawing.Size(589, 230);
             this.pnlTabList.TabIndex = 1;
             // 
             // btnCloseWithoutSaving
@@ -823,11 +823,12 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(582, 267);
+            this.ClientSize = new System.Drawing.Size(587, 267);
             this.Controls.Add(this.btnSaveAndClose);
             this.Controls.Add(this.btnCloseWithoutSaving);
             this.Controls.Add(this.pnlTabList);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FormConfig";
@@ -844,7 +845,7 @@
             this.pgeGenerator.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numAutoPriority)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numAutoGuaranteed)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trkMultiplierFavourites10)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trkMultiplierFavourites100)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numReservedChanceForPrio)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numPreferredAfter)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numReplayAvoidance)).EndInit();
@@ -893,7 +894,7 @@
         private System.Windows.Forms.NumericUpDown numReservedChanceForPrio;
         private System.Windows.Forms.Label lblReservedChanceForPrio;
         private System.Windows.Forms.Label lblFavouriteMultiplier;
-        private System.Windows.Forms.TrackBar trkMultiplierFavourites10;
+        private System.Windows.Forms.TrackBar trkMultiplierFavourites100;
         private System.Windows.Forms.TextBox txtFavouritesMultiplier;
         private System.Windows.Forms.Label lblSortingMode;
         private System.Windows.Forms.ComboBox drpSortingMode;

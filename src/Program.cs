@@ -11,24 +11,11 @@ namespace Hob_BRB_Player
 {
     static class Program
     {
-        private static ApplicationState appState;
-        public static ApplicationState AppState
-        {
-            get { return appState; }
-        }
+        public static ApplicationState AppState { get; private set; }
 
-        private static FormMain mainForm;
-        public static FormMain MainForm
-        {
-            get { return mainForm; }
-            private set { mainForm = value; }
-        }
-        private static FormPlayer playerForm;
-        public static FormPlayer PlayerForm
-        {
-            get { return playerForm; }
-            private set { playerForm = value; }
-        }
+        public static FormMain MainForm { get; private set; }
+
+        public static FormPlayer PlayerForm { get; private set; }
 
         private static Screen lastPlayerFormScreen = null;
 
@@ -65,10 +52,7 @@ namespace Hob_BRB_Player
         public static LibVLC VLC { get; private set; }
         public static MediaPlayer VLCPlayer { get; private set; }
 
-    /// <summary>
-    /// Der Haupteinstiegspunkt für die Anwendung.
-    /// </summary>
-    [STAThread]
+        [STAThread]
         static void Main()
         {
             Application.EnableVisualStyles();
@@ -98,7 +82,7 @@ namespace Hob_BRB_Player
 
             if (!IsApplicationSetup())
             {
-                appState = ApplicationState.InitialSetup;
+                AppState = ApplicationState.InitialSetup;
                 FormInitialSetup initialSetupForm = new FormInitialSetup();
                 initialSetupForm.Show();
             }
@@ -108,9 +92,9 @@ namespace Hob_BRB_Player
                 {
                     if (BRBManager.LoadEpisodes())
                     {
-                        appState = ApplicationState.Idle;
-                        mainForm = new FormMain();
-                        mainForm.Show();
+                        AppState = ApplicationState.Idle;
+                        MainForm = new FormMain();
+                        MainForm.Show();
                     }
                     else
                     {
@@ -143,9 +127,9 @@ namespace Hob_BRB_Player
             {
                 if (BRBManager.LoadEpisodes())
                 {
-                    appState = ApplicationState.Idle;
-                    mainForm = new FormMain();
-                    mainForm.Show();
+                    AppState = ApplicationState.Idle;
+                    MainForm = new FormMain();
+                    MainForm.Show();
                 }
                 else
                 {
@@ -166,7 +150,7 @@ namespace Hob_BRB_Player
         // Called by control form when "Start BRB player" is clicked
         public static void BeginBRBPlayback(List<BRBEpisode> brbPlaylist)
         {
-            appState = ApplicationState.PlayerActive;
+            AppState = ApplicationState.PlayerActive;
             PlayerForm = new FormPlayer(brbPlaylist);
 
             Screen mainFormScreen = Screen.FromControl(MainForm);
@@ -176,7 +160,7 @@ namespace Hob_BRB_Player
             if (lastPlayerFormScreen != null && !lastPlayerFormScreen.Equals(mainFormScreen))
             {
                 PlayerForm.WindowState = FormWindowState.Normal;
-                PlayerForm.Location = lastPlayerFormScreen.WorkingArea.Location;
+                PlayerForm.Location = lastPlayerFormScreen.Bounds.Location;
                 PlayerForm.WindowState = FormWindowState.Maximized;
             }
             else
@@ -184,20 +168,17 @@ namespace Hob_BRB_Player
                 if (Config.StartPlayerOnDifferentScreen && Screen.AllScreens.Length > 1)
                 {
                     // Try to position the player form on the non-primary screen, if several screens are present
-                    if (Screen.AllScreens.Length > 1)
-                    {
-                        PlayerForm.WindowState = FormWindowState.Normal;
-                        playerFormScreen = Screen.AllScreens.First(s => !s.Equals(mainFormScreen));
-                        PlayerForm.Location = playerFormScreen.WorkingArea.Location;
-                        lastPlayerFormScreen = playerFormScreen;
-                        PlayerForm.WindowState = FormWindowState.Maximized;
-                    }
+                    PlayerForm.WindowState = FormWindowState.Normal;
+                    playerFormScreen = Screen.AllScreens.First(s => !s.Equals(mainFormScreen));
+                    PlayerForm.Location = playerFormScreen.Bounds.Location;
+                    lastPlayerFormScreen = playerFormScreen;
+                    PlayerForm.WindowState = FormWindowState.Maximized;
                 }
                 else
                 {
                     // Otherwise, place on screen of control form
                     PlayerForm.WindowState = FormWindowState.Normal;
-                    PlayerForm.Location = mainFormScreen.WorkingArea.Location;
+                    PlayerForm.Location = mainFormScreen.Bounds.Location;
                     lastPlayerFormScreen = mainFormScreen;
                     PlayerForm.WindowState = FormWindowState.Maximized;
                 }
@@ -220,32 +201,33 @@ namespace Hob_BRB_Player
                 if (Screen.AllScreens[i].Equals(playerFormScreen))
                 {
                     oldIndex = i;
-                    newIndex = i == Screen.AllScreens.Length - 1 ? 0 : i + 1;
+                    newIndex = (i == Screen.AllScreens.Length - 1 ? 0 : i + 1);
                     break;
                 }
             }
 
             PlayerForm.WindowState = FormWindowState.Normal;
-            PlayerForm.Location = Screen.AllScreens[newIndex].WorkingArea.Location;
+            PlayerForm.Location = Screen.AllScreens[newIndex].Bounds.Location;
             PlayerForm.WindowState = FormWindowState.Maximized;
             lastPlayerFormScreen = Screen.AllScreens[newIndex];
 
             if (Screen.AllScreens[newIndex].Equals(mainFormScreen))
             {
-                int dx = MainForm.Location.X - mainFormScreen.WorkingArea.X;
-                int dy = MainForm.Location.Y - mainFormScreen.WorkingArea.Y;
+                int dx = MainForm.Location.X - mainFormScreen.Bounds.X;
+                int dy = MainForm.Location.Y - mainFormScreen.Bounds.Y;
 
-                MainForm.Location = Screen.AllScreens[oldIndex].WorkingArea.Location;
+                MainForm.Location = Screen.AllScreens[oldIndex].Bounds.Location;
                 MainForm.Location = new Point(MainForm.Location.X + dx, MainForm.Location.Y + dy);
             }
 
             PlayerForm.ReCenterControls();
         }
 
+        // Right now, there is no difference between Abort and Finish
         // Called by control form when "Abort BRB player" is clicked
         public static void AbortBRBPlayback()
         {
-            appState = ApplicationState.Idle;
+            AppState = ApplicationState.Idle;
             PlayerForm.CloseGracefully();
             MainForm.OnEndBRBPlayback();
         }
@@ -253,13 +235,13 @@ namespace Hob_BRB_Player
         // Called by player form when the user tells it to close after playback has ended
         public static void FinishBRBPlayback()
         {
-            appState = ApplicationState.Idle;
+            AppState = ApplicationState.Idle;
             PlayerForm.CloseGracefully();
             MainForm.OnEndBRBPlayback();
         }
 
         // Since a new PlayerForm is instantiated for every break, place these listeners here and forward the message
-        // Invoke is necessary since VLC uses its own thread
+        // Invoke is necessary since VLC's thread management might cause a deadlock otherwise
         public static void OnMediaEndReached(object sender, EventArgs e)
         {
             if (PlayerForm != null && PlayerForm.IsDisposed == false)
@@ -278,7 +260,7 @@ namespace Hob_BRB_Player
 
         public static void ExitApplication()
         {
-            appState = ApplicationState.Exiting;
+            AppState = ApplicationState.Exiting;
             Application.Exit();
         }
     }

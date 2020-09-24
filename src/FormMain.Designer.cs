@@ -66,8 +66,9 @@
             this.chkMuted = new System.Windows.Forms.CheckBox();
             this.txtSearch = new System.Windows.Forms.TextBox();
             this.drpSearchWhere = new System.Windows.Forms.ComboBox();
-            this.txtVolume = new System.Windows.Forms.TextBox();
             this.lblManagerShouldSuggestPlaylist = new System.Windows.Forms.Label();
+            this.picSearch = new System.Windows.Forms.PictureBox();
+            this.txtVolume = new System.Windows.Forms.TextBox();
             this.lblVerDiv1 = new System.Windows.Forms.Label();
             this.dispPlayerStatus = new System.Windows.Forms.Label();
             this.dispPlayingOrNextUp = new System.Windows.Forms.Label();
@@ -77,7 +78,6 @@
             this.dispRemainingBreakTime = new System.Windows.Forms.Label();
             this.tmrUpdateBRBPlaybackData = new System.Windows.Forms.Timer(this.components);
             this.tmrAllowChapterIncrement = new System.Windows.Forms.Timer(this.components);
-            this.picSearch = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.numMinutes)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trkScrubber)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trkVolume)).BeginInit();
@@ -323,7 +323,8 @@
             this.btnAddBRB.Name = "btnAddBRB";
             this.btnAddBRB.Size = new System.Drawing.Size(49, 30);
             this.btnAddBRB.TabIndex = 3;
-            this.tooltipsManager.SetToolTip(this.btnAddBRB, "Add selected BRB(s) to end of playlist");
+            this.tooltipsManager.SetToolTip(this.btnAddBRB, "Add selected BRB(s) to end of playlist. Double clicking the BRB on the right has " +
+        "the same effect");
             this.btnAddBRB.UseVisualStyleBackColor = true;
             this.btnAddBRB.Click += new System.EventHandler(this.btnAddBRB_Click);
             // 
@@ -550,16 +551,6 @@
             this.tooltipsManager.SetToolTip(this.drpSearchWhere, "Select where the text you gave should be looked for");
             this.drpSearchWhere.SelectedIndexChanged += new System.EventHandler(this.drpSearchWhere_SelectedIndexChanged);
             // 
-            // txtVolume
-            // 
-            this.txtVolume.Enabled = false;
-            this.txtVolume.Location = new System.Drawing.Point(1310, 587);
-            this.txtVolume.Name = "txtVolume";
-            this.txtVolume.ReadOnly = true;
-            this.txtVolume.Size = new System.Drawing.Size(30, 20);
-            this.txtVolume.TabIndex = 20;
-            this.txtVolume.Text = "50";
-            // 
             // lblManagerShouldSuggestPlaylist
             // 
             this.lblManagerShouldSuggestPlaylist.AutoSize = true;
@@ -570,6 +561,26 @@
             this.lblManagerShouldSuggestPlaylist.TabIndex = 26;
             this.lblManagerShouldSuggestPlaylist.Text = "Automatically suggest a playlist for a break.";
             this.tooltipsManager.SetToolTip(this.lblManagerShouldSuggestPlaylist, "By default, a small overtime is permitted. Visit Settings to change");
+            // 
+            // picSearch
+            // 
+            this.picSearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.picSearch.Location = new System.Drawing.Point(962, 120);
+            this.picSearch.Name = "picSearch";
+            this.picSearch.Size = new System.Drawing.Size(24, 24);
+            this.picSearch.TabIndex = 42;
+            this.picSearch.TabStop = false;
+            this.tooltipsManager.SetToolTip(this.picSearch, "Enter some text to filter the BRBs displayed below");
+            // 
+            // txtVolume
+            // 
+            this.txtVolume.Enabled = false;
+            this.txtVolume.Location = new System.Drawing.Point(1310, 587);
+            this.txtVolume.Name = "txtVolume";
+            this.txtVolume.ReadOnly = true;
+            this.txtVolume.Size = new System.Drawing.Size(30, 20);
+            this.txtVolume.TabIndex = 20;
+            this.txtVolume.Text = "50";
             // 
             // lblVerDiv1
             // 
@@ -649,19 +660,8 @@
             this.tmrAllowChapterIncrement.Interval = 1000000;
             this.tmrAllowChapterIncrement.Tick += new System.EventHandler(this.tmrAllowChapterIncrement_Tick);
             // 
-            // picSearch
-            // 
-            this.picSearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.picSearch.Location = new System.Drawing.Point(962, 120);
-            this.picSearch.Name = "picSearch";
-            this.picSearch.Size = new System.Drawing.Size(24, 24);
-            this.picSearch.TabIndex = 42;
-            this.picSearch.TabStop = false;
-            this.tooltipsManager.SetToolTip(this.picSearch, "Enter some text to filter the BRBs displayed below");
-            // 
             // FormMain
             // 
-            this.AcceptButton = this.btnStartOrAbortPlayer;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1352, 642);

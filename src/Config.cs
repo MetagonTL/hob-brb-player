@@ -12,13 +12,15 @@ namespace Hob_BRB_Player
 {
     static class Config
     {
-        public const int CurrentReleaseChapter = 1710; // When the current app version was released; this is used as the minimum chapter the user can set in the app
+        public const string Version = "0.3"; // The current app version
+
+        public const int CurrentReleaseChapter = 1714; // When the current app version was released; this is used as the minimum chapter the user can set in the app
 
         // Fills the config with standard values and saves it to file.
         // However, does not touch Initial Setup values (BRBDirectory, StartPlayerOnDifferentScreen, MakePlayerTopMost, Chapter), this should be done beforehand
         public static bool GenerateAndSaveStandardConfig()
         {
-            Version = "0.2";
+            ConfigVersion = Version;
             PermittedOvertimeMinutes = 2;
             PermittedUndertimePercent = 10;
             AvoidForChaptersAfterPlay = 3;
@@ -51,7 +53,7 @@ namespace Hob_BRB_Player
                 jsonConfig.Read(); // StartObject
 
                 jsonConfig.Read(); // PropertyName
-                Version = jsonConfig.ReadAsString();
+                ConfigVersion = jsonConfig.ReadAsString();
                 jsonConfig.Read(); // PropertyName. Etc...
                 BRBDirectory = jsonConfig.ReadAsString();
                 jsonConfig.Read();
@@ -123,8 +125,8 @@ namespace Hob_BRB_Player
                                         + "Otherwise, you might accidentally destroy your configuration, render the video player useless, or cause corruption of BRB statistics.");
                 jsonConfig.WriteStartObject();
 
-                jsonConfig.WritePropertyName("Version");
-                jsonConfig.WriteValue(Version);
+                jsonConfig.WritePropertyName("ConfigVersion");
+                jsonConfig.WriteValue(ConfigVersion);
                 jsonConfig.WritePropertyName("BRBDirectory");
                 jsonConfig.WriteValue(BRBDirectory);
                 jsonConfig.WritePropertyName("StartPlayerOnDifferentScreen");
@@ -186,7 +188,7 @@ namespace Hob_BRB_Player
         // Config variables
 
         // General / Initial Setup
-        public static string Version { get; private set; } // The current app version
+        public static string ConfigVersion { get; private set; } // The version of the app that was used to save the config and BRB info
         public static string BRBDirectory { get; set; } // Path of the BRB episodes (video files)
         public static bool StartPlayerOnDifferentScreen { get; set; } // Whether the player form should always try to display on a different screen than the main form
         public static bool MakePlayerTopMost { get; set; } // Whether the player form should be topmost (for the purpose of display recording)

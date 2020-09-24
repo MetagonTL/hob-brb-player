@@ -19,8 +19,8 @@ namespace Hob_BRB_Player
         private InitialSetupState setupState;
         private int brbToMatchIndex = -1;
 
-        private List<BRBEpisode> importedBRBData = new List<BRBEpisode>(); // Raw data from JSON file be MetagonTL
-        private List<BRBEpisode> epWithPreviouslyUnknFilenames = new List<BRBEpisode>(); // Raw data from JSON file be MetagonTL
+        private List<BRBEpisode> importedBRBData = new List<BRBEpisode>(); // Raw data from JSON file by MetagonTL
+        private List<BRBEpisode> epWithPreviouslyUnknFilenames = new List<BRBEpisode>(); // Raw data from JSON file by MetagonTL
         private List<BRBEpisode> brbsToMatch = new List<BRBEpisode>(); // Static list that contains BRBs with unknown filename or such BRBs that cannot be found in the directory
         private List<string> filesNotCovered = new List<string>(); // Dynamic list that contains all files in the BRB directory that have not yet been matched to a BRB in the system
 
@@ -35,6 +35,7 @@ namespace Hob_BRB_Player
             LoadIcons();
         }
 
+        // Panels are not docked to allow easy editing in Designer
         private void DockPanels()
         {
             pnlInitialSetupInfo.Dock = DockStyle.Fill;
@@ -102,7 +103,8 @@ namespace Hob_BRB_Player
                 btnNext.Enabled = true;
                 chkUseWorkingDirRoot.Enabled = true;
 
-                if (importedBRBData.Count == 0)
+                // Load raw data from MetagonTL
+                if (importedBRBData.Count == 0) // If JSON data is already loaded, no need to load it again
                 {
                     try
                     {
@@ -127,7 +129,7 @@ namespace Hob_BRB_Player
                         return;
                     }
                 }
-                if (epWithPreviouslyUnknFilenames.Count == 0)
+                if (epWithPreviouslyUnknFilenames.Count == 0) // If JSON data is already loaded, no need to load it again
                 {
                     try
                     {
@@ -154,14 +156,14 @@ namespace Hob_BRB_Player
                 }
 
                 List<string> paths = new List<string>(Directory.GetFiles(txtBRBDirectory.Text));
-                List<string> filenames = new List<string>(); // Better to only work with filenames, since their exact format is more reliable
+                List<string> filenames = new List<string>(); // Better to only work with filenames instead of paths, since their exact format is more reliable
                 foreach (string path in paths)
                 {
                     filenames.Add(Path.GetFileName(path));
                 }
                 int importedBRBsFound = 0;
-                List<BRBEpisode> brbsNotFound = new List<BRBEpisode>(importedBRBData);
-                filesNotCovered = new List<string>(filenames);
+                List<BRBEpisode> brbsNotFound = new List<BRBEpisode>(importedBRBData); // BRBs that MetagonTL thinks should exist, but were not found in the directory
+                filesNotCovered = new List<string>(filenames); // Files in the directory that are neither in MetagonTL's list, nor could the user match them
 
                 foreach (BRBEpisode episode in importedBRBData)
                 {
@@ -173,14 +175,14 @@ namespace Hob_BRB_Player
                     }
                 }
 
-                brbsToMatch = new List<BRBEpisode>(epWithPreviouslyUnknFilenames);
+                brbsToMatch = new List<BRBEpisode>(epWithPreviouslyUnknFilenames); // Contains BRBs that were not found on disk, or where MetagonTL did not know the filename in the first place
                 brbsToMatch.AddRange(brbsNotFound);
 
                 dispFilesInBRBDir.Text = "Of the " + importedBRBData.Count + " BRB episodes known to MetagonTL by filename, " + importedBRBsFound + " " +
                                          (importedBRBsFound == 1 ? "was" : "were") + " found in your directory.\r\n" +
                                          "Furthermore, the directory contains " + filesNotCovered.Count + " file" + (filesNotCovered.Count == 1 ? "" : "s") +
                                          " with names unknown to MetagonTL.\r\n" + 
-                                         "Some of them might belong to the " + epWithPreviouslyUnknFilenames.Count + " episode" + (epWithPreviouslyUnknFilenames.Count == 1 ? "" : "s") +
+                                         "Some of them might belong to the " + brbsToMatch.Count + " episode" + (brbsToMatch.Count == 1 ? "" : "s") +
                                          " where MetagonTL has playback data but not the filename.\r\n\r\n" +
                                          "You will be able to amend this data in the next step.";
             }
@@ -219,9 +221,6 @@ namespace Hob_BRB_Player
         // "Begin matching" also sets up the BRB manager and imports all the episodes that are "clear" to import
         private void btnBeginMatching_Click(object sender, EventArgs e)
         {
-            //MessageBox.Show("Initial Setup will now import legacy BRB data. For this, it will access the video files in your BRB directory. This might take a few seconds.",
-            //                "Short lag possible at this point", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
             // BRBManager.BRBEpisodes should be an empty list right now, even if brbepisodes.json already exists, since it shouldn't get loaded if Initial Setup is triggered
 
             foreach (BRBEpisode episode in importedBRBData)
@@ -336,22 +335,17 @@ namespace Hob_BRB_Player
             if (MessageBox.Show("Do you want to assign this BRB to the currently selected filename?",
                                 "Confirm BRB match", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
             {
-                // Use gross hacks to "rename" BRB since the new name already exists on file. C.f. FormUpdateBRB
                 BRBEpisode episodeToMatch = brbsToMatch[brbToMatchIndex];
-                BRBEpisode importedEpisode = new BRBEpisode((string)drpCurrentFilename.SelectedItem, episodeToMatch.Duration, episodeToMatch.Favourite, episodeToMatch.Title,
-                                                            episodeToMatch.Description, episodeToMatch.Credits, episodeToMatch.IsNew, episodeToMatch.PlaybackChapters,
-                                                            episodeToMatch.GuaranteedPlays, episodeToMatch.PriorityPlays);
-                importedEpisode.RefreshDuration();
-                // Make sure the episode's video file is understood by the application. If so, add it to the BRB manager and save immediately.
-                if (importedEpisode.Duration.Ticks == 0)
+
+                // Copy data over to the actual filename. If successful, add it to the BRB manager and save immediately
+                // Since the BRB could not be found on disk, it is not in the BRB list, so no need to remove it
+                if (!BRBManager.TransferToNewFilename(episodeToMatch, (string)drpCurrentFilename.SelectedItem, false))
                 {
                     MessageBox.Show("Could not register the BRB file you selected. Make sure it is a valid video file (in a format compatible with VLC) " +
                                     "and the application has read permissions on it.",
                                     "Matching BRB episode failed", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
-                BRBManager.BRBEpisodes.Add(importedEpisode);
-                BRBManager.BRBEpisodes.Sort();
 
                 if (!BRBManager.SaveEpisodes())
                 {
@@ -393,21 +387,19 @@ namespace Hob_BRB_Player
         private void btnSwitchScreen_Click(object sender, EventArgs e)
         {
             Screen playerFormScreen = Screen.FromControl(playerTest);
-            int oldIndex = 0;
             int newIndex = 0;
 
-            for (int i = 0; i < Screen.AllScreens.Length; i++)
+            for (int i = 0; i < Screen.AllScreens.Length; i++) // In particular, if only one screen is available, newIndex will remain at 0
             {
                 if (Screen.AllScreens[i].Equals(playerFormScreen))
                 {
-                    oldIndex = i;
-                    newIndex = i == Screen.AllScreens.Length - 1 ? 0 : i + 1;
+                    newIndex = (i == Screen.AllScreens.Length - 1 ? 0 : i + 1);
                     break;
                 }
             }
 
             playerTest.WindowState = FormWindowState.Normal;
-            playerTest.Location = Screen.AllScreens[newIndex].WorkingArea.Location;
+            playerTest.Location = Screen.AllScreens[newIndex].Bounds.Location;
             playerTest.WindowState = FormWindowState.Maximized;
             playerTest.Refresh();
 
@@ -457,7 +449,7 @@ namespace Hob_BRB_Player
                         if (!BRBManager.RegisterNewBRB(filename))
                         {
                             MessageBox.Show("Could not register the BRB file \"" + filename + "\". Make sure it is a valid video file (in a format compatible with VLC) " +
-                                            "and the application has read permissions on it. If it is not supposed to be a BRB episode, please remove it from the BRB directory.",
+                                            "and the application has read permissions on it. If it is not supposed to be a BRB episode, please move it out of the BRB directory.",
                                             "Registering new/unknown BRB failed", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         }
                     }
@@ -488,6 +480,8 @@ namespace Hob_BRB_Player
         }
 
 
+        // Updates the controls of the form according to the step switched to
+
         private void ChangeSetupState(InitialSetupState newState)
         {
             pnlInitialSetupInfo.Visible = false;
@@ -497,6 +491,7 @@ namespace Hob_BRB_Player
             pnlUnknownBRBImportPost.Visible = false;
             pnlPlayerAndChapter.Visible = false;
             pnlOBSSetup.Visible = false;
+            pnlSavingConfig.Visible = false;
 
             btnNext.Enabled = true;
             btnNext.Text = "Next";

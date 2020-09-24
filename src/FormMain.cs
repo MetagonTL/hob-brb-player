@@ -17,6 +17,7 @@ namespace Hob_BRB_Player
 {
     public partial class FormMain : Form
     {
+        // These images are switched out for each other during operation, so permanently load them
         private Image iconStartPlayer = Image.FromFile("icons\\brbplayer.png");
         private Image iconAbortPlayer = Image.FromFile("icons\\abortbrbplayer.png");
         private Image iconPlay = Image.FromFile("icons\\play.png");
@@ -62,7 +63,7 @@ namespace Hob_BRB_Player
         private void FillInConfigAndBRBData()
         {
             UpdateConfigValues();
-            // Since this method is only called on startup, enable the Chapter Increment link
+            // Since this method is only called on startup, the Chapter Increment link can be re-enabled here
             lnkChapterNumber.LinkColor = Color.Blue;
             lnkChapterNumber.LinkBehavior = LinkBehavior.AlwaysUnderline;
 
@@ -130,9 +131,10 @@ namespace Hob_BRB_Player
 
             lstAllBRBs.Items.AddRange(newItems.ToArray());
 
+            // Clearing sorter every time is supposed to improve performance
             lstAllBRBs.ListViewItemSorter = new BRBListComparer(currentBRBListSortColumn, currentBRBListSortInverted);
             lstAllBRBs.Sort();
-            lstAllBRBs.ListViewItemSorter = null; // This is supposed to improve performance
+            lstAllBRBs.ListViewItemSorter = null;
 
             lstAllBRBs.EndUpdate();
 
@@ -247,7 +249,7 @@ namespace Hob_BRB_Player
                 {
                     case 0: // Favourite
                         return ((ListViewItem)x).SubItems[subItemIndex].Text == "" ? 1 : -1;
-                    // If string is not empty, then item has priority
+                    // If string is not empty, then item is a favourite, so it has priority
                     case 1: // Filename
                     case 2: // Duration (can be sorted by String just fine)
                     case 3: // Description
@@ -259,7 +261,7 @@ namespace Hob_BRB_Player
 
                     case 5: // Weight
                         return Convert.ToInt32(((ListViewItem)x).SubItems[subItemIndex].Text) > Convert.ToInt32(((ListViewItem)y).SubItems[subItemIndex].Text) ? -1 : 1;
-                    // ">" since bigger means higher priority
+                    // ">" since bigger weight means higher priority
 
                     case 6: // Priority
                     default:
@@ -295,7 +297,7 @@ namespace Hob_BRB_Player
             }
             lstAllBRBs.ListViewItemSorter = new BRBListComparer(currentBRBListSortColumn, currentBRBListSortInverted);
             lstAllBRBs.Sort();
-            lstAllBRBs.ListViewItemSorter = null; // This is supposed to improve performance
+            lstAllBRBs.ListViewItemSorter = null; // Resetting this is supposed to improve performance
         }
 
         // Automatically update BRB data if the search text changes
@@ -367,7 +369,7 @@ namespace Hob_BRB_Player
                 if (index >= 1)
                 {
                     ListViewItem temp = lstBRBPlaylist.Items[index];
-                    lstBRBPlaylist.Items.Remove(temp);
+                    lstBRBPlaylist.Items.RemoveAt(index);
                     lstBRBPlaylist.Items.Insert(index - 1, temp);
                 }
             }
@@ -376,7 +378,7 @@ namespace Hob_BRB_Player
                 if (index >= Program.PlayerForm.NextOrCurrentBRBIndex + 2)
                 {
                     ListViewItem temp = lstBRBPlaylist.Items[index];
-                    lstBRBPlaylist.Items.Remove(temp);
+                    lstBRBPlaylist.Items.RemoveAt(index);
                     lstBRBPlaylist.Items.Insert(index - 1, temp);
                     Program.PlayerForm.UpdateBRBPlaylist(GetCurrentPlaylist());
                 }
@@ -396,7 +398,7 @@ namespace Hob_BRB_Player
                 if (index <= lstBRBPlaylist.Items.Count - 2)
                 {
                     ListViewItem temp = lstBRBPlaylist.Items[index];
-                    lstBRBPlaylist.Items.Remove(temp);
+                    lstBRBPlaylist.Items.RemoveAt(index);
                     lstBRBPlaylist.Items.Insert(index + 1, temp);
                 }
             }
@@ -405,7 +407,7 @@ namespace Hob_BRB_Player
                 if (index >= Program.PlayerForm.NextOrCurrentBRBIndex + 1 && index <= lstBRBPlaylist.Items.Count - 2)
                 {
                     ListViewItem temp = lstBRBPlaylist.Items[index];
-                    lstBRBPlaylist.Items.Remove(temp);
+                    lstBRBPlaylist.Items.RemoveAt(index);
                     lstBRBPlaylist.Items.Insert(index + 1, temp);
                     Program.PlayerForm.UpdateBRBPlaylist(GetCurrentPlaylist());
                 }
@@ -517,7 +519,7 @@ namespace Hob_BRB_Player
                                 "No videos in playlist", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
-            // TODO: More logic, checking playlist for bad stuff etc.
+            
             if (Program.AppState == ApplicationState.Idle)
             {
                 Program.BeginBRBPlayback(GetCurrentPlaylist());
@@ -720,10 +722,6 @@ namespace Hob_BRB_Player
                 case BRBPlayerState.BeginningOfBreak:
                 case BRBPlayerState.InBetweenBRBs:
                 case BRBPlayerState.HobbVLC:
-                    // trkVolume.Value = Program.PlayerForm.WMPlayer.settings.volume;
-                    // txtVolume.Text = Program.PlayerForm.WMPlayer.settings.volume.ToString();
-                    // chkMuted.Checked = Program.PlayerForm.WMPlayer.settings.mute;
-
                     for (int i = 0; i < Program.PlayerForm.NextOrCurrentBRBIndex; i++)
                     {
                         lstBRBPlaylist.Items[i].ForeColor = Color.DarkGray;
@@ -864,7 +862,7 @@ namespace Hob_BRB_Player
 
         private void btnCreditsAndSupport_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("The current app version is " + Config.Version + ".\r\n\r\n" +
+            MessageBox.Show("The current app version is " + Config.ConfigVersion + ".\r\n\r\n" +
                             "App design and coding by MetagonTL, https://www.twitch.tv/metagontl . For any technical issues, questions or suggestions, MetagonTL can be reached on Twitch. " +
                             "For longer messages or emergencies, contact MetagonTL via e-mail.\r\n\r\n" +
                             "General app feedback, InterBRB screen design and graphics by KaufLive, https://www.twitch.tv/kauflive . " +

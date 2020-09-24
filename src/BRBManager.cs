@@ -131,6 +131,29 @@ namespace Hob_BRB_Player
             }
         }
 
+        // Update the filename of a BRB episode, without considering anything else (for instance, when user updates a BRB to its new filename)
+        public static bool TransferToNewFilename(BRBEpisode episode, string newFilename, bool removeOldEpisode)
+        {
+            BRBEpisode newEpisodeVersion = new BRBEpisode(newFilename, episode.Duration, episode.Favourite, episode.Title,
+                                                          episode.Description, episode.Credits, episode.IsNew, episode.PlaybackChapters,
+                                                          episode.GuaranteedPlays, episode.PriorityPlays);
+            newEpisodeVersion.RefreshDuration();
+
+            // Make sure the episode's video file is understood by the application
+            if (newEpisodeVersion.Duration.Ticks == 0)
+            {
+                return false;
+            }
+
+            if (removeOldEpisode)
+            {
+                BRBEpisodes.Remove(episode);
+            }
+            BRBEpisodes.Add(newEpisodeVersion);
+            BRBEpisodes.Sort();
+            return true;
+        }
+
         // Generates a playlist. For the overall duration, InterBRB times are taken into account
         public static List<BRBEpisode> GeneratePlaylist(TimeSpan minDuration, TimeSpan targetDuration, TimeSpan maxDuration, ref List<string> refAddReason)
         {

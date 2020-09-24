@@ -1,5 +1,4 @@
-﻿//using AxWMPLib;
-using LibVLCSharp;
+﻿using LibVLCSharp;
 using LibVLCSharp.Shared;
 using LibVLCSharp.WinForms;
 using System;
@@ -13,7 +12,6 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-//using WMPLib;
 
 namespace Hob_BRB_Player
 {
@@ -76,7 +74,7 @@ namespace Hob_BRB_Player
 			BRBPlaylist.Add(episode);
 			if (PlayerState == BRBPlayerState‌.EndOfBreak)
 			{
-				// Episode was added manually at end of break. Automatically play this new BRB
+				// Episode was added at end of break. Automatically play this new BRB
 				ChangePlayerState(BRBPlayerState.InBetweenBRBs);
 				UnpauseAndHideControls();
 			}
@@ -87,10 +85,6 @@ namespace Hob_BRB_Player
 			get { return BRBPlaylist[NextOrCurrentBRBIndex]; }
 		}
 
-		//public AxWindowsMediaPlayer WMPlayer
-		//{
-		//	get { return axWMPlayer; }
-		//}
 		public MediaPlayer VLCPlayer { get; }
 
 		private long lastScrubUpdateTicks = 0;
@@ -101,6 +95,7 @@ namespace Hob_BRB_Player
 			"C|AYAYA.png",
 			"U|FeelsMattMan.png",
 			"L|HeyListen.gif",
+			"U|haHAA.png",
 			"E|hobbAim.png",
 			"R|hobbBald.png",
 			"E|hobbBeep.png",
@@ -177,12 +172,12 @@ namespace Hob_BRB_Player
 
 		// Common: AYAYA, hobbBrit, hobbBrow, hobbCry, hobbDab, hobbDerp, hobbGasm, hobbH, hobbHands, hobbHi, hobbJedi, hobbLink, hobbLUL, hobbPega, hobbS, hobbSif, hobbTos, hobbTroll,
 		//         hobbWeird, hobbY, KEKW, PETHOB (22)
-		// Uncommon: FeelsMattMan, hobbBlanket, hobbBrexit, hobbCray, hobbDuck, hobbFart, hobbHype, hobbIncel, hobbKeys, hobbNed, hobbNotes, hobbPoo, hobbRage, hobbRed, hobbT, hobbW,
-		//         hobbWoah, hobbYoda, PETLINK (19)
+		// Uncommon: FeelsMattMan, haHAA, hobbBlanket, hobbBrexit, hobbCray, hobbDuck, hobbFart, hobbHype, hobbIncel, hobbKeys, hobbNed, hobbNotes, hobbPoo, hobbRage, hobbRed, hobbT, hobbW,
+		//         hobbWoah, hobbYoda, PETLINK (20)
 		// Rare: hobbBald, hobbBowl, hobbBuffer, hobbClap, hobbCloud, hobbEmo, hobbHOP, hobbKEK, hobbLurk, hobbMind, hobbNan, hobbPride, hobbRings, hobbWheel, PETTHEMATT (15)
 		// Epic: 2Head, hobbAim, hobbBeep, hobbChoke, hobbCrazy, hobbF, hobbKet, hobbMan, hobbNGT, hobbPray, PotPie (11)
 		// Legendary: HeyListen, hobbDiva, hobbK, hobbMorg, hobbP, hobbUnagi, hobbVIP, RareHob, sumSmash (9)
-		// SUM: 76 with wt 846; Common 65.0 %, 2.96 % each; Uncommon 22.5 %, 1.18 % each; Rare 8.87 %, 0.59 % each; Epic 2.60 %, 0.24 % each; Legendary 1.06 %, 0.12 % each
+		// SUM: 77 with wt 856; Common 64.3 %, 2.92 % each; Uncommon 23.4 %, 1.17 % each; Rare 8.76 %, 0.58 % each; Epic 2.57 %, 0.23 % each; Legendary 1.05 %, 0.12 % each
 
 
 		private List<string> weightedHobEmotes = new List<string>(); // Compiled only once, then saved for future uses
@@ -243,17 +238,6 @@ namespace Hob_BRB_Player
 
         private void FormPlayer_Shown(object sender, EventArgs e)
         {
-			// Configure player to be quasi-fullscreen and difficult to involuntarily disrupt
-
-			/*WMPlayer.uiMode = "none";
-			WMPlayer.enableContextMenu = false;
-			WMPlayer.windowlessVideo = true;
-			WMPlayer.Ctlenabled = false;
-			WMPlayer.stretchToFit = true;
-
-			WMPlayer.settings.autoStart = false;
-			WMPlayer.settings.enableErrorDialogs = false;*/
-
 			ChangePlayerState(BRBPlayerState.BeginningOfBreak);
 		}
 
@@ -433,6 +417,7 @@ namespace Hob_BRB_Player
 
 		private string GetRandomHobEmote()
         {
+			// Compile weighted list once if not done already
 			if (weightedHobEmotes.Count == 0)
             {
 				foreach (string emoteInfo in hobEmotes)
@@ -479,10 +464,10 @@ namespace Hob_BRB_Player
 			Program.FinishBRBPlayback();
 		}
 
+		// If a BRB is currently playing, pause it and show the BRB controls
 		public void PauseAndShowControls(bool fromEscape = false)
 		{
-			// If a BRB is currently playing, pause it and show the BRB controls
-			if (PlayerState == BRBPlayerState.BeginningOfBreak || PlayerState == BRBPlayerState.EndOfBreak)
+			if (PlayerState == BRBPlayerState.BeginningOfBreak || PlayerState == BRBPlayerState.EndOfBreak) // Paused automatically by form, cannot be unpaused
             {
 				if (!fromEscape)
                 {
@@ -508,7 +493,7 @@ namespace Hob_BRB_Player
 				Program.ShowCursor();
 				Program.MainForm.OnBRBPause();
 			}
-			if (PlayerState == BRBPlayerState.InBetweenBRBs || PlayerState == BRBPlayerState.HobbVLC)
+			if (PlayerState == BRBPlayerState.InBetweenBRBs || PlayerState == BRBPlayerState.HobbVLC) // "Pause" means "Pause timer" here
             {
 				tmrTenthSecond.Stop();
 				Program.ShowCursor();
@@ -516,8 +501,8 @@ namespace Hob_BRB_Player
 				Paused = true;
 				pnlPaused.Visible = true;
 			}
-			if (PlayerState == BRBPlayerState.ErrorOccurred)
-            {
+			if (PlayerState == BRBPlayerState.ErrorOccurred) // Paused automatically by form, cannot be unpaused
+			{
 				Program.ShowCursor();
                 Program.MainForm.OnBRBPause();
 				Paused = true;
@@ -565,16 +550,6 @@ namespace Hob_BRB_Player
             }
 		}
 
-		// If a BRB video is playing, go back to its InterBRB screen
-		// If no BRB video is playing, do nothing
-		public void ReplayCurrentBRB()
-        {
-			if (PlayerState == BRBPlayerState‌.Playback || PlayerState == BRBPlayerState.InBetweenBRBs)
-            {
-				ChangePlayerState(BRBPlayerState.InBetweenBRBs);
-            }
-        }
-
 		public void ScrubTo(double seconds)
         {
 			if (PlayerState == BRBPlayerState.Playback)
@@ -582,9 +557,6 @@ namespace Hob_BRB_Player
 				if ((DateTime.Now.Ticks - lastScrubUpdateTicks) / TimeSpan.TicksPerMillisecond >= 250)
 				{
 					VLCPlayer.Position = (float)seconds / ((float)VLCPlayer.Length / 1000.0f);
-					// Update video so scrub effects are visible
-					//WMPlayer.Ctlcontrols.play();
-					//WMPlayer.Ctlcontrols.pause(); // TODO: Necessary?
 					lastScrubUpdateTicks = DateTime.Now.Ticks;
 				}
 			}
@@ -598,6 +570,16 @@ namespace Hob_BRB_Player
 		public void SetMuted(bool muted)
         {
 			VLCPlayer.Mute = muted;
+		}
+
+		// If a BRB video is playing, go back to its InterBRB screen
+		// If no BRB video is playing, do nothing
+		public void ReplayCurrentBRB()
+		{
+			if (PlayerState == BRBPlayerState‌.Playback || PlayerState == BRBPlayerState.InBetweenBRBs)
+			{
+				ChangePlayerState(BRBPlayerState.InBetweenBRBs);
+			}
 		}
 
 		// Go back to the InterBRB screen announcing the previous BRB
@@ -646,8 +628,6 @@ namespace Hob_BRB_Player
 			if (VLCPlayer.Media != null)
 			{
 				ThreadPool.QueueUserWorkItem(_ => { VLCPlayer.Stop(); });
-				//VLCPlayer.Media.Dispose();
-				//VLCPlayer.Media = null;
 			}
 			HideAllUIScreens();
 			tmrTenthSecond.Stop();
@@ -677,6 +657,7 @@ namespace Hob_BRB_Player
 					if (!Paused)
 					{
 						VLCPlayer.Play();
+						// Deadlock should not occur here since Playback should not be triggered out of playback
 					}
 					break;
 
@@ -718,7 +699,7 @@ namespace Hob_BRB_Player
 			this.Close();
 		}
 
-		// Prevent accidental Alt-F4 closing, but not Task Manager closing, for instance (however, do pause and display controls)
+		// Prevent accidental Alt-F4 closing, but not Task Manager closing, for instance. However, do pause and display controls
 		private void FormPlayer_FormClosing(object sender, FormClosingEventArgs e)
 		{
 			if (e.CloseReason == CloseReason.UserClosing && PlayerState != BRBPlayerState.Exiting)

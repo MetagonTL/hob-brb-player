@@ -35,7 +35,8 @@ namespace Hob_BRB_Player
                 if (ep.Filename == txtNewFilename.Text)
                 {
                     MessageBox.Show("Cannot rename the BRB file to the name you chose: The new filename already exists in the BRB Manager's system.\r\n\r\n" +
-                                    "If you want to proceed, you need to free up the name by renaming the respective BRB first, regardless of whether it still exists on disk or not.",
+                                    "If you want to proceed, you need to free up the name by renaming the respective BRB first, regardless of whether it still exists on disk or not.\r\n\r\n" +
+                                    "If you have renamed the BRB file to this name outside of the application, use \"Replace with new version\" instead of \"Rename BRB file\".",
                                     "Desired new filename already in system", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }

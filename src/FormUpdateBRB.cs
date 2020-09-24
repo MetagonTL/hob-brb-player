@@ -81,24 +81,17 @@ namespace Hob_BRB_Player
                     }
                 }
 
-                // Copy data over and remove old BRB. Hacks - should BRBManager do this himself instead?
-                newVersionEpisode = new BRBEpisode(newFilename, episodeToUpdate.Duration, episodeToUpdate.Favourite, episodeToUpdate.Title, episodeToUpdate.Description,
-                                                   episodeToUpdate.Credits, episodeToUpdate.IsNew, episodeToUpdate.PlaybackChapters, episodeToUpdate.GuaranteedPlays,
-                                                   episodeToUpdate.PriorityPlays);
-                newVersionEpisode.RefreshDuration(); // Account for possible new duration of the updated video file
-                if (newVersionEpisode.Duration.Ticks == 0)
+                // Copy data over and remove old BRB
+                if (!BRBManager.TransferToNewFilename(episodeToUpdate, newFilename, true))
                 {
                     MessageBox.Show("Could not register the new BRB file. Make sure it is a valid video file (in a format compatible with VLC) and the application has read permissions on it." +
                                     "\r\n\r\nThe updating process was aborted. If the new file was already in the system, it has been removed. No other data was changed.",
                                     "Adding new BRB failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
-                BRBManager.BRBEpisodes.Remove(episodeToUpdate);
-                BRBManager.BRBEpisodes.Add(newVersionEpisode);
-                BRBManager.BRBEpisodes.Sort();
             }
 
-            // Old file still exists. Possible scenario: User has added a newer version of the BRB and did not remove the old version from the directory.
+            // Old file still exists. Possible scenario: User has added a newer version of the BRB and did not remove the old version from the directory
             else
             {
                 if (newVersionEpisode != null)
@@ -123,20 +116,14 @@ namespace Hob_BRB_Player
                     }
                 }
 
-                // Copy data over. Hacks - should BRBManager do this himself instead?
-                newVersionEpisode = new BRBEpisode(newFilename, episodeToUpdate.Duration, episodeToUpdate.Favourite, episodeToUpdate.Title, episodeToUpdate.Description,
-                                                   episodeToUpdate.Credits, episodeToUpdate.IsNew, episodeToUpdate.PlaybackChapters, episodeToUpdate.GuaranteedPlays,
-                                                   episodeToUpdate.PriorityPlays);
-                newVersionEpisode.RefreshDuration(); // Account for possible new duration of the updated video file
-                if (newVersionEpisode.Duration.Ticks == 0)
+                // Copy data over, but do not remove old BRB
+                if (!BRBManager.TransferToNewFilename(episodeToUpdate, newFilename, false))
                 {
                     MessageBox.Show("Could not register the new BRB file. Make sure it is a valid video file (in a format compatible with VLC) and the application has read permissions on it." +
                                     "\r\n\r\nThe updating process was aborted. If the new file was already in the system, it has been removed. No other data was changed.",
                                     "Adding new BRB failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
-                BRBManager.BRBEpisodes.Add(newVersionEpisode);
-                BRBManager.BRBEpisodes.Sort();
             }
 
             BRBManager.RefreshAvailableList();

@@ -42,8 +42,8 @@ namespace Hob_BRB_Player
             numPermittedUntertime.Value = Config.PermittedUndertimePercent;
             numChapterHistory.Value = Config.ChapterHistoryConsidered;
             numReplayAvoidance.Value = Config.AvoidForChaptersAfterPlay;
-            trkMultiplierFavourites10.Value = (int)Math.Round(Config.FavouriteMultiplier * 10.0);
-            txtFavouritesMultiplier.Text = Config.FavouriteMultiplier.ToString("0.0");
+            trkMultiplierFavourites100.Value = (int)Math.Round(Config.FavouriteMultiplier * 100.0);
+            txtFavouritesMultiplier.Text = Config.FavouriteMultiplier.ToString("0.00");
             drpSortingMode.SelectedIndex = (int)Config.SortingMode;
             numReservedChanceForPrio.Value = Config.ReservedChanceForPriorityBRBs;
             numPreferredAfter.Value = Config.PreferredPlayAfterChapters;
@@ -70,7 +70,7 @@ namespace Hob_BRB_Player
 
         private void trkMultiplierFavourites10_Scroll(object sender, EventArgs e)
         {
-            txtFavouritesMultiplier.Text = (trkMultiplierFavourites10.Value / 10.0).ToString("0.0");
+            txtFavouritesMultiplier.Text = (trkMultiplierFavourites100.Value / 100.0).ToString("0.00");
             OnSettingChanged(sender, e);
         }
 
@@ -98,9 +98,10 @@ namespace Hob_BRB_Player
         // Checks user settings for being in bounds and for consistency. If both are fulfilled, saves new config
         private bool CheckAndSaveSettings()
         {
-            if (numChapter.Value < 1689)
+            if (numChapter.Value < Config.CurrentReleaseChapter)
             {
-                MessageBox.Show("Could not apply your new settings. Reason: You specified a chapter smaller than 1689, which cannot be correct since this app was released after 1689.",
+                MessageBox.Show("Could not apply your new settings. Reason: You specified a chapter smaller than " + Config.CurrentReleaseChapter +
+                                ", which cannot be correct since this app was released after " + Config.CurrentReleaseChapter + ".",
                                 "Consistency error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return false;
             }
@@ -156,7 +157,7 @@ namespace Hob_BRB_Player
             Config.PermittedUndertimePercent = (int)Math.Round(numPermittedUntertime.Value);
             Config.ChapterHistoryConsidered = (int)Math.Round(numChapterHistory.Value);
             Config.AvoidForChaptersAfterPlay = (int)Math.Round(numReplayAvoidance.Value);
-            Config.FavouriteMultiplier = trkMultiplierFavourites10.Value / 10.0;
+            Config.FavouriteMultiplier = trkMultiplierFavourites100.Value / 10.0;
             Config.SortingMode = (BRBPlaylistSortingMode)drpSortingMode.SelectedIndex;
             Config.ReservedChanceForPriorityBRBs = (int)Math.Round(numReservedChanceForPrio.Value);
             Config.PreferredPlayAfterChapters = (int)Math.Round(numPreferredAfter.Value);

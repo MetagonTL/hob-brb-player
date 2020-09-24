@@ -7,15 +7,12 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-//using WMPLib;
 
 namespace Hob_BRB_Player
 {
     [JsonObject(MemberSerialization.OptOut)]
     public class BRBEpisode : IComparable
     {
-        //[JsonIgnore] public static WindowsMediaPlayer WMPlayer { get; } = new WindowsMediaPlayer();
-
         public string Filename { get; private set; }
         public TimeSpan Duration { get; private set; }
         public bool Favourite { get; set; } // Is marked with a star in the BRB list and receives a boost to urgency score
@@ -49,7 +46,7 @@ namespace Hob_BRB_Player
             get { return PlaybackChapters.Count(c => (c >= Config.Chapter - Config.ChapterHistoryConsidered)); }
         }
 
-        // Constructor for new BRB episodes where the user does not immediately enter information
+        // Constructor for new BRB episodes
         public BRBEpisode(string filename)
         {
             Filename = filename;
@@ -67,27 +64,9 @@ namespace Hob_BRB_Player
             PriorityPlays = Config.AutoPriorityPlaysForNewBRBs;
         }
 
-        // Constructor for new BRB episodes where the user immediately enters information
-        public BRBEpisode(string filename, string title, string description, string credits)
-        {
-            Filename = filename;
-            Media media = new Media(Program.VLC, new Uri(Path.GetFullPath(Path.Combine(Config.BRBDirectory, filename))));
-            Task<MediaParsedStatus> parseTask = media.Parse();
-            parseTask.Wait();
-            Duration = new TimeSpan(media.Duration > -1 ? media.Duration * TimeSpan.TicksPerMillisecond : 0);
-            Favourite = false;
-            Title = title;
-            Description = description;
-            Credits = credits;
-            IsNew = true;
-            PlaybackChapters = new List<int>();
-            GuaranteedPlays = Config.AutoGuaranteedPlaysForNewBRBs;
-            PriorityPlays = Config.AutoPriorityPlaysForNewBRBs;
-        }
-
         // Constructor for already extant BRB episodes (on application load or information update)
         [JsonConstructor] public BRBEpisode(string filename, TimeSpan duration, bool favourite, string title, string description,
-                                            string credits, bool isnew,  List<int> playbackChapters, int guaranteedPlays, int priorityPlays)
+                                            string credits, bool isnew, List<int> playbackChapters, int guaranteedPlays, int priorityPlays)
         {
             Filename = filename;
             Duration = duration;
