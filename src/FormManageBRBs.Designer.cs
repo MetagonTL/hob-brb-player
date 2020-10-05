@@ -71,7 +71,7 @@
             this.btnReloadBRBList.Location = new System.Drawing.Point(12, 12);
             this.btnReloadBRBList.Name = "btnReloadBRBList";
             this.btnReloadBRBList.Size = new System.Drawing.Size(173, 40);
-            this.btnReloadBRBList.TabIndex = 11;
+            this.btnReloadBRBList.TabIndex = 0;
             this.btnReloadBRBList.Text = " Reload BRB List";
             this.btnReloadBRBList.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnReloadBRBList.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -88,7 +88,7 @@
             this.btnSave.Location = new System.Drawing.Point(754, 12);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(110, 40);
-            this.btnSave.TabIndex = 23;
+            this.btnSave.TabIndex = 1;
             this.btnSave.Text = " Save";
             this.btnSave.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnSave.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -104,7 +104,7 @@
             this.chkFavourite.Location = new System.Drawing.Point(355, 142);
             this.chkFavourite.Name = "chkFavourite";
             this.chkFavourite.Size = new System.Drawing.Size(102, 20);
-            this.chkFavourite.TabIndex = 26;
+            this.chkFavourite.TabIndex = 4;
             this.chkFavourite.Text = "Favourite (★)";
             this.tooltipsManager.SetToolTip(this.chkFavourite, "BRBs marked Favourite will be displayed with a star in the main window. By defaul" +
         "t, they will also be selected more often in random playlists.");
@@ -120,7 +120,7 @@
             this.txtTitle.MaxLength = 100;
             this.txtTitle.Name = "txtTitle";
             this.txtTitle.Size = new System.Drawing.Size(438, 22);
-            this.txtTitle.TabIndex = 27;
+            this.txtTitle.TabIndex = 6;
             this.tooltipsManager.SetToolTip(this.txtTitle, "This title will be shown to viewers during the InterBRB screen. If empty, the fil" +
         "ename is displayed instead.");
             this.txtTitle.TextChanged += new System.EventHandler(this.txtTitle_TextChanged);
@@ -134,7 +134,7 @@
             this.txtAuthors.MaxLength = 50;
             this.txtAuthors.Name = "txtAuthors";
             this.txtAuthors.Size = new System.Drawing.Size(438, 22);
-            this.txtAuthors.TabIndex = 29;
+            this.txtAuthors.TabIndex = 7;
             this.tooltipsManager.SetToolTip(this.txtAuthors, "If the authors of the BRB are entered here, they will be displayed to viewers dur" +
         "ing the InterBRB screen.");
             this.txtAuthors.TextChanged += new System.EventHandler(this.txtAuthors_TextChanged);
@@ -148,7 +148,7 @@
             this.txtDescription.Name = "txtDescription";
             this.txtDescription.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.txtDescription.Size = new System.Drawing.Size(509, 149);
-            this.txtDescription.TabIndex = 31;
+            this.txtDescription.TabIndex = 8;
             this.tooltipsManager.SetToolTip(this.txtDescription, "A description for the BRB where any additional information can be entered. This w" +
         "ill not be displayed in the BRB player.");
             this.txtDescription.TextChanged += new System.EventHandler(this.txtDescription_TextChanged);
@@ -159,7 +159,7 @@
             this.btnOpenBRB.Location = new System.Drawing.Point(355, 96);
             this.btnOpenBRB.Name = "btnOpenBRB";
             this.btnOpenBRB.Size = new System.Drawing.Size(219, 30);
-            this.btnOpenBRB.TabIndex = 32;
+            this.btnOpenBRB.TabIndex = 3;
             this.btnOpenBRB.Text = "Open with standard program";
             this.tooltipsManager.SetToolTip(this.btnOpenBRB, "Opens the selected video file with the standard program as set in Windows");
             this.btnOpenBRB.UseVisualStyleBackColor = true;
@@ -175,7 +175,7 @@
             this.txtPlaybackData.ReadOnly = true;
             this.txtPlaybackData.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.txtPlaybackData.Size = new System.Drawing.Size(509, 72);
-            this.txtPlaybackData.TabIndex = 34;
+            this.txtPlaybackData.TabIndex = 11;
             this.tooltipsManager.SetToolTip(this.txtPlaybackData, "Information about playbacks of the BRB video (from chapter 1412 onwards). This is" +
         " updated automatically whenever the BRB player finishes playing the video file.");
             // 
@@ -189,7 +189,7 @@
             this.txtDuration.Name = "txtDuration";
             this.txtDuration.ReadOnly = true;
             this.txtDuration.Size = new System.Drawing.Size(80, 22);
-            this.txtDuration.TabIndex = 36;
+            this.txtDuration.TabIndex = 5;
             this.txtDuration.Text = "00:00";
             this.txtDuration.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.tooltipsManager.SetToolTip(this.txtDuration, "The playtime of the BRB video file");
@@ -200,7 +200,7 @@
             this.btnReplaceBRB.Location = new System.Drawing.Point(355, 590);
             this.btnReplaceBRB.Name = "btnReplaceBRB";
             this.btnReplaceBRB.Size = new System.Drawing.Size(178, 30);
-            this.btnReplaceBRB.TabIndex = 37;
+            this.btnReplaceBRB.TabIndex = 12;
             this.btnReplaceBRB.Text = "Replace with new version";
             this.tooltipsManager.SetToolTip(this.btnReplaceBRB, "Use this to tell the application a BRB file has changed (whether under the same o" +
         "r a different filename).");
@@ -213,7 +213,7 @@
             this.btnRenameBRB.Location = new System.Drawing.Point(686, 590);
             this.btnRenameBRB.Name = "btnRenameBRB";
             this.btnRenameBRB.Size = new System.Drawing.Size(178, 30);
-            this.btnRenameBRB.TabIndex = 38;
+            this.btnRenameBRB.TabIndex = 13;
             this.btnRenameBRB.Text = "Rename BRB file";
             this.tooltipsManager.SetToolTip(this.btnRenameBRB, "Use this to rename the BRB file on disk. If the file has already been renamed out" +
         "side of this application, use the button \"Replace with new version\".");
@@ -231,7 +231,7 @@
             0});
             this.numGuaranteedPlays.Name = "numGuaranteedPlays";
             this.numGuaranteedPlays.Size = new System.Drawing.Size(46, 22);
-            this.numGuaranteedPlays.TabIndex = 41;
+            this.numGuaranteedPlays.TabIndex = 9;
             this.tooltipsManager.SetToolTip(this.numGuaranteedPlays, resources.GetString("numGuaranteedPlays.ToolTip"));
             this.numGuaranteedPlays.ValueChanged += new System.EventHandler(this.numGuaranteedPlays_ValueChanged);
             // 
@@ -246,7 +246,7 @@
             0});
             this.numPriorityPlays.Name = "numPriorityPlays";
             this.numPriorityPlays.Size = new System.Drawing.Size(46, 22);
-            this.numPriorityPlays.TabIndex = 42;
+            this.numPriorityPlays.TabIndex = 10;
             this.tooltipsManager.SetToolTip(this.numPriorityPlays, resources.GetString("numPriorityPlays.ToolTip"));
             this.numPriorityPlays.ValueChanged += new System.EventHandler(this.numPriorityPlays_ValueChanged);
             // 
@@ -259,7 +259,7 @@
             this.txtSearch.MaxLength = 100;
             this.txtSearch.Name = "txtSearch";
             this.txtSearch.Size = new System.Drawing.Size(361, 22);
-            this.txtSearch.TabIndex = 45;
+            this.txtSearch.TabIndex = 14;
             this.tooltipsManager.SetToolTip(this.txtSearch, "Enter some text to only display BRB videos that contain this text somewhere.");
             this.txtSearch.TextChanged += new System.EventHandler(this.txtSearch_TextChanged);
             // 
@@ -278,7 +278,7 @@
             this.drpSearchWhere.Location = new System.Drawing.Point(701, 663);
             this.drpSearchWhere.Name = "drpSearchWhere";
             this.drpSearchWhere.Size = new System.Drawing.Size(163, 24);
-            this.drpSearchWhere.TabIndex = 47;
+            this.drpSearchWhere.TabIndex = 15;
             this.tooltipsManager.SetToolTip(this.drpSearchWhere, "Select where the text you gave should be looked for");
             this.drpSearchWhere.SelectedIndexChanged += new System.EventHandler(this.drpSearchWhere_SelectedIndexChanged);
             // 
@@ -289,7 +289,7 @@
             this.lblTitle.Location = new System.Drawing.Point(352, 180);
             this.lblTitle.Name = "lblTitle";
             this.lblTitle.Size = new System.Drawing.Size(68, 16);
-            this.lblTitle.TabIndex = 25;
+            this.lblTitle.TabIndex = 18;
             this.lblTitle.Text = "BRB Title:";
             this.tooltipsManager.SetToolTip(this.lblTitle, "This title will be shown to viewers during the InterBRB screen. If empty, the fil" +
         "ename is displayed instead.");
@@ -301,7 +301,7 @@
             this.lblAuthors.Location = new System.Drawing.Point(352, 216);
             this.lblAuthors.Name = "lblAuthors";
             this.lblAuthors.Size = new System.Drawing.Size(56, 16);
-            this.lblAuthors.TabIndex = 28;
+            this.lblAuthors.TabIndex = 19;
             this.lblAuthors.Text = "Authors:";
             this.tooltipsManager.SetToolTip(this.lblAuthors, "If the authors of the BRB are entered here, they will be displayed to viewers dur" +
         "ing the InterBRB screen.");
@@ -313,7 +313,7 @@
             this.lblDescription.Location = new System.Drawing.Point(352, 248);
             this.lblDescription.Name = "lblDescription";
             this.lblDescription.Size = new System.Drawing.Size(79, 16);
-            this.lblDescription.TabIndex = 30;
+            this.lblDescription.TabIndex = 20;
             this.lblDescription.Text = "Description:";
             this.tooltipsManager.SetToolTip(this.lblDescription, "A description for the BRB where any additional information can be entered. This w" +
         "ill not be displayed in the BRB player.");
@@ -325,7 +325,7 @@
             this.lblPlaybackData.Location = new System.Drawing.Point(352, 477);
             this.lblPlaybackData.Name = "lblPlaybackData";
             this.lblPlaybackData.Size = new System.Drawing.Size(98, 16);
-            this.lblPlaybackData.TabIndex = 33;
+            this.lblPlaybackData.TabIndex = 23;
             this.lblPlaybackData.Text = "Playback data:";
             // 
             // lblDuration
@@ -335,7 +335,7 @@
             this.lblDuration.Location = new System.Drawing.Point(717, 143);
             this.lblDuration.Name = "lblDuration";
             this.lblDuration.Size = new System.Drawing.Size(61, 16);
-            this.lblDuration.TabIndex = 35;
+            this.lblDuration.TabIndex = 17;
             this.lblDuration.Text = "Duration:";
             // 
             // lblGuaranteedPlays
@@ -345,7 +345,7 @@
             this.lblGuaranteedPlays.Location = new System.Drawing.Point(352, 435);
             this.lblGuaranteedPlays.Name = "lblGuaranteedPlays";
             this.lblGuaranteedPlays.Size = new System.Drawing.Size(139, 16);
-            this.lblGuaranteedPlays.TabIndex = 39;
+            this.lblGuaranteedPlays.TabIndex = 21;
             this.lblGuaranteedPlays.Text = "Guaranteed Plays left:";
             // 
             // lblPriorityPlays
@@ -355,7 +355,7 @@
             this.lblPriorityPlays.Location = new System.Drawing.Point(601, 435);
             this.lblPriorityPlays.Name = "lblPriorityPlays";
             this.lblPriorityPlays.Size = new System.Drawing.Size(166, 16);
-            this.lblPriorityPlays.TabIndex = 40;
+            this.lblPriorityPlays.TabIndex = 22;
             this.lblPriorityPlays.Text = "After that, Priority Plays left:";
             // 
             // picSearch
@@ -374,7 +374,7 @@
             this.lblFilterBRBs.Location = new System.Drawing.Point(42, 667);
             this.lblFilterBRBs.Name = "lblFilterBRBs";
             this.lblFilterBRBs.Size = new System.Drawing.Size(213, 16);
-            this.lblFilterBRBs.TabIndex = 44;
+            this.lblFilterBRBs.TabIndex = 24;
             this.lblFilterBRBs.Text = "Filter BRBs: Should contain the text";
             // 
             // lblFilterWhere
@@ -384,7 +384,7 @@
             this.lblFilterWhere.Location = new System.Drawing.Point(628, 667);
             this.lblFilterWhere.Name = "lblFilterWhere";
             this.lblFilterWhere.Size = new System.Drawing.Size(67, 16);
-            this.lblFilterWhere.TabIndex = 46;
+            this.lblFilterWhere.TabIndex = 25;
             this.lblFilterWhere.Text = "in the field";
             // 
             // lblAvailableBRBs
@@ -395,7 +395,7 @@
             this.lblAvailableBRBs.Location = new System.Drawing.Point(12, 72);
             this.lblAvailableBRBs.Name = "lblAvailableBRBs";
             this.lblAvailableBRBs.Size = new System.Drawing.Size(100, 16);
-            this.lblAvailableBRBs.TabIndex = 48;
+            this.lblAvailableBRBs.TabIndex = 16;
             this.lblAvailableBRBs.Text = "BRB Episodes:";
             // 
             // lstAllBRBs
@@ -414,7 +414,7 @@
             this.lstAllBRBs.Name = "lstAllBRBs";
             this.lstAllBRBs.ShowItemToolTips = true;
             this.lstAllBRBs.Size = new System.Drawing.Size(328, 524);
-            this.lstAllBRBs.TabIndex = 49;
+            this.lstAllBRBs.TabIndex = 2;
             this.lstAllBRBs.UseCompatibleStateImageBehavior = false;
             this.lstAllBRBs.View = System.Windows.Forms.View.Details;
             this.lstAllBRBs.SelectedIndexChanged += new System.EventHandler(this.lstAllBRBs_SelectedIndexChanged);

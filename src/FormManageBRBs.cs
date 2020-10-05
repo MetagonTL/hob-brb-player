@@ -232,6 +232,7 @@ namespace Hob_BRB_Player
         }
 
         // Changes are immediately transported to BRBs, but only saved to disk on form close
+
         private void chkFavourite_CheckedChanged(object sender, EventArgs e)
         {
             if (selectedBRB != null)

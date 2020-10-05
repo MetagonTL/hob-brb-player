@@ -12,6 +12,8 @@ namespace Hob_BRB_Player
 {
     public partial class FormPlayerTest : Form
     {
+        private bool closing = false;
+
         public FormPlayerTest()
         {
             InitializeComponent();
@@ -39,6 +41,22 @@ namespace Hob_BRB_Player
         private void tmrRefresh_Tick(object sender, EventArgs e)
         {
             this.Refresh();
+        }
+
+        // Called by Initial Setup once it finishes and this form is no longer needed
+        public void ConfirmClose()
+        {
+            closing = true;
+            this.Close();
+        }
+
+        // Prevent accidental Alt-F4 closing, but not Task Manager closing, for instance
+        private void FormPlayer_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (e.CloseReason == CloseReason.UserClosing && !closing)
+            {
+                e.Cancel = true;
+            }
         }
     }
 }

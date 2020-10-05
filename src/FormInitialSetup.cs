@@ -35,7 +35,7 @@ namespace Hob_BRB_Player
             LoadIcons();
         }
 
-        // Panels are not docked to allow easy editing in Designer
+        // Panels are not docked prior to runtime in order to allow easier editing in Designer
         private void DockPanels()
         {
             pnlInitialSetupInfo.Dock = DockStyle.Fill;
@@ -596,6 +596,8 @@ namespace Hob_BRB_Player
             {
                 Program.OnInitialSetupCompleted();
             }
+
+            playerTest.ConfirmClose(); // Release and close the player test form (it has its own protection from accidental Alt-F4)
         }
     }
 }

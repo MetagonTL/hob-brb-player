@@ -44,7 +44,7 @@
             this.chkUseWorkingDirRoot.Location = new System.Drawing.Point(12, 93);
             this.chkUseWorkingDirRoot.Name = "chkUseWorkingDirRoot";
             this.chkUseWorkingDirRoot.Size = new System.Drawing.Size(214, 17);
-            this.chkUseWorkingDirRoot.TabIndex = 11;
+            this.chkUseWorkingDirRoot.TabIndex = 2;
             this.chkUseWorkingDirRoot.Text = "Always use drive of application directory";
             this.chkUseWorkingDirRoot.UseVisualStyleBackColor = true;
             this.chkUseWorkingDirRoot.CheckedChanged += new System.EventHandler(this.chkUseWorkingDirRoot_CheckedChanged);
@@ -55,7 +55,7 @@
             this.btnBrowseForBRBDir.Location = new System.Drawing.Point(412, 58);
             this.btnBrowseForBRBDir.Name = "btnBrowseForBRBDir";
             this.btnBrowseForBRBDir.Size = new System.Drawing.Size(88, 22);
-            this.btnBrowseForBRBDir.TabIndex = 10;
+            this.btnBrowseForBRBDir.TabIndex = 1;
             this.btnBrowseForBRBDir.Text = "Browse...";
             this.btnBrowseForBRBDir.UseVisualStyleBackColor = true;
             this.btnBrowseForBRBDir.Click += new System.EventHandler(this.btnBrowseForBRBDir_Click);
@@ -68,7 +68,7 @@
             this.txtBRBDirectory.Name = "txtBRBDirectory";
             this.txtBRBDirectory.ReadOnly = true;
             this.txtBRBDirectory.Size = new System.Drawing.Size(394, 20);
-            this.txtBRBDirectory.TabIndex = 9;
+            this.txtBRBDirectory.TabIndex = 0;
             // 
             // lblPointToBRBDirectory
             // 
@@ -76,7 +76,7 @@
             this.lblPointToBRBDirectory.Location = new System.Drawing.Point(12, 16);
             this.lblPointToBRBDirectory.Name = "lblPointToBRBDirectory";
             this.lblPointToBRBDirectory.Size = new System.Drawing.Size(487, 26);
-            this.lblPointToBRBDirectory.TabIndex = 8;
+            this.lblPointToBRBDirectory.TabIndex = 5;
             this.lblPointToBRBDirectory.Text = "Please point the application to the directory containing your BRB videos.\r\nIf you" +
     " want to physically move your files, do this outside of the app first, then upda" +
     "te the directory here.";
@@ -87,7 +87,7 @@
             this.btnSave.Location = new System.Drawing.Point(412, 110);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(88, 23);
-            this.btnSave.TabIndex = 12;
+            this.btnSave.TabIndex = 4;
             this.btnSave.Text = "Save";
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
@@ -98,7 +98,7 @@
             this.btnCancel.Location = new System.Drawing.Point(319, 110);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(87, 23);
-            this.btnCancel.TabIndex = 13;
+            this.btnCancel.TabIndex = 3;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);

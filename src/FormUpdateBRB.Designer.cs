@@ -44,7 +44,7 @@
             this.btnReplace.Location = new System.Drawing.Point(391, 159);
             this.btnReplace.Name = "btnReplace";
             this.btnReplace.Size = new System.Drawing.Size(111, 30);
-            this.btnReplace.TabIndex = 13;
+            this.btnReplace.TabIndex = 2;
             this.btnReplace.Text = "Replace";
             this.btnReplace.UseVisualStyleBackColor = true;
             this.btnReplace.Click += new System.EventHandler(this.btnReplace_Click);
@@ -55,7 +55,7 @@
             this.btnCancel.Location = new System.Drawing.Point(274, 159);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(111, 30);
-            this.btnCancel.TabIndex = 12;
+            this.btnCancel.TabIndex = 1;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
@@ -67,7 +67,7 @@
             this.lblNewFilename.Location = new System.Drawing.Point(12, 114);
             this.lblNewFilename.Name = "lblNewFilename";
             this.lblNewFilename.Size = new System.Drawing.Size(111, 16);
-            this.lblNewFilename.TabIndex = 10;
+            this.lblNewFilename.TabIndex = 6;
             this.lblNewFilename.Text = "Updated version:";
             // 
             // txtOldFilename
@@ -77,7 +77,7 @@
             this.txtOldFilename.Name = "txtOldFilename";
             this.txtOldFilename.ReadOnly = true;
             this.txtOldFilename.Size = new System.Drawing.Size(373, 22);
-            this.txtOldFilename.TabIndex = 9;
+            this.txtOldFilename.TabIndex = 3;
             // 
             // lblOldFilename
             // 
@@ -86,7 +86,7 @@
             this.lblOldFilename.Location = new System.Drawing.Point(12, 86);
             this.lblOldFilename.Name = "lblOldFilename";
             this.lblOldFilename.Size = new System.Drawing.Size(86, 16);
-            this.lblOldFilename.TabIndex = 8;
+            this.lblOldFilename.TabIndex = 5;
             this.lblOldFilename.Text = "Old filename:";
             // 
             // lblUpdateBRB
@@ -96,7 +96,7 @@
             this.lblUpdateBRB.Location = new System.Drawing.Point(12, 18);
             this.lblUpdateBRB.Name = "lblUpdateBRB";
             this.lblUpdateBRB.Size = new System.Drawing.Size(475, 48);
-            this.lblUpdateBRB.TabIndex = 7;
+            this.lblUpdateBRB.TabIndex = 4;
             this.lblUpdateBRB.Text = resources.GetString("lblUpdateBRB.Text");
             // 
             // drpUpdatedFilename
@@ -107,7 +107,7 @@
             this.drpUpdatedFilename.Location = new System.Drawing.Point(129, 111);
             this.drpUpdatedFilename.Name = "drpUpdatedFilename";
             this.drpUpdatedFilename.Size = new System.Drawing.Size(373, 24);
-            this.drpUpdatedFilename.TabIndex = 14;
+            this.drpUpdatedFilename.TabIndex = 0;
             // 
             // FormUpdateBRB
             // 

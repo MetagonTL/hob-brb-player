@@ -12,9 +12,9 @@ namespace Hob_BRB_Player
 {
     static class Config
     {
-        public const string Version = "0.3"; // The current app version
+        public const string Version = "0.3.1"; // The current app version
 
-        public const int CurrentReleaseChapter = 1714; // When the current app version was released; this is used as the minimum chapter the user can set in the app
+        public const int CurrentReleaseChapter = 1721; // When the current app version was released; this is used as the minimum chapter the user can set in the app
 
         // Fills the config with standard values and saves it to file.
         // However, does not touch Initial Setup values (BRBDirectory, StartPlayerOnDifferentScreen, MakePlayerTopMost, Chapter), this should be done beforehand
@@ -33,7 +33,7 @@ namespace Hob_BRB_Player
             SortingMode = BRBPlaylistSortingMode.Interwoven;
             StandardPlayerVolume = 80;
             InterBRBCountdown = 10;
-            TimeUntilHobbVLC = 30;
+            TimeUntilHobbVLC = 20;
             HobbVLCCountdown = 10;
             HobbVLCMaxDuration = 2;
             HobbVLCIgnoreMaxDurationAfterTries = 2;
@@ -44,6 +44,89 @@ namespace Hob_BRB_Player
         // Loads config from file and resets Test Mode to Disabled
         public static bool LoadConfig()
         {
+            try
+            {
+                FileStream fs = File.Open("config.json", FileMode.Open, FileAccess.Read);
+                JsonReader jsonConfig = new JsonTextReader(new StreamReader(fs));
+
+                jsonConfig.Read(); // Comment
+                jsonConfig.Read(); // StartObject
+
+                jsonConfig.Read(); // PropertyName
+                ConfigVersion = jsonConfig.ReadAsString();
+
+                if (Version == ConfigVersion)
+                {
+                    jsonConfig.Read(); // PropertyName. Etc...
+                    BRBDirectory = jsonConfig.ReadAsString();
+                    jsonConfig.Read();
+                    StartPlayerOnDifferentScreen = (bool)jsonConfig.ReadAsBoolean();
+                    jsonConfig.Read();
+                    MakePlayerTopMost = (bool)jsonConfig.ReadAsBoolean();
+                    TestMode = false;
+                    jsonConfig.Read();
+                    Chapter = (int)jsonConfig.ReadAsInt32();
+                    jsonConfig.Read();
+                    PermittedOvertimeMinutes = (int)jsonConfig.ReadAsInt32();
+                    jsonConfig.Read();
+                    PermittedUndertimePercent = (int)jsonConfig.ReadAsInt32();
+                    jsonConfig.Read();
+                    AvoidForChaptersAfterPlay = (int)jsonConfig.ReadAsInt32();
+                    jsonConfig.Read();
+                    PreferredPlayAfterChapters = (int)jsonConfig.ReadAsInt32();
+                    jsonConfig.Read();
+                    ChapterHistoryConsidered = (int)jsonConfig.ReadAsInt32();
+                    jsonConfig.Read();
+                    ReservedChanceForPriorityBRBs = (int)jsonConfig.ReadAsInt32();
+                    jsonConfig.Read();
+                    AutoGuaranteedPlaysForNewBRBs = (int)jsonConfig.ReadAsInt32();
+                    jsonConfig.Read();
+                    AutoPriorityPlaysForNewBRBs = (int)jsonConfig.ReadAsInt32();
+                    jsonConfig.Read();
+                    FavouriteMultiplier = (double)jsonConfig.ReadAsDouble();
+                    jsonConfig.Read();
+                    SortingMode = (BRBPlaylistSortingMode)jsonConfig.ReadAsInt32();
+                    jsonConfig.Read();
+                    StandardPlayerVolume = (int)jsonConfig.ReadAsInt32();
+                    jsonConfig.Read();
+                    InterBRBCountdown = (int)jsonConfig.ReadAsInt32();
+                    jsonConfig.Read();
+                    TimeUntilHobbVLC = (int)jsonConfig.ReadAsInt32();
+                    jsonConfig.Read();
+                    HobbVLCCountdown = (int)jsonConfig.ReadAsInt32();
+                    jsonConfig.Read();
+                    HobbVLCMaxDuration = (int)jsonConfig.ReadAsInt32();
+                    jsonConfig.Read();
+                    HobbVLCIgnoreMaxDurationAfterTries = (int)jsonConfig.ReadAsInt32();
+                    // That is all, no need to continue reading
+
+                    jsonConfig.Close();
+                    fs.Close();
+
+                    return true;
+                }
+                else // There has been an app update
+                {
+                    jsonConfig.Close();
+                    fs.Close();
+                    
+                    return UpdateToNewAppVersion();
+                }
+            }
+            catch (IOException)
+            {
+                return false;
+            }
+            catch (JsonException)
+            {
+                return false;
+            }
+        }
+
+        // On app updates, conversion of JSON files or other stuff might be necessary. If so, do this here and then load the rest of config
+        private static bool UpdateToNewAppVersion()
+        {
+            // Only load config normally and update ConfigVersion. Other things might need to be done in later versions...
             try
             {
                 FileStream fs = File.Open("config.json", FileMode.Open, FileAccess.Read);
@@ -97,10 +180,12 @@ namespace Hob_BRB_Player
                 HobbVLCIgnoreMaxDurationAfterTries = (int)jsonConfig.ReadAsInt32();
                 // That is all, no need to continue reading
 
+                ConfigVersion = Version;
+
                 jsonConfig.Close();
                 fs.Close();
 
-                return true;
+                return SaveConfig(); // Save updated config to file
             }
             catch (IOException)
             {

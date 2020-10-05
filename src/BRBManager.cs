@@ -160,6 +160,7 @@ namespace Hob_BRB_Player
             List<BRBEpisode> playlist = GeneratePlaylist(minDuration, targetDuration, maxDuration, true, ref refAddReason);
             if (playlist == null)
             {
+                refAddReason = new List<string>(); // Reset Add Reasons
                 playlist = GeneratePlaylist(minDuration, targetDuration, maxDuration, false, ref refAddReason); // If this is also is null, then it is likely the time conditions are too strict
             }
             return playlist;
@@ -167,8 +168,6 @@ namespace Hob_BRB_Player
             
         private static List<BRBEpisode> GeneratePlaylist(TimeSpan minDuration, TimeSpan targetDuration, TimeSpan maxDuration, bool replayAvoidance, ref List<string> refAddReason)
         {
-            Random rand = new Random();
-
             List<BRBEpisode> playlist = new List<BRBEpisode>();
             TimeSpan duration = new TimeSpan(0);
             TimeSpan constInterBRBTimeSpan = new TimeSpan((long)((Config.InterBRBCountdown + 0.1) * TimeSpan.TicksPerSecond));
@@ -192,7 +191,7 @@ namespace Hob_BRB_Player
             // From now on, ignore all BRBs affected by Replay Avoidance
             if (replayAvoidance)
             {
-                remDataset = remDataset.FindAll(e => Config.Chapter - e.LatestPlaybackChapter >= Config.AvoidForChaptersAfterPlay);
+                remDataset = remDataset.FindAll(e => Config.Chapter - e.LatestPlaybackChapter > Config.AvoidForChaptersAfterPlay);
             }
 
             // Choose one BRB that hasn't been played in forever, if there are any
@@ -215,7 +214,7 @@ namespace Hob_BRB_Player
                 remPriorityEpisodes = remDataset.FindAll(e => e.PriorityPlays > 0);
                 BRBEpisode episode;
                 // Since the Priority chance is an integer percentage, one can use a random integer here
-                if (remPriorityEpisodes.Count > 0 && rand.Next(1, 100) <= Config.ReservedChanceForPriorityBRBs)
+                if (remPriorityEpisodes.Count > 0 && Program.Rand.Next(1, 100) <= Config.ReservedChanceForPriorityBRBs)
                 {
                     episode = GetWeightedRandomBRBFrom(remPriorityEpisodes);
                     refAddReason.Add("Priority");
@@ -263,13 +262,12 @@ namespace Hob_BRB_Player
 
             if (Config.SortingMode == BRBPlaylistSortingMode.Random)
             {
-                Random rand = new Random();
                 int index;
                 while (playlistCopy.Count > 0)
                 {
-                    index = rand.Next(0, playlistCopy.Count - 1);
+                    index = Program.Rand.Next(0, playlistCopy.Count - 1);
                     sorted.Add(playlistCopy[index]);
-                    playlistCopy.Remove(playlistCopy[index]);
+                    playlistCopy.RemoveAt(index);
                 }
             }
 
@@ -366,8 +364,7 @@ namespace Hob_BRB_Player
                 }
             }
 
-            Random rand = new Random();
-            int randomIndex = rand.Next(0, weightedFilenameList.Count);
+            int randomIndex = Program.Rand.Next(0, weightedFilenameList.Count);
 
             return GetEpisode(weightedFilenameList[randomIndex]);
         }

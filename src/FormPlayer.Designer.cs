@@ -71,8 +71,8 @@
             this.videoView = new LibVLCSharp.WinForms.VideoView();
             this.tooltipManager = new System.Windows.Forms.ToolTip(this.components);
             this.pnlTestMode = new System.Windows.Forms.Panel();
-            this.lblTestMode = new System.Windows.Forms.Label();
             this.lblScreamAtHobForTestMode = new System.Windows.Forms.Label();
+            this.lblTestMode = new System.Windows.Forms.Label();
             this.pnlUIInterBRB.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picRandomHobEmote)).BeginInit();
             this.pnlUIPreBRB.SuspendLayout();
@@ -228,7 +228,7 @@
             this.btnSwitchScreen.Location = new System.Drawing.Point(1117, 133);
             this.btnSwitchScreen.Name = "btnSwitchScreen";
             this.btnSwitchScreen.Size = new System.Drawing.Size(40, 40);
-            this.btnSwitchScreen.TabIndex = 8;
+            this.btnSwitchScreen.TabIndex = 1;
             this.tooltipManager.SetToolTip(this.btnSwitchScreen, "Move player to a different screen");
             this.btnSwitchScreen.UseVisualStyleBackColor = true;
             this.btnSwitchScreen.Click += new System.EventHandler(this.btnSwitchScreen_Click);
@@ -240,7 +240,7 @@
             this.btnConfirmBRBPlayback.Location = new System.Drawing.Point(827, 133);
             this.btnConfirmBRBPlayback.Name = "btnConfirmBRBPlayback";
             this.btnConfirmBRBPlayback.Size = new System.Drawing.Size(266, 40);
-            this.btnConfirmBRBPlayback.TabIndex = 7;
+            this.btnConfirmBRBPlayback.TabIndex = 0;
             this.btnConfirmBRBPlayback.Text = " All done, start BRB playback";
             this.btnConfirmBRBPlayback.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnConfirmBRBPlayback.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -492,7 +492,7 @@
             this.btnFinishBRBPlayback.Location = new System.Drawing.Point(827, 95);
             this.btnFinishBRBPlayback.Name = "btnFinishBRBPlayback";
             this.btnFinishBRBPlayback.Size = new System.Drawing.Size(266, 40);
-            this.btnFinishBRBPlayback.TabIndex = 7;
+            this.btnFinishBRBPlayback.TabIndex = 0;
             this.btnFinishBRBPlayback.Text = " Close player and save statistics";
             this.btnFinishBRBPlayback.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnFinishBRBPlayback.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -557,17 +557,6 @@
             this.pnlTestMode.Size = new System.Drawing.Size(556, 66);
             this.pnlTestMode.TabIndex = 10;
             // 
-            // lblTestMode
-            // 
-            this.lblTestMode.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.lblTestMode.Font = new System.Drawing.Font("Verdana", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTestMode.ForeColor = System.Drawing.Color.DarkRed;
-            this.lblTestMode.Location = new System.Drawing.Point(143, 6);
-            this.lblTestMode.Name = "lblTestMode";
-            this.lblTestMode.Size = new System.Drawing.Size(267, 39);
-            this.lblTestMode.TabIndex = 1;
-            this.lblTestMode.Text = "T E S T   M O D E";
-            // 
             // lblScreamAtHobForTestMode
             // 
             this.lblScreamAtHobForTestMode.AutoSize = true;
@@ -578,6 +567,17 @@
             this.lblScreamAtHobForTestMode.Size = new System.Drawing.Size(500, 18);
             this.lblScreamAtHobForTestMode.TabIndex = 7;
             this.lblScreamAtHobForTestMode.Text = "If you ever see this on stream, please scream at Hob to turn it off";
+            // 
+            // lblTestMode
+            // 
+            this.lblTestMode.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.lblTestMode.Font = new System.Drawing.Font("Verdana", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTestMode.ForeColor = System.Drawing.Color.DarkRed;
+            this.lblTestMode.Location = new System.Drawing.Point(143, 6);
+            this.lblTestMode.Name = "lblTestMode";
+            this.lblTestMode.Size = new System.Drawing.Size(267, 39);
+            this.lblTestMode.TabIndex = 1;
+            this.lblTestMode.Text = "T E S T   M O D E";
             // 
             // FormPlayer
             // 

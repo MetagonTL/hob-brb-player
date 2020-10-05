@@ -96,7 +96,7 @@ namespace Hob_BRB_Player
 			"U|FeelsMattMan.png",
 			"L|HeyListen.gif",
 			"U|haHAA.png",
-			"E|hobbAim.png",
+			"E|hobbAim.gif",
 			"R|hobbBald.png",
 			"E|hobbBeep.png",
 			"U|hobbBlanket.png",
@@ -133,7 +133,7 @@ namespace Hob_BRB_Player
 			"C|hobbLink.png",
 			"C|hobbLUL.png",
 			"R|hobbLurk.png",
-			"E|hobbMan.png",
+			"E|hobbMan.gif",
 			"R|hobbMind.png",
 			"L|hobbMorg.png",
 			"R|hobbNan.png",
@@ -173,7 +173,7 @@ namespace Hob_BRB_Player
 		// Common: AYAYA, hobbBrit, hobbBrow, hobbCry, hobbDab, hobbDerp, hobbGasm, hobbH, hobbHands, hobbHi, hobbJedi, hobbLink, hobbLUL, hobbPega, hobbS, hobbSif, hobbTos, hobbTroll,
 		//         hobbWeird, hobbY, KEKW, PETHOB (22)
 		// Uncommon: FeelsMattMan, haHAA, hobbBlanket, hobbBrexit, hobbCray, hobbDuck, hobbFart, hobbHype, hobbIncel, hobbKeys, hobbNed, hobbNotes, hobbPoo, hobbRage, hobbRed, hobbT, hobbW,
-		//         hobbWoah, hobbYoda, PETLINK (20)
+		//           hobbWoah, hobbYoda, PETLINK (20)
 		// Rare: hobbBald, hobbBowl, hobbBuffer, hobbClap, hobbCloud, hobbEmo, hobbHOP, hobbKEK, hobbLurk, hobbMind, hobbNan, hobbPride, hobbRings, hobbWheel, PETTHEMATT (15)
 		// Epic: 2Head, hobbAim, hobbBeep, hobbChoke, hobbCrazy, hobbF, hobbKet, hobbMan, hobbNGT, hobbPray, PotPie (11)
 		// Legendary: HeyListen, hobbDiva, hobbK, hobbMorg, hobbP, hobbUnagi, hobbVIP, RareHob, sumSmash (9)
@@ -438,8 +438,7 @@ namespace Hob_BRB_Player
                 }
             }
 
-			Random rand = new Random();
-			int randomIndex = rand.Next(0, weightedHobEmotes.Count);
+			int randomIndex = Program.Rand.Next(0, weightedHobEmotes.Count);
 
 			return weightedHobEmotes[randomIndex];
 		}

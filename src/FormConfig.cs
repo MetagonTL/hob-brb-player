@@ -157,7 +157,7 @@ namespace Hob_BRB_Player
             Config.PermittedUndertimePercent = (int)Math.Round(numPermittedUntertime.Value);
             Config.ChapterHistoryConsidered = (int)Math.Round(numChapterHistory.Value);
             Config.AvoidForChaptersAfterPlay = (int)Math.Round(numReplayAvoidance.Value);
-            Config.FavouriteMultiplier = trkMultiplierFavourites100.Value / 10.0;
+            Config.FavouriteMultiplier = trkMultiplierFavourites100.Value / 100.0;
             Config.SortingMode = (BRBPlaylistSortingMode)drpSortingMode.SelectedIndex;
             Config.ReservedChanceForPriorityBRBs = (int)Math.Round(numReservedChanceForPrio.Value);
             Config.PreferredPlayAfterChapters = (int)Math.Round(numPreferredAfter.Value);

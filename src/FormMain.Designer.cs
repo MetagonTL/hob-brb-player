@@ -91,7 +91,7 @@
             this.btnSettings.Location = new System.Drawing.Point(180, 12);
             this.btnSettings.Name = "btnSettings";
             this.btnSettings.Size = new System.Drawing.Size(125, 40);
-            this.btnSettings.TabIndex = 11;
+            this.btnSettings.TabIndex = 1;
             this.btnSettings.Text = " Settings";
             this.btnSettings.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnSettings.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -107,7 +107,7 @@
             this.btnManageBRBs.Location = new System.Drawing.Point(12, 12);
             this.btnManageBRBs.Name = "btnManageBRBs";
             this.btnManageBRBs.Size = new System.Drawing.Size(162, 40);
-            this.btnManageBRBs.TabIndex = 10;
+            this.btnManageBRBs.TabIndex = 0;
             this.btnManageBRBs.Text = " Manage BRBs";
             this.btnManageBRBs.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnManageBRBs.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -123,7 +123,7 @@
             this.lblGeneratePlaylist.Location = new System.Drawing.Point(12, 94);
             this.lblGeneratePlaylist.Name = "lblGeneratePlaylist";
             this.lblGeneratePlaylist.Size = new System.Drawing.Size(248, 16);
-            this.lblGeneratePlaylist.TabIndex = 25;
+            this.lblGeneratePlaylist.TabIndex = 28;
             this.lblGeneratePlaylist.Text = "Let mathematics do the work here below:";
             // 
             // lblOfApproxDuration
@@ -132,15 +132,15 @@
             this.lblOfApproxDuration.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblOfApproxDuration.Location = new System.Drawing.Point(12, 228);
             this.lblOfApproxDuration.Name = "lblOfApproxDuration";
-            this.lblOfApproxDuration.Size = new System.Drawing.Size(140, 16);
-            this.lblOfApproxDuration.TabIndex = 27;
-            this.lblOfApproxDuration.Text = "It should contain about";
+            this.lblOfApproxDuration.Size = new System.Drawing.Size(149, 16);
+            this.lblOfApproxDuration.TabIndex = 30;
+            this.lblOfApproxDuration.Text = "It should contain at least";
             this.tooltipsManager.SetToolTip(this.lblOfApproxDuration, "By default, a small overtime is permitted. Visit Settings to change");
             // 
             // numMinutes
             // 
             this.numMinutes.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.numMinutes.Location = new System.Drawing.Point(158, 226);
+            this.numMinutes.Location = new System.Drawing.Point(167, 226);
             this.numMinutes.Maximum = new decimal(new int[] {
             99,
             0,
@@ -153,7 +153,7 @@
             0});
             this.numMinutes.Name = "numMinutes";
             this.numMinutes.Size = new System.Drawing.Size(40, 22);
-            this.numMinutes.TabIndex = 0;
+            this.numMinutes.TabIndex = 5;
             this.tooltipsManager.SetToolTip(this.numMinutes, "By default, a small overtime is permitted. Visit Settings to change");
             this.numMinutes.Value = new decimal(new int[] {
             20,
@@ -165,10 +165,10 @@
             // 
             this.lblMinutes.AutoSize = true;
             this.lblMinutes.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMinutes.Location = new System.Drawing.Point(204, 228);
+            this.lblMinutes.Location = new System.Drawing.Point(213, 228);
             this.lblMinutes.Name = "lblMinutes";
             this.lblMinutes.Size = new System.Drawing.Size(57, 16);
-            this.lblMinutes.TabIndex = 28;
+            this.lblMinutes.TabIndex = 31;
             this.lblMinutes.Text = "minutes.";
             this.tooltipsManager.SetToolTip(this.lblMinutes, "By default, a small overtime is permitted. Visit Settings to change");
             // 
@@ -180,7 +180,7 @@
             this.lblHorDiv1.Location = new System.Drawing.Point(0, 73);
             this.lblHorDiv1.Name = "lblHorDiv1";
             this.lblHorDiv1.Size = new System.Drawing.Size(1352, 2);
-            this.lblHorDiv1.TabIndex = 24;
+            this.lblHorDiv1.TabIndex = 26;
             // 
             // lblHorDiv2
             // 
@@ -190,7 +190,7 @@
             this.lblHorDiv2.Location = new System.Drawing.Point(0, 523);
             this.lblHorDiv2.Name = "lblHorDiv2";
             this.lblHorDiv2.Size = new System.Drawing.Size(1352, 2);
-            this.lblHorDiv2.TabIndex = 29;
+            this.lblHorDiv2.TabIndex = 39;
             // 
             // btnStartOrAbortPlayer
             // 
@@ -201,7 +201,7 @@
             this.btnStartOrAbortPlayer.Location = new System.Drawing.Point(305, 470);
             this.btnStartOrAbortPlayer.Name = "btnStartOrAbortPlayer";
             this.btnStartOrAbortPlayer.Size = new System.Drawing.Size(364, 40);
-            this.btnStartOrAbortPlayer.TabIndex = 9;
+            this.btnStartOrAbortPlayer.TabIndex = 16;
             this.btnStartOrAbortPlayer.Text = " Start BRB Player";
             this.btnStartOrAbortPlayer.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnStartOrAbortPlayer.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -218,7 +218,7 @@
             this.lblRunningTimeIncludingInterBRBs.Location = new System.Drawing.Point(308, 440);
             this.lblRunningTimeIncludingInterBRBs.Name = "lblRunningTimeIncludingInterBRBs";
             this.lblRunningTimeIncludingInterBRBs.Size = new System.Drawing.Size(207, 16);
-            this.lblRunningTimeIncludingInterBRBs.TabIndex = 37;
+            this.lblRunningTimeIncludingInterBRBs.TabIndex = 35;
             this.lblRunningTimeIncludingInterBRBs.Text = "Running time including InterBRBs:";
             // 
             // dispTotalBRBRunningTime
@@ -229,7 +229,7 @@
             this.dispTotalBRBRunningTime.Location = new System.Drawing.Point(521, 440);
             this.dispTotalBRBRunningTime.Name = "dispTotalBRBRunningTime";
             this.dispTotalBRBRunningTime.Size = new System.Drawing.Size(44, 16);
-            this.dispTotalBRBRunningTime.TabIndex = 38;
+            this.dispTotalBRBRunningTime.TabIndex = 36;
             this.dispTotalBRBRunningTime.Text = "00:00";
             // 
             // btnMoveUp
@@ -238,7 +238,7 @@
             this.btnMoveUp.Location = new System.Drawing.Point(675, 147);
             this.btnMoveUp.Name = "btnMoveUp";
             this.btnMoveUp.Size = new System.Drawing.Size(30, 30);
-            this.btnMoveUp.TabIndex = 5;
+            this.btnMoveUp.TabIndex = 8;
             this.tooltipsManager.SetToolTip(this.btnMoveUp, "Move BRB up in playlist");
             this.btnMoveUp.UseVisualStyleBackColor = true;
             this.btnMoveUp.Click += new System.EventHandler(this.btnMoveUp_Click);
@@ -249,7 +249,7 @@
             this.btnMoveDown.Location = new System.Drawing.Point(675, 183);
             this.btnMoveDown.Name = "btnMoveDown";
             this.btnMoveDown.Size = new System.Drawing.Size(30, 30);
-            this.btnMoveDown.TabIndex = 6;
+            this.btnMoveDown.TabIndex = 9;
             this.tooltipsManager.SetToolTip(this.btnMoveDown, "Move BRB down in playlist");
             this.btnMoveDown.UseVisualStyleBackColor = true;
             this.btnMoveDown.Click += new System.EventHandler(this.btnMoveDown_Click);
@@ -261,7 +261,7 @@
             this.btnGenerate.Location = new System.Drawing.Point(43, 269);
             this.btnGenerate.Name = "btnGenerate";
             this.btnGenerate.Size = new System.Drawing.Size(200, 40);
-            this.btnGenerate.TabIndex = 1;
+            this.btnGenerate.TabIndex = 6;
             this.btnGenerate.Text = "Generate";
             this.btnGenerate.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnGenerate.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
@@ -276,7 +276,7 @@
             this.lblManuallyBuildOrAdjustPlaylist.Location = new System.Drawing.Point(308, 94);
             this.lblManuallyBuildOrAdjustPlaylist.Name = "lblManuallyBuildOrAdjustPlaylist";
             this.lblManuallyBuildOrAdjustPlaylist.Size = new System.Drawing.Size(410, 16);
-            this.lblManuallyBuildOrAdjustPlaylist.TabIndex = 35;
+            this.lblManuallyBuildOrAdjustPlaylist.TabIndex = 32;
             this.lblManuallyBuildOrAdjustPlaylist.Text = "Manually build or adjust the playlist by using the controls here below:";
             // 
             // lstBRBPlaylist
@@ -294,7 +294,7 @@
             this.lstBRBPlaylist.Name = "lstBRBPlaylist";
             this.lstBRBPlaylist.ShowItemToolTips = true;
             this.lstBRBPlaylist.Size = new System.Drawing.Size(364, 277);
-            this.lstBRBPlaylist.TabIndex = 4;
+            this.lstBRBPlaylist.TabIndex = 7;
             this.lstBRBPlaylist.UseCompatibleStateImageBehavior = false;
             this.lstBRBPlaylist.View = System.Windows.Forms.View.Details;
             // 
@@ -310,7 +310,7 @@
             this.lstAllBRBs.Name = "lstAllBRBs";
             this.lstAllBRBs.ShowItemToolTips = true;
             this.lstAllBRBs.Size = new System.Drawing.Size(610, 278);
-            this.lstAllBRBs.TabIndex = 2;
+            this.lstAllBRBs.TabIndex = 15;
             this.lstAllBRBs.UseCompatibleStateImageBehavior = false;
             this.lstAllBRBs.View = System.Windows.Forms.View.Details;
             this.lstAllBRBs.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.lstAllBRBs_ColumnClick);
@@ -322,7 +322,7 @@
             this.btnAddBRB.Location = new System.Drawing.Point(675, 243);
             this.btnAddBRB.Name = "btnAddBRB";
             this.btnAddBRB.Size = new System.Drawing.Size(49, 30);
-            this.btnAddBRB.TabIndex = 3;
+            this.btnAddBRB.TabIndex = 10;
             this.tooltipsManager.SetToolTip(this.btnAddBRB, "Add selected BRB(s) to end of playlist. Double clicking the BRB on the right has " +
         "the same effect");
             this.btnAddBRB.UseVisualStyleBackColor = true;
@@ -334,7 +334,7 @@
             this.btnRemoveBRB.Location = new System.Drawing.Point(675, 279);
             this.btnRemoveBRB.Name = "btnRemoveBRB";
             this.btnRemoveBRB.Size = new System.Drawing.Size(30, 30);
-            this.btnRemoveBRB.TabIndex = 7;
+            this.btnRemoveBRB.TabIndex = 11;
             this.tooltipsManager.SetToolTip(this.btnRemoveBRB, "Remove selected BRB from playlist");
             this.btnRemoveBRB.UseVisualStyleBackColor = true;
             this.btnRemoveBRB.Click += new System.EventHandler(this.btnRemoveBRB_Click);
@@ -346,7 +346,7 @@
             this.lblBRBsToPlay.Location = new System.Drawing.Point(308, 123);
             this.lblBRBsToPlay.Name = "lblBRBsToPlay";
             this.lblBRBsToPlay.Size = new System.Drawing.Size(89, 16);
-            this.lblBRBsToPlay.TabIndex = 36;
+            this.lblBRBsToPlay.TabIndex = 33;
             this.lblBRBsToPlay.Text = "BRBs to play:";
             // 
             // lblAvailableBRBs
@@ -357,7 +357,7 @@
             this.lblAvailableBRBs.Location = new System.Drawing.Point(736, 123);
             this.lblAvailableBRBs.Name = "lblAvailableBRBs";
             this.lblAvailableBRBs.Size = new System.Drawing.Size(106, 16);
-            this.lblAvailableBRBs.TabIndex = 39;
+            this.lblAvailableBRBs.TabIndex = 34;
             this.lblAvailableBRBs.Text = "Available BRBs:";
             // 
             // btnExit
@@ -368,7 +368,7 @@
             this.btnExit.Location = new System.Drawing.Point(1230, 12);
             this.btnExit.Name = "btnExit";
             this.btnExit.Size = new System.Drawing.Size(110, 40);
-            this.btnExit.TabIndex = 22;
+            this.btnExit.TabIndex = 4;
             this.btnExit.Text = " Exit";
             this.btnExit.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnExit.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -384,7 +384,7 @@
             this.btnCreditsAndSupport.Location = new System.Drawing.Point(1029, 12);
             this.btnCreditsAndSupport.Name = "btnCreditsAndSupport";
             this.btnCreditsAndSupport.Size = new System.Drawing.Size(195, 40);
-            this.btnCreditsAndSupport.TabIndex = 21;
+            this.btnCreditsAndSupport.TabIndex = 3;
             this.btnCreditsAndSupport.Text = " Credits and Contact";
             this.btnCreditsAndSupport.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnCreditsAndSupport.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -399,7 +399,7 @@
             this.btnResetBRBs.Location = new System.Drawing.Point(675, 339);
             this.btnResetBRBs.Name = "btnResetBRBs";
             this.btnResetBRBs.Size = new System.Drawing.Size(30, 30);
-            this.btnResetBRBs.TabIndex = 8;
+            this.btnResetBRBs.TabIndex = 12;
             this.tooltipsManager.SetToolTip(this.btnResetBRBs, "Reset playlist");
             this.btnResetBRBs.UseVisualStyleBackColor = true;
             this.btnResetBRBs.Click += new System.EventHandler(this.btnResetBRBs_Click);
@@ -410,7 +410,7 @@
             this.lblCurrentlyOnChapter.Location = new System.Drawing.Point(638, 4);
             this.lblCurrentlyOnChapter.Name = "lblCurrentlyOnChapter";
             this.lblCurrentlyOnChapter.Size = new System.Drawing.Size(102, 13);
-            this.lblCurrentlyOnChapter.TabIndex = 23;
+            this.lblCurrentlyOnChapter.TabIndex = 25;
             this.lblCurrentlyOnChapter.Text = "Currently on chapter";
             // 
             // lnkChapterNumber
@@ -424,7 +424,7 @@
             this.lnkChapterNumber.Location = new System.Drawing.Point(623, 18);
             this.lnkChapterNumber.Name = "lnkChapterNumber";
             this.lnkChapterNumber.Size = new System.Drawing.Size(132, 55);
-            this.lnkChapterNumber.TabIndex = 12;
+            this.lnkChapterNumber.TabIndex = 2;
             this.lnkChapterNumber.TabStop = true;
             this.lnkChapterNumber.Text = "9999";
             this.tooltipsManager.SetToolTip(this.lnkChapterNumber, "Click to increment when blue. Visit Settings to manually readjust");
@@ -442,7 +442,7 @@
             this.btnPlayPause.Location = new System.Drawing.Point(11, 549);
             this.btnPlayPause.Name = "btnPlayPause";
             this.btnPlayPause.Size = new System.Drawing.Size(40, 40);
-            this.btnPlayPause.TabIndex = 13;
+            this.btnPlayPause.TabIndex = 17;
             this.tooltipsManager.SetToolTip(this.btnPlayPause, "Pause/Resume");
             this.btnPlayPause.UseVisualStyleBackColor = true;
             this.btnPlayPause.Click += new System.EventHandler(this.btnPlayPause_Click);
@@ -454,7 +454,7 @@
             this.btnReplayBRB.Location = new System.Drawing.Point(57, 559);
             this.btnReplayBRB.Name = "btnReplayBRB";
             this.btnReplayBRB.Size = new System.Drawing.Size(30, 30);
-            this.btnReplayBRB.TabIndex = 15;
+            this.btnReplayBRB.TabIndex = 18;
             this.tooltipsManager.SetToolTip(this.btnReplayBRB, "Play BRB again from beginning");
             this.btnReplayBRB.UseVisualStyleBackColor = true;
             this.btnReplayBRB.Click += new System.EventHandler(this.btnReplayBRB_Click);
@@ -466,7 +466,7 @@
             this.btnNextBRB.Location = new System.Drawing.Point(129, 559);
             this.btnNextBRB.Name = "btnNextBRB";
             this.btnNextBRB.Size = new System.Drawing.Size(30, 30);
-            this.btnNextBRB.TabIndex = 17;
+            this.btnNextBRB.TabIndex = 20;
             this.tooltipsManager.SetToolTip(this.btnNextBRB, "Skip to next BRB");
             this.btnNextBRB.UseVisualStyleBackColor = true;
             this.btnNextBRB.Click += new System.EventHandler(this.btnNextBRB_Click);
@@ -478,7 +478,7 @@
             this.btnPreviousBRB.Location = new System.Drawing.Point(93, 559);
             this.btnPreviousBRB.Name = "btnPreviousBRB";
             this.btnPreviousBRB.Size = new System.Drawing.Size(30, 30);
-            this.btnPreviousBRB.TabIndex = 16;
+            this.btnPreviousBRB.TabIndex = 19;
             this.tooltipsManager.SetToolTip(this.btnPreviousBRB, "Go back to previous BRB");
             this.btnPreviousBRB.UseVisualStyleBackColor = true;
             this.btnPreviousBRB.Click += new System.EventHandler(this.btnPreviousBRB_Click);
@@ -492,7 +492,7 @@
             this.trkScrubber.Location = new System.Drawing.Point(0, 613);
             this.trkScrubber.Name = "trkScrubber";
             this.trkScrubber.Size = new System.Drawing.Size(1352, 45);
-            this.trkScrubber.TabIndex = 14;
+            this.trkScrubber.TabIndex = 21;
             this.trkScrubber.TickStyle = System.Windows.Forms.TickStyle.None;
             this.tooltipsManager.SetToolTip(this.trkScrubber, "Scrub bar for the currently playing BRB");
             this.trkScrubber.Scroll += new System.EventHandler(this.trkScrubber_Scroll);
@@ -505,7 +505,7 @@
             this.trkVolume.Name = "trkVolume";
             this.trkVolume.Orientation = System.Windows.Forms.Orientation.Vertical;
             this.trkVolume.Size = new System.Drawing.Size(45, 97);
-            this.trkVolume.TabIndex = 18;
+            this.trkVolume.TabIndex = 22;
             this.trkVolume.TickFrequency = 20;
             this.tooltipsManager.SetToolTip(this.trkVolume, "Volume slider");
             this.trkVolume.Value = 50;
@@ -518,7 +518,7 @@
             this.chkMuted.Location = new System.Drawing.Point(1310, 535);
             this.chkMuted.Name = "chkMuted";
             this.chkMuted.Size = new System.Drawing.Size(30, 30);
-            this.chkMuted.TabIndex = 19;
+            this.chkMuted.TabIndex = 23;
             this.tooltipsManager.SetToolTip(this.chkMuted, "Mute/Unmute");
             this.chkMuted.UseVisualStyleBackColor = true;
             this.chkMuted.CheckedChanged += new System.EventHandler(this.chkMuted_CheckedChanged);
@@ -529,7 +529,7 @@
             this.txtSearch.Location = new System.Drawing.Point(992, 122);
             this.txtSearch.Name = "txtSearch";
             this.txtSearch.Size = new System.Drawing.Size(252, 20);
-            this.txtSearch.TabIndex = 43;
+            this.txtSearch.TabIndex = 13;
             this.tooltipsManager.SetToolTip(this.txtSearch, "Enter some text to filter the BRBs displayed below");
             this.txtSearch.TextChanged += new System.EventHandler(this.txtSearch_TextChanged);
             // 
@@ -547,7 +547,7 @@
             this.drpSearchWhere.Location = new System.Drawing.Point(1250, 121);
             this.drpSearchWhere.Name = "drpSearchWhere";
             this.drpSearchWhere.Size = new System.Drawing.Size(90, 21);
-            this.drpSearchWhere.TabIndex = 48;
+            this.drpSearchWhere.TabIndex = 14;
             this.tooltipsManager.SetToolTip(this.drpSearchWhere, "Select where the text you gave should be looked for");
             this.drpSearchWhere.SelectedIndexChanged += new System.EventHandler(this.drpSearchWhere_SelectedIndexChanged);
             // 
@@ -558,7 +558,7 @@
             this.lblManagerShouldSuggestPlaylist.Location = new System.Drawing.Point(12, 207);
             this.lblManagerShouldSuggestPlaylist.Name = "lblManagerShouldSuggestPlaylist";
             this.lblManagerShouldSuggestPlaylist.Size = new System.Drawing.Size(265, 16);
-            this.lblManagerShouldSuggestPlaylist.TabIndex = 26;
+            this.lblManagerShouldSuggestPlaylist.TabIndex = 29;
             this.lblManagerShouldSuggestPlaylist.Text = "Automatically suggest a playlist for a break.";
             this.tooltipsManager.SetToolTip(this.lblManagerShouldSuggestPlaylist, "By default, a small overtime is permitted. Visit Settings to change");
             // 
@@ -579,7 +579,7 @@
             this.txtVolume.Name = "txtVolume";
             this.txtVolume.ReadOnly = true;
             this.txtVolume.Size = new System.Drawing.Size(30, 20);
-            this.txtVolume.TabIndex = 20;
+            this.txtVolume.TabIndex = 24;
             this.txtVolume.Text = "50";
             // 
             // lblVerDiv1
@@ -590,7 +590,7 @@
             this.lblVerDiv1.Location = new System.Drawing.Point(293, 75);
             this.lblVerDiv1.Name = "lblVerDiv1";
             this.lblVerDiv1.Size = new System.Drawing.Size(2, 448);
-            this.lblVerDiv1.TabIndex = 34;
+            this.lblVerDiv1.TabIndex = 27;
             // 
             // dispPlayerStatus
             // 
@@ -599,7 +599,7 @@
             this.dispPlayerStatus.Location = new System.Drawing.Point(246, 566);
             this.dispPlayerStatus.Name = "dispPlayerStatus";
             this.dispPlayerStatus.Size = new System.Drawing.Size(85, 16);
-            this.dispPlayerStatus.TabIndex = 31;
+            this.dispPlayerStatus.TabIndex = 40;
             this.dispPlayerStatus.Text = "Now playing:";
             this.dispPlayerStatus.Visible = false;
             // 
@@ -610,7 +610,7 @@
             this.dispPlayingOrNextUp.Location = new System.Drawing.Point(339, 566);
             this.dispPlayingOrNextUp.Name = "dispPlayingOrNextUp";
             this.dispPlayingOrNextUp.Size = new System.Drawing.Size(70, 16);
-            this.dispPlayingOrNextUp.TabIndex = 32;
+            this.dispPlayingOrNextUp.TabIndex = 41;
             this.dispPlayingOrNextUp.Text = "None.mp4";
             this.dispPlayingOrNextUp.Visible = false;
             // 
@@ -621,7 +621,7 @@
             this.dispRunningTime.Location = new System.Drawing.Point(1154, 594);
             this.dispRunningTime.Name = "dispRunningTime";
             this.dispRunningTime.Size = new System.Drawing.Size(80, 16);
-            this.dispRunningTime.TabIndex = 33;
+            this.dispRunningTime.TabIndex = 42;
             this.dispRunningTime.Text = "00:00 / 00:00";
             // 
             // tmrEnsureCursorVisibility
@@ -635,7 +635,7 @@
             this.lblRemainingBreakTime.Location = new System.Drawing.Point(726, 479);
             this.lblRemainingBreakTime.Name = "lblRemainingBreakTime";
             this.lblRemainingBreakTime.Size = new System.Drawing.Size(167, 20);
-            this.lblRemainingBreakTime.TabIndex = 40;
+            this.lblRemainingBreakTime.TabIndex = 37;
             this.lblRemainingBreakTime.Text = "Remaining break time:";
             this.lblRemainingBreakTime.Visible = false;
             // 
@@ -646,7 +646,7 @@
             this.dispRemainingBreakTime.Location = new System.Drawing.Point(899, 479);
             this.dispRemainingBreakTime.Name = "dispRemainingBreakTime";
             this.dispRemainingBreakTime.Size = new System.Drawing.Size(54, 20);
-            this.dispRemainingBreakTime.TabIndex = 41;
+            this.dispRemainingBreakTime.TabIndex = 38;
             this.dispRemainingBreakTime.Text = "20:00";
             this.dispRemainingBreakTime.Visible = false;
             // 

@@ -140,7 +140,7 @@
             this.chkTestMode.Location = new System.Drawing.Point(9, 153);
             this.chkTestMode.Name = "chkTestMode";
             this.chkTestMode.Size = new System.Drawing.Size(113, 17);
-            this.chkTestMode.TabIndex = 9;
+            this.chkTestMode.TabIndex = 3;
             this.chkTestMode.Text = "Enable Test Mode";
             this.tooltipsManager.SetToolTip(this.chkTestMode, "Perfect for testing the app and its BRB playback.\r\nBRBs played in Test Mode never" +
         " count towards any statistics. This setting automatically resets upon restarting" +
@@ -158,15 +158,15 @@
             this.pnlBRBPlayerOpenBehaviour.Location = new System.Drawing.Point(6, 88);
             this.pnlBRBPlayerOpenBehaviour.Name = "pnlBRBPlayerOpenBehaviour";
             this.pnlBRBPlayerOpenBehaviour.Size = new System.Drawing.Size(565, 58);
-            this.pnlBRBPlayerOpenBehaviour.TabIndex = 8;
+            this.pnlBRBPlayerOpenBehaviour.TabIndex = 2;
             // 
             // chkMakePlayerTopMost
             // 
             this.chkMakePlayerTopMost.AutoSize = true;
-            this.chkMakePlayerTopMost.Location = new System.Drawing.Point(264, 4);
+            this.chkMakePlayerTopMost.Location = new System.Drawing.Point(309, 4);
             this.chkMakePlayerTopMost.Name = "chkMakePlayerTopMost";
             this.chkMakePlayerTopMost.Size = new System.Drawing.Size(181, 17);
-            this.chkMakePlayerTopMost.TabIndex = 10;
+            this.chkMakePlayerTopMost.TabIndex = 2;
             this.chkMakePlayerTopMost.Text = "Make the player window topmost";
             this.tooltipsManager.SetToolTip(this.chkMakePlayerTopMost, resources.GetString("chkMakePlayerTopMost.ToolTip"));
             this.chkMakePlayerTopMost.UseVisualStyleBackColor = true;
@@ -177,9 +177,12 @@
             this.rdoPlayerOnDifferentScreen.AutoSize = true;
             this.rdoPlayerOnDifferentScreen.Location = new System.Drawing.Point(3, 26);
             this.rdoPlayerOnDifferentScreen.Name = "rdoPlayerOnDifferentScreen";
-            this.rdoPlayerOnDifferentScreen.Size = new System.Drawing.Size(210, 17);
-            this.rdoPlayerOnDifferentScreen.TabIndex = 9;
-            this.rdoPlayerOnDifferentScreen.Text = "Try to open player on a different screen";
+            this.rdoPlayerOnDifferentScreen.Size = new System.Drawing.Size(273, 17);
+            this.rdoPlayerOnDifferentScreen.TabIndex = 1;
+            this.rdoPlayerOnDifferentScreen.Text = "Try to open player on a different screen from controls";
+            this.tooltipsManager.SetToolTip(this.rdoPlayerOnDifferentScreen, "The player will try to open on a screen different from the main window. As long a" +
+        "s the app is kept open, it will remember which screen was last used and try to r" +
+        "euse it.\r\n");
             this.rdoPlayerOnDifferentScreen.UseVisualStyleBackColor = true;
             this.rdoPlayerOnDifferentScreen.CheckedChanged += new System.EventHandler(this.OnSettingChanged);
             // 
@@ -188,9 +191,11 @@
             this.rdoPlayerOnSameScreen.AutoSize = true;
             this.rdoPlayerOnSameScreen.Location = new System.Drawing.Point(3, 3);
             this.rdoPlayerOnSameScreen.Name = "rdoPlayerOnSameScreen";
-            this.rdoPlayerOnSameScreen.Size = new System.Drawing.Size(194, 17);
-            this.rdoPlayerOnSameScreen.TabIndex = 8;
-            this.rdoPlayerOnSameScreen.Text = "Always open player on same screen";
+            this.rdoPlayerOnSameScreen.Size = new System.Drawing.Size(248, 17);
+            this.rdoPlayerOnSameScreen.TabIndex = 0;
+            this.rdoPlayerOnSameScreen.Text = "Always open player on same screen as controls";
+            this.tooltipsManager.SetToolTip(this.rdoPlayerOnSameScreen, "The player will always open on the same screen as the main window. To pause playb" +
+        "ack and display the controls, you can always press Escape on the player window.");
             this.rdoPlayerOnSameScreen.UseVisualStyleBackColor = true;
             this.rdoPlayerOnSameScreen.CheckedChanged += new System.EventHandler(this.OnSettingChanged);
             // 
@@ -209,7 +214,7 @@
             0});
             this.numChapter.Name = "numChapter";
             this.numChapter.Size = new System.Drawing.Size(56, 20);
-            this.numChapter.TabIndex = 5;
+            this.numChapter.TabIndex = 1;
             this.tooltipsManager.SetToolTip(this.numChapter, "Please note that setting this lower than the current value might have unintended " +
         "consequences.");
             this.numChapter.Value = new decimal(new int[] {
@@ -241,7 +246,7 @@
             this.btnShowOrUpdateDirectory.Location = new System.Drawing.Point(89, 10);
             this.btnShowOrUpdateDirectory.Name = "btnShowOrUpdateDirectory";
             this.btnShowOrUpdateDirectory.Size = new System.Drawing.Size(130, 23);
-            this.btnShowOrUpdateDirectory.TabIndex = 1;
+            this.btnShowOrUpdateDirectory.TabIndex = 0;
             this.btnShowOrUpdateDirectory.Text = "Show or Update...";
             this.btnShowOrUpdateDirectory.UseVisualStyleBackColor = true;
             this.btnShowOrUpdateDirectory.Click += new System.EventHandler(this.btnShowOrUpdateDirectory_Click);
@@ -296,7 +301,7 @@
             0});
             this.numAutoPriority.Name = "numAutoPriority";
             this.numAutoPriority.Size = new System.Drawing.Size(41, 20);
-            this.numAutoPriority.TabIndex = 27;
+            this.numAutoPriority.TabIndex = 10;
             this.tooltipsManager.SetToolTip(this.numAutoPriority, "When a new BRB is added to the system, it automatically receives this many Priori" +
         "ty playbacks.");
             // 
@@ -319,7 +324,7 @@
             0});
             this.numAutoGuaranteed.Name = "numAutoGuaranteed";
             this.numAutoGuaranteed.Size = new System.Drawing.Size(41, 20);
-            this.numAutoGuaranteed.TabIndex = 25;
+            this.numAutoGuaranteed.TabIndex = 9;
             this.tooltipsManager.SetToolTip(this.numAutoGuaranteed, "When a new BRB is added to the system, it automatically receives this many Guaran" +
         "teed playbacks.");
             // 
@@ -344,7 +349,7 @@
             this.drpSortingMode.Location = new System.Drawing.Point(476, 45);
             this.drpSortingMode.Name = "drpSortingMode";
             this.drpSortingMode.Size = new System.Drawing.Size(95, 21);
-            this.drpSortingMode.TabIndex = 23;
+            this.drpSortingMode.TabIndex = 4;
             this.tooltipsManager.SetToolTip(this.drpSortingMode, "How a playlist should be sorted after it has been generated. \"Interwoven\" means l" +
         "onger and shorter BRBs should alternate.");
             this.drpSortingMode.SelectedIndexChanged += new System.EventHandler(this.OnSettingChanged);
@@ -364,7 +369,7 @@
             this.txtFavouritesMultiplier.Name = "txtFavouritesMultiplier";
             this.txtFavouritesMultiplier.ReadOnly = true;
             this.txtFavouritesMultiplier.Size = new System.Drawing.Size(31, 20);
-            this.txtFavouritesMultiplier.TabIndex = 21;
+            this.txtFavouritesMultiplier.TabIndex = 2;
             this.txtFavouritesMultiplier.Text = "1.00";
             this.txtFavouritesMultiplier.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.tooltipsManager.SetToolTip(this.txtFavouritesMultiplier, resources.GetString("txtFavouritesMultiplier.ToolTip"));
@@ -378,7 +383,7 @@
             this.trkMultiplierFavourites100.Minimum = 100;
             this.trkMultiplierFavourites100.Name = "trkMultiplierFavourites100";
             this.trkMultiplierFavourites100.Size = new System.Drawing.Size(65, 19);
-            this.trkMultiplierFavourites100.TabIndex = 20;
+            this.trkMultiplierFavourites100.TabIndex = 1;
             this.trkMultiplierFavourites100.TickFrequency = 50;
             this.tooltipsManager.SetToolTip(this.trkMultiplierFavourites100, resources.GetString("trkMultiplierFavourites100.ToolTip"));
             this.trkMultiplierFavourites100.Value = 100;
@@ -394,7 +399,7 @@
             this.numReservedChanceForPrio.Location = new System.Drawing.Point(476, 79);
             this.numReservedChanceForPrio.Name = "numReservedChanceForPrio";
             this.numReservedChanceForPrio.Size = new System.Drawing.Size(50, 20);
-            this.numReservedChanceForPrio.TabIndex = 19;
+            this.numReservedChanceForPrio.TabIndex = 6;
             this.tooltipsManager.SetToolTip(this.numReservedChanceForPrio, resources.GetString("numReservedChanceForPrio.ToolTip"));
             this.numReservedChanceForPrio.ValueChanged += new System.EventHandler(this.OnSettingChanged);
             // 
@@ -436,7 +441,7 @@
             0});
             this.numPreferredAfter.Name = "numPreferredAfter";
             this.numPreferredAfter.Size = new System.Drawing.Size(50, 20);
-            this.numPreferredAfter.TabIndex = 15;
+            this.numPreferredAfter.TabIndex = 8;
             this.tooltipsManager.SetToolTip(this.numPreferredAfter, resources.GetString("numPreferredAfter.ToolTip"));
             this.numPreferredAfter.Value = new decimal(new int[] {
             25,
@@ -464,7 +469,7 @@
             0});
             this.numReplayAvoidance.Name = "numReplayAvoidance";
             this.numReplayAvoidance.Size = new System.Drawing.Size(41, 20);
-            this.numReplayAvoidance.TabIndex = 12;
+            this.numReplayAvoidance.TabIndex = 7;
             this.tooltipsManager.SetToolTip(this.numReplayAvoidance, resources.GetString("numReplayAvoidance.ToolTip"));
             this.numReplayAvoidance.ValueChanged += new System.EventHandler(this.OnSettingChanged);
             // 
@@ -497,9 +502,9 @@
             0});
             this.numChapterHistory.Name = "numChapterHistory";
             this.numChapterHistory.Size = new System.Drawing.Size(50, 20);
-            this.numChapterHistory.TabIndex = 7;
-            this.tooltipsManager.SetToolTip(this.numChapterHistory, "For instance, if this setting is at 200 and the current chapter is 1500, then the" +
-        " generator does not care when and how often a BRB was played before chapter 1300" +
+            this.numChapterHistory.TabIndex = 5;
+            this.tooltipsManager.SetToolTip(this.numChapterHistory, "For instance, if this setting is at 200 and the current chapter is 1800, then the" +
+        " generator does not care when and how often a BRB was played before chapter 1600" +
         ".");
             this.numChapterHistory.Value = new decimal(new int[] {
             1,
@@ -550,7 +555,7 @@
             0});
             this.numPermittedOvertime.Name = "numPermittedOvertime";
             this.numPermittedOvertime.Size = new System.Drawing.Size(41, 20);
-            this.numPermittedOvertime.TabIndex = 1;
+            this.numPermittedOvertime.TabIndex = 0;
             this.tooltipsManager.SetToolTip(this.numPermittedOvertime, resources.GetString("numPermittedOvertime.ToolTip"));
             this.numPermittedOvertime.ValueChanged += new System.EventHandler(this.OnSettingChanged);
             // 
@@ -600,7 +605,7 @@
             0});
             this.numHobbVLCCountdown.Name = "numHobbVLCCountdown";
             this.numHobbVLCCountdown.Size = new System.Drawing.Size(41, 20);
-            this.numHobbVLCCountdown.TabIndex = 37;
+            this.numHobbVLCCountdown.TabIndex = 3;
             this.tooltipsManager.SetToolTip(this.numHobbVLCCountdown, "For how many seconds the hobbVLC screen is displayed before each hobbVLC BRB.");
             this.numHobbVLCCountdown.Value = new decimal(new int[] {
             1,
@@ -625,7 +630,7 @@
             0});
             this.numHobbVLCMaxDuration.Name = "numHobbVLCMaxDuration";
             this.numHobbVLCMaxDuration.Size = new System.Drawing.Size(41, 20);
-            this.numHobbVLCMaxDuration.TabIndex = 36;
+            this.numHobbVLCMaxDuration.TabIndex = 1;
             this.tooltipsManager.SetToolTip(this.numHobbVLCMaxDuration, "How many minutes long a hobbVLC BRB should be at most. This is precise to the min" +
         "ute: If this is set to 3, the longest possible duration will be 3:30.");
             this.numHobbVLCMaxDuration.Value = new decimal(new int[] {
@@ -659,7 +664,7 @@
             -2147483648});
             this.numHobbVLCIgnoreDurAfterTries.Name = "numHobbVLCIgnoreDurAfterTries";
             this.numHobbVLCIgnoreDurAfterTries.Size = new System.Drawing.Size(41, 20);
-            this.numHobbVLCIgnoreDurAfterTries.TabIndex = 32;
+            this.numHobbVLCIgnoreDurAfterTries.TabIndex = 5;
             this.tooltipsManager.SetToolTip(this.numHobbVLCIgnoreDurAfterTries, resources.GetString("numHobbVLCIgnoreDurAfterTries.ToolTip"));
             this.numHobbVLCIgnoreDurAfterTries.ValueChanged += new System.EventHandler(this.OnSettingChanged);
             // 
@@ -701,7 +706,7 @@
             0});
             this.numTimeUntilHobbVLC.Name = "numTimeUntilHobbVLC";
             this.numTimeUntilHobbVLC.Size = new System.Drawing.Size(41, 20);
-            this.numTimeUntilHobbVLC.TabIndex = 29;
+            this.numTimeUntilHobbVLC.TabIndex = 4;
             this.tooltipsManager.SetToolTip(this.numTimeUntilHobbVLC, "After the end screen has been displayed for this long, hobbVLC will automatically" +
         " activate and play a random BRB.");
             this.numTimeUntilHobbVLC.Value = new decimal(new int[] {
@@ -735,7 +740,7 @@
             0});
             this.numInterBRBCountdown.Name = "numInterBRBCountdown";
             this.numInterBRBCountdown.Size = new System.Drawing.Size(41, 20);
-            this.numInterBRBCountdown.TabIndex = 27;
+            this.numInterBRBCountdown.TabIndex = 2;
             this.tooltipsManager.SetToolTip(this.numInterBRBCountdown, "For how many seconds the InterBRB screen is displayed before each BRB.");
             this.numInterBRBCountdown.Value = new decimal(new int[] {
             1,
@@ -769,7 +774,7 @@
             0});
             this.numStandardPlayerVolume.Name = "numStandardPlayerVolume";
             this.numStandardPlayerVolume.Size = new System.Drawing.Size(50, 20);
-            this.numStandardPlayerVolume.TabIndex = 25;
+            this.numStandardPlayerVolume.TabIndex = 0;
             this.tooltipsManager.SetToolTip(this.numStandardPlayerVolume, "Standard volume for the video player on application startup.");
             this.numStandardPlayerVolume.ValueChanged += new System.EventHandler(this.OnSettingChanged);
             // 

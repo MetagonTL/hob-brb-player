@@ -17,6 +17,9 @@ namespace Hob_BRB_Player
 
         public static FormPlayer PlayerForm { get; private set; }
 
+        public static Random Rand = new Random(); // Need to use a central Random since creating a new one every time could reuse the same seed, hence generate the same numbers
+
+
         private static Screen lastPlayerFormScreen = null;
 
         // Auxiliary methods, since Cursor.Hide() and Cursor.Show() actually stack if called multiple times, which we want to do sometimes

@@ -194,11 +194,27 @@ namespace Hob_BRB_Player
                 UpdateBRBData();
 
                 // Activate the timer for 07:00
-                StartLinkReactivateTimer();
+                StartLinkReactivationTimer();
+
+                // Remind user of backing up playback data every 25 chapters
+                if (Config.Chapter % 25 == 20)
+                {
+                    MessageBox.Show("This is a periodic reminder of MetagonTL's recommendation to keep regular backups of brbepisodes.json (and config.json, if you wish).\r\n\r\n" +
+                                    "The former file contains all information about your BRB episodes, including descriptions and playback statistics. Losing it for any reason " +
+                                    "(including any coding errors by MetagonTL, despite all of his testing efforts) would mean it had to be manually recompiled.",
+                                    "Backup reminder", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+
+                // Congratulate user every 100 chapters
+                if (Config.Chapter % 100 == 0)
+                {
+                    MessageBox.Show("MetagonTL would like to congratulate you on streaming your " + Config.Chapter + "th chapter. He hopes your enjoyment of your journey " +
+                                    "continues to grow for evermore.", "Congratulations", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
             }
         }
 
-        private void StartLinkReactivateTimer()
+        private void StartLinkReactivationTimer()
         {
             DateTime utcNow = DateTime.UtcNow;
             long currentTickOfDay = utcNow.Hour * TimeSpan.TicksPerHour + utcNow.Minute * TimeSpan.TicksPerMinute + utcNow.Second * TimeSpan.TicksPerSecond;
@@ -335,7 +351,7 @@ namespace Hob_BRB_Player
 
             if (playlist == null)
             {
-                MessageBox.Show("The playlist generator failed compiling a BRB playlist with the given restrictions.\r\n\r\n"
+                MessageBox.Show("The playlist generator failed to compile a BRB playlist with the given restrictions.\r\n\r\n"
                                 + "You can try the following steps:\r\n"
                                 + "– Try generating a playlist again. If there are only few possible options, the generator can sometimes manoeuvre itself into a dead end.\r\n"
                                 + "– Change the target running time of your break‌.\r\n"
@@ -857,18 +873,18 @@ namespace Hob_BRB_Player
 
             UpdateConfigValues();
             UpdateBRBData();
-            StartLinkReactivateTimer();
+            StartLinkReactivationTimer();
         }
 
         private void btnCreditsAndSupport_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("The current app version is " + Config.ConfigVersion + ".\r\n\r\n" +
+            MessageBox.Show("The current app version is " + Config.Version + ".\r\n\r\n" +
                             "App design and coding by MetagonTL, https://www.twitch.tv/metagontl . For any technical issues, questions or suggestions, MetagonTL can be reached on Twitch. " +
                             "For longer messages or emergencies, contact MetagonTL via e-mail.\r\n\r\n" +
                             "General app feedback, InterBRB screen design and graphics by KaufLive, https://www.twitch.tv/kauflive . " +
                             "MetagonTL is very grateful to Kauf for his invaluable help while boosting the app to a stream-ready state.\r\n\r\n" +
                             "Icons for the various app buttons provided by Boxicons, https://boxicons.com , under the CC-BY 4.0 licence, https://creativecommons.org/licenses/by/4.0/ .\r\n\r\n" +
-                            "Made for the stream of The_Happy_Hob. MetagonTL thanks Hob himself, Megatron, LadyZoe, KaufLive, KittyPurrFace, all past and present mods and cycle mods, " +
+                            "Made for the stream of The_Happy_Hob. MetagonTL thanks Hob himself, Megantron, LadyZoe, KaufLive, KittyPurrFace, all past and present mods and cycle mods, " +
                             "and Chat for innumerable hours of entertainment. He also especially thanks the authors of all BRB videos for creating the \"Best Part Of The Stream\", " +
                             "eventually inspiring him to develop this application.",
                             "Application Credits", MessageBoxButtons.OK, MessageBoxIcon.Information);

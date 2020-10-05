@@ -45,7 +45,7 @@
             this.lblRenameBRB.Location = new System.Drawing.Point(12, 18);
             this.lblRenameBRB.Name = "lblRenameBRB";
             this.lblRenameBRB.Size = new System.Drawing.Size(444, 32);
-            this.lblRenameBRB.TabIndex = 0;
+            this.lblRenameBRB.TabIndex = 4;
             this.lblRenameBRB.Text = "Rename your selected BRB file on disk by entering a new filename below.\r\nBRB data" +
     " will automatically be transferred to the new name.";
             // 
@@ -56,7 +56,7 @@
             this.lblOldFilename.Location = new System.Drawing.Point(12, 71);
             this.lblOldFilename.Name = "lblOldFilename";
             this.lblOldFilename.Size = new System.Drawing.Size(86, 16);
-            this.lblOldFilename.TabIndex = 1;
+            this.lblOldFilename.TabIndex = 5;
             this.lblOldFilename.Text = "Old filename:";
             // 
             // txtOldFilename
@@ -66,7 +66,7 @@
             this.txtOldFilename.Name = "txtOldFilename";
             this.txtOldFilename.ReadOnly = true;
             this.txtOldFilename.Size = new System.Drawing.Size(352, 22);
-            this.txtOldFilename.TabIndex = 2;
+            this.txtOldFilename.TabIndex = 3;
             // 
             // txtNewFilename
             // 
@@ -74,7 +74,7 @@
             this.txtNewFilename.Location = new System.Drawing.Point(110, 96);
             this.txtNewFilename.Name = "txtNewFilename";
             this.txtNewFilename.Size = new System.Drawing.Size(352, 22);
-            this.txtNewFilename.TabIndex = 4;
+            this.txtNewFilename.TabIndex = 0;
             // 
             // lblNewFilename
             // 
@@ -83,7 +83,7 @@
             this.lblNewFilename.Location = new System.Drawing.Point(12, 99);
             this.lblNewFilename.Name = "lblNewFilename";
             this.lblNewFilename.Size = new System.Drawing.Size(92, 16);
-            this.lblNewFilename.TabIndex = 3;
+            this.lblNewFilename.TabIndex = 6;
             this.lblNewFilename.Text = "New filename:";
             // 
             // btnCancel
@@ -92,7 +92,7 @@
             this.btnCancel.Location = new System.Drawing.Point(234, 140);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(111, 30);
-            this.btnCancel.TabIndex = 5;
+            this.btnCancel.TabIndex = 1;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
@@ -103,7 +103,7 @@
             this.btnRename.Location = new System.Drawing.Point(351, 140);
             this.btnRename.Name = "btnRename";
             this.btnRename.Size = new System.Drawing.Size(111, 30);
-            this.btnRename.TabIndex = 6;
+            this.btnRename.TabIndex = 2;
             this.btnRename.Text = "Rename";
             this.btnRename.UseVisualStyleBackColor = true;
             this.btnRename.Click += new System.EventHandler(this.btnRename_Click);
