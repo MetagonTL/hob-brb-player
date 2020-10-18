@@ -75,8 +75,8 @@
             this.btnReloadBRBList.Text = " Reload BRB List";
             this.btnReloadBRBList.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnReloadBRBList.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.tooltipsManager.SetToolTip(this.btnReloadBRBList, "Reloads the episode list from disk and shows prompts for any changes. Is performe" +
-        "d automatically on application start");
+            this.tooltipsManager.SetToolTip(this.btnReloadBRBList, "Reloads the episode list from the BRB directory and shows prompts for any new fil" +
+        "es. Is performed automatically on application start");
             this.btnReloadBRBList.UseVisualStyleBackColor = true;
             this.btnReloadBRBList.Click += new System.EventHandler(this.btnReloadBRBList_Click);
             // 

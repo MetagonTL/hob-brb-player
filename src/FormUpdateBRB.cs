@@ -6,6 +6,7 @@ using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Runtime.Remoting.Messaging;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -38,7 +39,12 @@ namespace Hob_BRB_Player
 
             drpUpdatedFilename.Items.AddRange(availableFilenames.ToArray());
 
-            if (drpUpdatedFilename.Items.Count == 0)
+            if (!drpUpdatedFilename.Items.Contains(episode.Filename))
+            {
+                drpUpdatedFilename.Items.Add(episode.Filename); // Can be useful when the duration of a BRB file changes, for instance
+            }
+
+            if (drpUpdatedFilename.Items.Count == 0) // Should never happen
             {
                 drpUpdatedFilename.Items.Add("(No filenames available)");
                 btnReplace.Enabled = false;
@@ -63,13 +69,20 @@ namespace Hob_BRB_Player
             {
                 if (newVersionEpisode != null)
                 {
-                    if (MessageBox.Show("All BRB data from the old file will be copied over to the new video version in the system. This will overwrite any existing data of the new video.\r\n\r\n" +
-                                        "Since the old file cannot be found on disk anymore, it will subsequently be removed from the system.\r\n\r\n" +
-                                        "Do you want to proceed?", "Please confirm BRB video update", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.No)
+                    if (episodeToUpdate.Filename == newFilename)
                     {
-                        return;
+                        // Cannot happen
                     }
-                    BRBManager.BRBEpisodes.Remove(newVersionEpisode);
+                    else
+                    {
+                        if (MessageBox.Show("All BRB data from the old file will be copied over to the new video version in the system. This will overwrite any existing data of the new video.\r\n\r\n" +
+                                            "Since the old file cannot be found on disk anymore, it will subsequently be removed from the system.\r\n\r\n" +
+                                            "Do you want to proceed?", "Please confirm BRB video update", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.No)
+                        {
+                            return;
+                        }
+                        BRBManager.BRBEpisodes.Remove(newVersionEpisode);
+                    }
                 }
                 else
                 {
@@ -96,14 +109,35 @@ namespace Hob_BRB_Player
             {
                 if (newVersionEpisode != null)
                 {
-                    if (MessageBox.Show("All BRB data from the old file will be copied over to the new video version in the system. This will overwrite any existing data of the new video.\r\n\r\n" +
-                                        "Note that since the old video file is still present on disk, it will remain in the system. " +
-                                        "If you do not wish this, please cancel the operation and remove it from the directory on disk first.\r\n\r\n" +
-                                        "Do you want to proceed?", "Please confirm BRB video update", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.No)
+                    if (episodeToUpdate.Filename == newFilename)
                     {
-                        return;
+                        if (MessageBox.Show("This will reload the video file in question and update the duration shown in the application. Proceed?",
+                                            "Please confirm BRB video update", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
+                        {
+                            episodeToUpdate.RefreshDuration();
+
+                            if (!BRBManager.SaveEpisodes())
+                            {
+                                MessageBox.Show("Could not write to file brbepisodes.json. Replacing the BRB file with a new version was successful, but this could not be saved to disk.\r\n\r\n" +
+                                                "It is recommended you investigate this problem as soon as possible, since playback data is difficult to replace if lost.",
+                                                "Writing BRB data to disk failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            }
+
+                            this.Close();
+                            return; // Make sure the file doesn't end up in the system twice
+                        }
                     }
-                    BRBManager.BRBEpisodes.Remove(newVersionEpisode);
+                    else
+                    {
+                        if (MessageBox.Show("All BRB data from the old file will be copied over to the new video version in the system. This will overwrite any existing data of the new video.\r\n\r\n" +
+                                            "Note that since the old video file is still present on disk, it will remain in the system. " +
+                                            "If you do not wish this, please cancel the operation and remove it from the directory on disk first.\r\n\r\n" +
+                                            "Do you want to proceed?", "Please confirm BRB video update", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.No)
+                        {
+                            return;
+                        }
+                        BRBManager.BRBEpisodes.Remove(newVersionEpisode);
+                    }
                 }
                 else
                 {

@@ -331,7 +331,7 @@ namespace Hob_BRB_Player
                 {
                     continue;
                 }
-                if (replayAvoidance && Config.Chapter - ep.LatestPlaybackChapter < Config.AvoidForChaptersAfterPlay)
+                if (replayAvoidance && Config.Chapter - ep.LatestPlaybackChapter <= Config.AvoidForChaptersAfterPlay)
                 {
                     continue;
                 }
@@ -369,7 +369,7 @@ namespace Hob_BRB_Player
             return GetEpisode(weightedFilenameList[randomIndex]);
         }
 
-        // Adds the playback to the episode data
+        // Adds a playback to the episode data
         public static void OnPlayedBack(BRBEpisode episode)
         {
             if (Config.TestMode)
@@ -393,7 +393,7 @@ namespace Hob_BRB_Player
                 episode.IsNew = false; // Non-priority playback, the episode is no longer "new"
             }
 
-            SaveEpisodes(); // Suppress warnings here. A last save is performed on exiting the player window; if saving still doesn't work there, then inform the user
+            SaveEpisodes(); // Suppress warnings/errors here. A last save is performed on exiting the player window; if saving still doesn't work there, then the user is informed
             Program.MainForm.UpdateBRBData();
         }
 

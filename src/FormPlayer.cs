@@ -298,21 +298,56 @@ namespace Hob_BRB_Player
 			}
 			return new TimeSpan((long)((remSecsBRBPlaytime + remSecsInterBRBs + remSecsPostScreen) * TimeSpan.TicksPerSecond));
 		}
-		
+
 		// Handles activation of the next stage when a BRB video finished playing, and registers BRB as played
 		public void OnMediaEndReached(object sender, EventArgs e)
 		{
-			BRBManager.OnPlayedBack(NextOrCurrentBRB);
+			switch (PlayerState)
+			{
+				case BRBPlayerState.Playback:
+					BRBManager.OnPlayedBack(NextOrCurrentBRB);
 
-			NextOrCurrentBRBIndex++;
-			if (NextOrCurrentBRBIndex >= BRBPlaylist.Count)
-            {
-				ChangePlayerState(BRBPlayerState.EndOfBreak);
+					NextOrCurrentBRBIndex++;
+
+					if (NextOrCurrentBRBIndex >= BRBPlaylist.Count)
+					{
+						ChangePlayerState(BRBPlayerState.EndOfBreak);
+					}
+					else
+					{
+						ChangePlayerState(BRBPlayerState.InBetweenBRBs);
+					}
+					break;
+
+					// For InterBRBs etc., loop the background video (but that should rarely happen)
+				case BRBPlayerState.BeginningOfBreak:
+					ThreadPool.QueueUserWorkItem((o) => {
+						VLCPlayer.Media = new Media(Program.VLC, new Uri(Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), "images\\screens\\preBRB.mkv")));
+						VLCPlayer.Play();
+					});
+					break;
+
+				case BRBPlayerState.InBetweenBRBs:
+					ThreadPool.QueueUserWorkItem((o) => {
+						VLCPlayer.Media = new Media(Program.VLC, new Uri(Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), "images\\screens\\interBRB.mkv")));
+						VLCPlayer.Play();
+					});
+					break;
+
+				case BRBPlayerState.EndOfBreak:
+					ThreadPool.QueueUserWorkItem((o) => {
+						VLCPlayer.Media = new Media(Program.VLC, new Uri(Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), "images\\screens\\postBRB.mkv")));
+						VLCPlayer.Play();
+					});
+					break;
+
+				case BRBPlayerState.HobbVLC:
+					ThreadPool.QueueUserWorkItem((o) => {
+						VLCPlayer.Media = new Media(Program.VLC, new Uri(Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), "images\\screens\\hobbVLC.mkv")));
+						VLCPlayer.Play();
+					});
+					break;
 			}
-			else
-            {
-				ChangePlayerState(BRBPlayerState.InBetweenBRBs);
-            }
 		}
 
 
@@ -335,6 +370,11 @@ namespace Hob_BRB_Player
 			int remMins = (int)Math.Round(GetRemainingBreakTime().TotalMinutes);
 			dispWelcomeToBRBBreak.Text = "Welcome to the best part of the stream. Hob will now take a break for about "
 										 + remMins + " minute" + (remMins == 1 ? "" : "s") + " and BRB videos will play.";
+
+			ThreadPool.QueueUserWorkItem((o) => {
+				VLCPlayer.Media = new Media(Program.VLC, new Uri(Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), "images\\screens\\preBRB.mkv")));
+				VLCPlayer.Play();
+			});
 
 			pnlUIPreBRB.Visible = true;
 		}
@@ -366,6 +406,11 @@ namespace Hob_BRB_Player
 
 			dispCurrentChapterNumber.Text = "The current chapter is " + Config.Chapter + ". If this is wrong, please remind Hob to update it.";
 
+			ThreadPool.QueueUserWorkItem((o) => {
+				VLCPlayer.Media = new Media(Program.VLC, new Uri(Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), "images\\screens\\interBRB.mkv")));
+				VLCPlayer.Play();
+			});
+
 			pnlUIInterBRB.Visible = true;
 		}
 
@@ -374,7 +419,12 @@ namespace Hob_BRB_Player
 		{
 			Rectangle oldbounds = pnlUIPostBRB.Bounds;
 			pnlUIPostBRB.SetBounds(0, Screen.FromControl(this).Bounds.Height / 2 - pnlUIPostBRB.Height / 2, Screen.FromControl(this).Bounds.Width, oldbounds.Height);
-			
+
+			ThreadPool.QueueUserWorkItem((o) => {
+				VLCPlayer.Media = new Media(Program.VLC, new Uri(Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), "images\\screens\\postBRB.mkv")));
+				VLCPlayer.Play();
+			});
+
 			pnlUIPostBRB.Visible = true;
 		}
 
@@ -393,6 +443,11 @@ namespace Hob_BRB_Player
 			dispMoreInfoOnBRBHobbVLC.Text += NextOrCurrentBRB.Credits != "" ? "Authors: " + NextOrCurrentBRB‌.Credits : "";
 
 			dispCurrentChapterNumberHobbVLC.Text = "The current chapter is " + Config.Chapter + ". If this is wrong, please remind Hob to update it.";
+
+			ThreadPool.QueueUserWorkItem((o) => {
+				VLCPlayer.Media = new Media(Program.VLC, new Uri(Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), "images\\screens\\hobbVLC.mkv")));
+				VLCPlayer.Play();
+			});
 
 			pnlUIHobbVLC.Visible = true;
 		}
@@ -626,11 +681,11 @@ namespace Hob_BRB_Player
 
 			if (VLCPlayer.Media != null)
 			{
-				ThreadPool.QueueUserWorkItem(_ => { VLCPlayer.Stop(); });
+				ThreadPool.QueueUserWorkItem((o) => { VLCPlayer.Stop(); });
 			}
 			HideAllUIScreens();
 			tmrTenthSecond.Stop();
-			videoView.Visible = false;
+			// videoView.Visible = false; Not necessary anymore since now, videos play in the background of UI screens as well
 
 			switch (newState)
             {
@@ -652,7 +707,7 @@ namespace Hob_BRB_Player
 				case BRBPlayerState.Playback:
 					HideAllUIScreens();
 					VLCPlayer.Media = new Media(Program.VLC, new Uri(Path.GetFullPath(Path.Combine(Config.BRBDirectory, BRBPlaylist[NextOrCurrentBRBIndex].Filename))));
-					videoView.Visible = true;
+					// videoView.Visible = true;
 					if (!Paused)
 					{
 						VLCPlayer.Play();

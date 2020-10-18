@@ -12,9 +12,9 @@ namespace Hob_BRB_Player
 {
     static class Config
     {
-        public const string Version = "0.3.1"; // The current app version
+        public const string Version = "0.3.2"; // The current app version
 
-        public const int CurrentReleaseChapter = 1721; // When the current app version was released; this is used as the minimum chapter the user can set in the app
+        public const int CurrentReleaseChapter = 1731; // When the current app version was released; this is used as the minimum chapter the user can set in the app
 
         // Fills the config with standard values and saves it to file.
         // However, does not touch Initial Setup values (BRBDirectory, StartPlayerOnDifferentScreen, MakePlayerTopMost, Chapter), this should be done beforehand

@@ -544,6 +544,16 @@ namespace Hob_BRB_Player
 
                     pnlOBSSetup.Visible = true;
                     btnNext.Text = "Done";
+
+                    // Determine whether the player being topmost is unnecessary
+                    if (MessageBox.Show("Please open your OBS and check the following: When creating a Window Capture source and selecting \"Windows Graphics Capture\" (not BitBlt!) as the " +
+                                        "Capture Method, do you see a checkbox \"Capture Cursor\"?", "Necessity of Topmost", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+                        == DialogResult.Yes)
+                    {
+                        lblWhyTopmost.Text = "Since you can hide the mouse cursor on stream in your OBS, you should be able to uncheck this box. If you don't mind the video player being in " +
+                                             "front of\r\n\r\nall other applications, you can leave it checked.";
+                    }
+
                     break;
 
                 case InitialSetupState.SavingConfig:

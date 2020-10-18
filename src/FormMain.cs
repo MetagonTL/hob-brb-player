@@ -884,7 +884,7 @@ namespace Hob_BRB_Player
                             "General app feedback, InterBRB screen design and graphics by KaufLive, https://www.twitch.tv/kauflive . " +
                             "MetagonTL is very grateful to Kauf for his invaluable help while boosting the app to a stream-ready state.\r\n\r\n" +
                             "Icons for the various app buttons provided by Boxicons, https://boxicons.com , under the CC-BY 4.0 licence, https://creativecommons.org/licenses/by/4.0/ .\r\n\r\n" +
-                            "Made for the stream of The_Happy_Hob. MetagonTL thanks Hob himself, Megantron, LadyZoe, KaufLive, KittyPurrFace, all past and present mods and cycle mods, " +
+                            "Made for the stream of The_Happy_Hob. MetagonTL thanks Hob himself, Megantron, LadyZoe, KaufLive, xMattMan, KittyPurrFace, all past and present mods and cycle mods, " +
                             "and Chat for innumerable hours of entertainment. He also especially thanks the authors of all BRB videos for creating the \"Best Part Of The Stream\", " +
                             "eventually inspiring him to develop this application.",
                             "Application Credits", MessageBoxButtons.OK, MessageBoxIcon.Information);

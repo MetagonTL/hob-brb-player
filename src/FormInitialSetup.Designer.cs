@@ -113,14 +113,14 @@
             this.pnlPanelContainer.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.pnlPanelContainer.Controls.Add(this.pnlUnknownBRBImport);
-            this.pnlPanelContainer.Controls.Add(this.pnlUnknownBRBImportPre);
+            this.pnlPanelContainer.Controls.Add(this.pnlInitialSetupInfo);
             this.pnlPanelContainer.Controls.Add(this.pnlOBSSetup);
             this.pnlPanelContainer.Controls.Add(this.pnlPlayerAndChapter);
-            this.pnlPanelContainer.Controls.Add(this.pnlBRBDirectory);
-            this.pnlPanelContainer.Controls.Add(this.pnlInitialSetupInfo);
             this.pnlPanelContainer.Controls.Add(this.pnlSavingConfig);
             this.pnlPanelContainer.Controls.Add(this.pnlUnknownBRBImportPost);
+            this.pnlPanelContainer.Controls.Add(this.pnlUnknownBRBImport);
+            this.pnlPanelContainer.Controls.Add(this.pnlBRBDirectory);
+            this.pnlPanelContainer.Controls.Add(this.pnlUnknownBRBImportPre);
             this.pnlPanelContainer.Location = new System.Drawing.Point(0, 46);
             this.pnlPanelContainer.Name = "pnlPanelContainer";
             this.pnlPanelContainer.Size = new System.Drawing.Size(780, 284);
@@ -264,7 +264,7 @@
             this.lblSavingConfig1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblSavingConfig1.Location = new System.Drawing.Point(97, 18);
             this.lblSavingConfig1.Name = "lblSavingConfig1";
-            this.lblSavingConfig1.Size = new System.Drawing.Size(631, 64);
+            this.lblSavingConfig1.Size = new System.Drawing.Size(636, 64);
             this.lblSavingConfig1.TabIndex = 0;
             this.lblSavingConfig1.Text = resources.GetString("lblSavingConfig1.Text");
             // 
@@ -309,7 +309,7 @@
             this.lblOBSSetup2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblOBSSetup2.Location = new System.Drawing.Point(15, 87);
             this.lblOBSSetup2.Name = "lblOBSSetup2";
-            this.lblOBSSetup2.Size = new System.Drawing.Size(762, 192);
+            this.lblOBSSetup2.Size = new System.Drawing.Size(746, 192);
             this.lblOBSSetup2.TabIndex = 11;
             this.lblOBSSetup2.Text = resources.GetString("lblOBSSetup2.Text");
             // 

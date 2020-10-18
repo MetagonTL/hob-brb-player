@@ -29,7 +29,7 @@ namespace Hob_BRB_Player
         private void FormManageBRBs_Shown(object sender, EventArgs e)
         {
             BRBManager.RefreshAvailableList();
-            UpdateBRBList();
+            UpdateBRBList(false); // Not checking for new files on form show anymore, since that defeats the purpose of the "Reload BRB list" button
         }
 
         private void LoadIcons()
@@ -39,12 +39,15 @@ namespace Hob_BRB_Player
             picSearch.Image = Image.FromFile("icons\\search.png");
         }
 
-        // This just fetches data from the BRB Manager
-        private void UpdateBRBList()
+        // This just fetches data from the BRB Manager (and checks for new files)
+        private void UpdateBRBList(bool considerNewFiles)
         {
             selectedBRB = null;
 
-            CheckAndAddNewFiles();
+            if (considerNewFiles)
+            {
+                CheckAndAddNewFiles();
+            }
 
             lstAllBRBs.BeginUpdate();
             lstAllBRBs.Items.Clear();
@@ -138,7 +141,7 @@ namespace Hob_BRB_Player
             }
             else
             {
-                btnOpenBRB.Enabled = true;
+                btnOpenBRB.Enabled = BRBManager.AvailableBRBEpisodes.Contains(selectedBRB);
                 btnReplaceBRB.Enabled = true;
                 btnRenameBRB.Enabled = true;
 
@@ -171,7 +174,7 @@ namespace Hob_BRB_Player
         private void btnReloadBRBList_Click(object sender, EventArgs e)
         {
             BRBManager.RefreshAvailableList();
-            UpdateBRBList();
+            UpdateBRBList(true);
         }
 
         private void lstAllBRBs_SelectedIndexChanged(object sender, EventArgs e)
@@ -189,14 +192,14 @@ namespace Hob_BRB_Player
 
         private void txtSearch_TextChanged(object sender, EventArgs e)
         {
-            UpdateBRBList();
+            UpdateBRBList(false);
         }
 
         private void drpSearchWhere_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (txtSearch.Text != "")
             {
-                UpdateBRBList();
+                UpdateBRBList(false);
             }
         }
 
@@ -216,7 +219,7 @@ namespace Hob_BRB_Player
             {
                 FormUpdateBRB updateBRBForm = new FormUpdateBRB(selectedBRB);
                 updateBRBForm.ShowDialog(this);
-                UpdateBRBList();
+                UpdateBRBList(false);
             }
         }
 
@@ -227,7 +230,7 @@ namespace Hob_BRB_Player
             {
                 FormRenameBRB renameBRBForm = new FormRenameBRB(selectedBRB);
                 renameBRBForm.ShowDialog(this);
-                UpdateBRBList();
+                UpdateBRBList(false);
             }
         }
 

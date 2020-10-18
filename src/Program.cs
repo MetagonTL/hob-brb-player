@@ -72,13 +72,13 @@ namespace Hob_BRB_Player
             }
             catch (IOException)
             {
-                MessageBox.Show("Cannot set the file VLC.log as the VLC log file. Ensure the application has write permissions in its directory.", "Error setting the log file for VLC",
-                                MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Cannot set VLC.log as the VLC log file. Is an instance of the application already running? If not, ensure the application has write permissions in its directory.",
+                                "Error setting the log file for VLC", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
             catch (VLCException)
             {
-                MessageBox.Show("Cannot set the file VLC.log as the VLC log file. Ensure the application has write permissions in its directory.", "Error setting the log file for VLC",
-                                MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Cannot set VLC.log as the VLC log file. Is an instance of the application already running? If not, ensure the application has write permissions in its directory.",
+                                "Error setting the log file for VLC", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
             VLCPlayer.EndReached += new EventHandler<EventArgs>(OnMediaEndReached);
             VLCPlayer.EncounteredError += new EventHandler<EventArgs>(OnMediaError);
@@ -244,7 +244,7 @@ namespace Hob_BRB_Player
         }
 
         // Since a new PlayerForm is instantiated for every break, place these listeners here and forward the message
-        // Invoke is necessary since VLC's thread management might cause a deadlock otherwise
+        // Invoke is necessary since form controls may only be accessed from the form's thread, but VLC has its own thread
         public static void OnMediaEndReached(object sender, EventArgs e)
         {
             if (PlayerForm != null && PlayerForm.IsDisposed == false)
