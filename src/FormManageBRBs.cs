@@ -129,6 +129,7 @@ namespace Hob_BRB_Player
                 btnOpenBRB.Enabled = false;
                 btnReplaceBRB.Enabled = false;
                 btnRenameBRB.Enabled = false;
+                btnEditAutoMuteData.Enabled = false;
 
                 chkFavourite.Checked = false;
                 txtDuration.Text = "";
@@ -138,12 +139,14 @@ namespace Hob_BRB_Player
                 numGuaranteedPlays.Value = 0;
                 numPriorityPlays.Value = 0;
                 txtPlaybackData.Text = "";
+                chkEnableAutoMute.Checked = false;
             }
             else
             {
                 btnOpenBRB.Enabled = BRBManager.AvailableBRBEpisodes.Contains(selectedBRB);
                 btnReplaceBRB.Enabled = true;
                 btnRenameBRB.Enabled = true;
+                btnEditAutoMuteData.Enabled = true;
 
                 chkFavourite.Checked = selectedBRB.Favourite;
                 txtDuration.Text = BRBManager.TimeSpanToMMSS(selectedBRB.Duration);
@@ -152,6 +155,8 @@ namespace Hob_BRB_Player
                 txtDescription.Text = selectedBRB.Description;
                 numGuaranteedPlays.Value = selectedBRB.GuaranteedPlays;
                 numPriorityPlays.Value = selectedBRB.PriorityPlays;
+                chkEnableAutoMute.Enabled = (selectedBRB.AutoMutes.Count > 0);
+                chkEnableAutoMute.Checked = (selectedBRB.AutoMutes.Count > 0) && selectedBRB.AutoMuteEnabled;
 
                 txtPlaybackData.Text = "Last played in " + selectedBRB.LatestPlaybackChapter + " – Played " + selectedBRB.RecentPlaybacks + " time" + (selectedBRB.RecentPlaybacks != 1 ? "s" : "") +
                                         " since " + (Config.Chapter - Config.ChapterHistoryConsidered) + " – Urgency score " + selectedBRB.GetUrgencyScore() + "\r\n";
@@ -301,6 +306,23 @@ namespace Hob_BRB_Player
             if (selectedBRB != null)
             {
                 selectedBRB.PriorityPlays = (int)Math.Round(numPriorityPlays.Value);
+            }
+        }
+
+        private void chkEnableAutoMute_CheckedChanged(object sender, EventArgs e)
+        {
+            if (selectedBRB != null)
+            {
+                selectedBRB.AutoMuteEnabled = chkEnableAutoMute.Checked;
+            }
+        }
+
+        private void btnEditAutoMuteData_Click(object sender, EventArgs e)
+        {
+            if (selectedBRB != null)
+            {
+                FormAutoMuteData formAutoMuteData = new FormAutoMuteData(selectedBRB);
+                formAutoMuteData.ShowDialog(this);
             }
         }
 

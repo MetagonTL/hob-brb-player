@@ -29,6 +29,8 @@ namespace Hob_BRB_Player
         private int currentBRBListSortColumn = 1;
         private bool currentBRBListSortInverted = false; // At the beginning, sort by filename ascending
 
+        private DateTime nextChapterLinkReactivation = DateTime.UtcNow;
+
         public FormMain()
         {
             InitializeComponent();
@@ -211,6 +213,15 @@ namespace Hob_BRB_Player
                     MessageBox.Show("MetagonTL would like to congratulate you on streaming your " + Config.Chapter + "th chapter. He hopes your enjoyment of your journey " +
                                     "continues to grow for evermore.", "Congratulations", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
+
+                // Congratulate user on his birthday
+                if (DateTime.Now.Day == 27 && DateTime.Now.Month == 10)
+                {
+                    int birthday = DateTime.Now.Year - 1991;
+                    string birthdaySuffix = (birthday % 10 == 1 ? "st" : (birthday % 10 == 2 ? "nd" : (birthday % 10 == 3 ? "rd" : "th")));
+                    MessageBox.Show("MetagonTL would like to congratulate you on your " + birthday + birthdaySuffix + " birthday. He wishes you the best of luck, health and " +
+                                    "happiness for your upcoming year.", "Happy birthday", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
             }
         }
 
@@ -223,21 +234,24 @@ namespace Hob_BRB_Player
             // Only take the next 07:00 if it is at least 1 hour away. Otherwise, go to the next day
             if (currentTickOfDay <= activationTickOfDay - TimeSpan.TicksPerHour)
             {
-                tmrAllowChapterIncrement.Interval = (int)((activationTickOfDay - currentTickOfDay) / TimeSpan.TicksPerMillisecond);
+                nextChapterLinkReactivation = utcNow + new TimeSpan(activationTickOfDay - currentTickOfDay);
             }
             else
             {
-                tmrAllowChapterIncrement.Interval = (int)((activationTickOfDay - currentTickOfDay) / TimeSpan.TicksPerMillisecond + 1000 * 60 * 60 * 24);
+                nextChapterLinkReactivation = utcNow + new TimeSpan((activationTickOfDay - currentTickOfDay) + TimeSpan.TicksPerDay);
             }
             tmrAllowChapterIncrement.Enabled = true;
         }
 
         private void tmrAllowChapterIncrement_Tick(object sender, EventArgs e)
         {
-            tmrAllowChapterIncrement.Enabled = false;
+            if (DateTime.UtcNow.Ticks > nextChapterLinkReactivation.Ticks)
+            {
+                tmrAllowChapterIncrement.Enabled = false;
 
-            lnkChapterNumber.LinkColor = Color.Blue;
-            lnkChapterNumber.LinkBehavior = LinkBehavior.AlwaysUnderline;
+                lnkChapterNumber.LinkColor = Color.Blue;
+                lnkChapterNumber.LinkBehavior = LinkBehavior.AlwaysUnderline;
+            }
         }
 
         private class BRBListComparer : IComparer
@@ -553,6 +567,10 @@ namespace Hob_BRB_Player
         // The following two methods are called by Program
         public void OnBeginBRBPlayback()
         {
+            // Make sure the player has the correct volume settings
+            Program.PlayerForm.SetVolume(trkVolume.Value);
+            Program.PlayerForm.SetMuted(chkMuted.Checked);
+
             // Disable / enable controls as is appropriate
             btnManageBRBs.Enabled = false;
             btnSettings.Enabled = false;
@@ -883,6 +901,7 @@ namespace Hob_BRB_Player
                             "For longer messages or emergencies, contact MetagonTL via e-mail.\r\n\r\n" +
                             "General app feedback, InterBRB screen design and graphics by KaufLive, https://www.twitch.tv/kauflive . " +
                             "MetagonTL is very grateful to Kauf for his invaluable help while boosting the app to a stream-ready state.\r\n\r\n" +
+                            "He also thanks LadyZoe for providing further feedback and her work to establish communication pathways.\r\n\r\n" +
                             "Icons for the various app buttons provided by Boxicons, https://boxicons.com , under the CC-BY 4.0 licence, https://creativecommons.org/licenses/by/4.0/ .\r\n\r\n" +
                             "Made for the stream of The_Happy_Hob. MetagonTL thanks Hob himself, Megantron, LadyZoe, KaufLive, xMattMan, KittyPurrFace, all past and present mods and cycle mods, " +
                             "and Chat for innumerable hours of entertainment. He also especially thanks the authors of all BRB videos for creating the \"Best Part Of The Stream\", " +

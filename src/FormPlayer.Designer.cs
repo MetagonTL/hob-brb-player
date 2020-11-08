@@ -73,6 +73,7 @@
             this.pnlTestMode = new System.Windows.Forms.Panel();
             this.lblScreamAtHobForTestMode = new System.Windows.Forms.Label();
             this.lblTestMode = new System.Windows.Forms.Label();
+            this.tmrUpdateVolume = new System.Windows.Forms.Timer(this.components);
             this.pnlUIInterBRB.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picRandomHobEmote)).BeginInit();
             this.pnlUIPreBRB.SuspendLayout();
@@ -579,6 +580,11 @@
             this.lblTestMode.TabIndex = 1;
             this.lblTestMode.Text = "T E S T   M O D E";
             // 
+            // tmrUpdateVolume
+            // 
+            this.tmrUpdateVolume.Enabled = true;
+            this.tmrUpdateVolume.Tick += new System.EventHandler(this.tmrUpdateVolume_Tick);
+            // 
             // FormPlayer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -669,6 +675,7 @@
         private System.Windows.Forms.Panel pnlTestMode;
         private System.Windows.Forms.Label lblScreamAtHobForTestMode;
         private System.Windows.Forms.Label lblTestMode;
+        private System.Windows.Forms.Timer tmrUpdateVolume;
     }
 }
 

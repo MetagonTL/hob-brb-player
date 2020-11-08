@@ -136,7 +136,7 @@ namespace Hob_BRB_Player
         {
             BRBEpisode newEpisodeVersion = new BRBEpisode(newFilename, episode.Duration, episode.Favourite, episode.Title,
                                                           episode.Description, episode.Credits, episode.IsNew, episode.PlaybackChapters,
-                                                          episode.GuaranteedPlays, episode.PriorityPlays);
+                                                          episode.GuaranteedPlays, episode.PriorityPlays, episode.AutoMutes, episode.AutoMuteEnabled);
             newEpisodeVersion.RefreshDuration();
 
             // Make sure the episode's video file is understood by the application

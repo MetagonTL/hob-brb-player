@@ -87,6 +87,9 @@ namespace Hob_BRB_Player
 
 		public MediaPlayer VLCPlayer { get; }
 
+		private int volume = Config.StandardPlayerVolume;
+		private bool muted = false;
+
 		private long lastScrubUpdateTicks = 0;
 
 		// Common = Wt 25, Uncommon = Wt 10, Rare = Wt 5, Epic = Wt 2, Legendary = Wt 1
@@ -391,6 +394,11 @@ namespace Hob_BRB_Player
 			dispCountdown.Text = ((int)Math.Ceiling(secondCountdown)).ToString();
 			dispMoreInfoOnBRB.Text = NextOrCurrentBRB.Title != "" ? "Filename: " + NextOrCurrentBRB.Filename + (NextOrCurrentBRB.Credits != "" ? "  –  " : "") : "";
 			dispMoreInfoOnBRB.Text += NextOrCurrentBRB.Credits != "" ? "Authors: " + NextOrCurrentBRB‌.Credits : "";
+			if (NextOrCurrentBRB.AutoMuteEnabled)
+			{
+				dispMoreInfoOnBRB.Text += dispMoreInfoOnBRB.Text != "" ? "  –  " : "";
+				dispMoreInfoOnBRB.Text += "[AutoMute on]";
+			}
 
 			string randomEmote = GetRandomHobEmote();
 			picRandomHobEmote.Image = Image.FromFile("images\\hobEmotes\\" + randomEmote.Split('|')[1]);
@@ -441,6 +449,11 @@ namespace Hob_BRB_Player
 			dispCountdownHobbVLC.Text = ((int)Math.Ceiling(secondCountdown)).ToString();
 			dispMoreInfoOnBRBHobbVLC.Text = NextOrCurrentBRB.Title != "" ? "Filename: " + NextOrCurrentBRB.Filename + (NextOrCurrentBRB.Credits != "" ? "  –  " : "") : "";
 			dispMoreInfoOnBRBHobbVLC.Text += NextOrCurrentBRB.Credits != "" ? "Authors: " + NextOrCurrentBRB‌.Credits : "";
+			if (NextOrCurrentBRB.AutoMuteEnabled)
+			{
+				dispMoreInfoOnBRBHobbVLC.Text += dispMoreInfoOnBRBHobbVLC.Text != "" ? "  –  " : "";
+				dispMoreInfoOnBRBHobbVLC.Text += "[AutoMute on]";
+			}
 
 			dispCurrentChapterNumberHobbVLC.Text = "The current chapter is " + Config.Chapter + ". If this is wrong, please remind Hob to update it.";
 
@@ -618,12 +631,31 @@ namespace Hob_BRB_Player
 
 		public void SetVolume(int volume)
         {
-			VLCPlayer.Volume = volume;
+			this.volume = volume;
+			UpdatePlayerVolume();
 		}
 
 		public void SetMuted(bool muted)
         {
-			VLCPlayer.Mute = muted;
+			this.muted = muted;
+			UpdatePlayerVolume();
+		}
+
+		// VLC seems to reset volume on media change (or at least not reliably use new settings), so need to periodically call this
+		// Also, consider AutoMutes here
+		private void UpdatePlayerVolume()
+        {
+			if (PlayerState == BRBPlayerState.Playback)
+			{
+				// Causes an app freeze if called in an error state
+				VLCPlayer.Volume = volume;
+				VLCPlayer.Mute = muted || NextOrCurrentBRB.ShouldMuteAt(new TimeSpan((long)(VLCPlayer.Position * (double)VLCPlayer.Length * TimeSpan.TicksPerMillisecond)));
+			}
+		}
+
+		private void tmrUpdateVolume_Tick(object sender, EventArgs e)
+		{
+			UpdatePlayerVolume();
 		}
 
 		// If a BRB video is playing, go back to its InterBRB screen

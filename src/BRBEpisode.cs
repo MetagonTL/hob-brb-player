@@ -13,6 +13,41 @@ namespace Hob_BRB_Player
     [JsonObject(MemberSerialization.OptOut)]
     public class BRBEpisode : IComparable
     {
+        public struct AutoMuteSpan : IComparable
+        {
+            public TimeSpan Begin;
+            public TimeSpan End;
+            public string Info;
+            public bool Enabled;
+
+            public AutoMuteSpan(TimeSpan begin, TimeSpan end, string info, bool enabled)
+            {
+                Begin = begin;
+                End = end;
+                Info = info;
+                Enabled = enabled;
+            }
+
+            // It is the job of FormAutoMuteData to ensure no two identical spans end up in the system
+            public int CompareTo(object obj)
+            {
+                AutoMuteSpan other = (AutoMuteSpan)obj;
+
+                if (!Begin.Equals(other.Begin))
+                {
+                    return Begin.CompareTo(other.Begin);
+                }
+                else if (!End.Equals(other.End))
+                {
+                    return End.CompareTo(other.End);
+                }
+                else
+                {
+                    return Info.CompareTo(other.Info);
+                }
+            }
+        }
+
         public string Filename { get; private set; }
         public TimeSpan Duration { get; private set; }
         public bool Favourite { get; set; } // Is marked with a star in the BRB list and receives a boost to urgency score
@@ -23,6 +58,9 @@ namespace Hob_BRB_Player
         public List<int> PlaybackChapters { get; } // The chapters should be ordered ascending
         public int GuaranteedPlays { get; set; } // Will be played on the first opportunity this many times
         public int PriorityPlays { get; set; } // Will be played with a certain minimum chance this many times
+        public List<AutoMuteSpan> AutoMutes { get; private set; } // The player can automatically mute the BRB at these times (for instance, to avoid DMCA takedowns)
+        public bool AutoMuteEnabled { get; set; } // Whether the player should do AutoMute for this BRB
+
         [JsonIgnore] public char PriorityChar
         {
             get
@@ -62,11 +100,14 @@ namespace Hob_BRB_Player
             PlaybackChapters = new List<int>();
             GuaranteedPlays = Config.AutoGuaranteedPlaysForNewBRBs;
             PriorityPlays = Config.AutoPriorityPlaysForNewBRBs;
+            AutoMutes = new List<AutoMuteSpan>();
+            AutoMuteEnabled = false;
         }
 
         // Constructor for already extant BRB episodes (on application load or information update)
         [JsonConstructor] public BRBEpisode(string filename, TimeSpan duration, bool favourite, string title, string description,
-                                            string credits, bool isnew, List<int> playbackChapters, int guaranteedPlays, int priorityPlays)
+                                            string credits, bool isnew, List<int> playbackChapters, int guaranteedPlays, int priorityPlays,
+                                            List<AutoMuteSpan> autoMutes, bool autoMuteEnabled)
         {
             Filename = filename;
             Duration = duration;
@@ -78,6 +119,14 @@ namespace Hob_BRB_Player
             PlaybackChapters = playbackChapters;
             GuaranteedPlays = guaranteedPlays;
             PriorityPlays = priorityPlays;
+            AutoMutes = (autoMutes == null ? new List<AutoMuteSpan>() : autoMutes);
+            // TEMP
+            //if (Filename == "A Fume Knight Fight.mkv")
+            //{
+            //    AutoMutes.Add(new AutoMuteSpan(new TimeSpan(1704 * TimeSpan.TicksPerMillisecond), new TimeSpan(2503 * TimeSpan.TicksPerMillisecond), "Test by Band\r\nMuted etc.", true));
+            //    AutoMutes.Add(new AutoMuteSpan(new TimeSpan(61003 * TimeSpan.TicksPerMillisecond), new TimeSpan(69003 * TimeSpan.TicksPerMillisecond), "Test2 by Band\r\nMuted etc.", false));
+            //}
+            AutoMuteEnabled = autoMuteEnabled;
         }
 
         public void RefreshDuration()
@@ -191,6 +240,24 @@ namespace Hob_BRB_Player
                 || Title.ToLower().Contains(search.ToLower())
                 || Credits.ToLower().Contains(search.ToLower())
                 || Description.ToLower().Contains(search.ToLower());
+        }
+
+        public bool ShouldMuteAt(TimeSpan time)
+        {
+            if (!AutoMuteEnabled)
+            {
+                return false;
+            }
+
+            foreach (AutoMuteSpan span in AutoMutes)
+            {
+                if (span.Begin <= time && time <= span.End && span.Enabled)
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
 
         public override bool Equals(object obj)

@@ -112,7 +112,7 @@
             this.btnManageBRBs.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnManageBRBs.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.tooltipsManager.SetToolTip(this.btnManageBRBs, "Edit information of your BRB videos, mark them as \"Priority\" or \"Guaranteed Plays" +
-        "\"");
+        "\", etc.");
             this.btnManageBRBs.UseVisualStyleBackColor = true;
             this.btnManageBRBs.Click += new System.EventHandler(this.btnManageBRBs_Click);
             // 
@@ -581,6 +581,7 @@
             this.txtVolume.Size = new System.Drawing.Size(30, 20);
             this.txtVolume.TabIndex = 24;
             this.txtVolume.Text = "50";
+            this.tooltipsManager.SetToolTip(this.txtVolume, "Volume (controlled by the slider to the left)");
             // 
             // lblVerDiv1
             // 
@@ -657,7 +658,7 @@
             // 
             // tmrAllowChapterIncrement
             // 
-            this.tmrAllowChapterIncrement.Interval = 1000000;
+            this.tmrAllowChapterIncrement.Interval = 29000;
             this.tmrAllowChapterIncrement.Tick += new System.EventHandler(this.tmrAllowChapterIncrement_Tick);
             // 
             // FormMain

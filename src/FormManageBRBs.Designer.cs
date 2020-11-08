@@ -59,6 +59,8 @@
             this.lblAvailableBRBs = new System.Windows.Forms.Label();
             this.lstAllBRBs = new System.Windows.Forms.ListView();
             this.tmrResetSaveButton = new System.Windows.Forms.Timer(this.components);
+            this.chkEnableAutoMute = new System.Windows.Forms.CheckBox();
+            this.btnEditAutoMuteData = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.numGuaranteedPlays)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numPriorityPlays)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picSearch)).BeginInit();
@@ -76,7 +78,7 @@
             this.btnReloadBRBList.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnReloadBRBList.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.tooltipsManager.SetToolTip(this.btnReloadBRBList, "Reloads the episode list from the BRB directory and shows prompts for any new fil" +
-        "es. Is performed automatically on application start");
+        "es. Is performed automatically on application start.");
             this.btnReloadBRBList.UseVisualStyleBackColor = true;
             this.btnReloadBRBList.Click += new System.EventHandler(this.btnReloadBRBList_Click);
             // 
@@ -93,7 +95,7 @@
             this.btnSave.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnSave.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.tooltipsManager.SetToolTip(this.btnSave, "Manually save any changes to BRB data (they will also be saved upon closing this " +
-        "window)");
+        "window).");
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
@@ -150,7 +152,7 @@
             this.txtDescription.Size = new System.Drawing.Size(509, 149);
             this.txtDescription.TabIndex = 8;
             this.tooltipsManager.SetToolTip(this.txtDescription, "A description for the BRB where any additional information can be entered. This w" +
-        "ill not be displayed in the BRB player.");
+        "ill not be displayed to viewers by the BRB player.");
             this.txtDescription.TextChanged += new System.EventHandler(this.txtDescription_TextChanged);
             // 
             // btnOpenBRB
@@ -161,7 +163,7 @@
             this.btnOpenBRB.Size = new System.Drawing.Size(219, 30);
             this.btnOpenBRB.TabIndex = 3;
             this.btnOpenBRB.Text = "Open with standard program";
-            this.tooltipsManager.SetToolTip(this.btnOpenBRB, "Opens the selected video file with the standard program as set in Windows");
+            this.tooltipsManager.SetToolTip(this.btnOpenBRB, "Opens the selected video file with the standard program as set in Windows.");
             this.btnOpenBRB.UseVisualStyleBackColor = true;
             this.btnOpenBRB.Click += new System.EventHandler(this.btnOpenBRB_Click);
             // 
@@ -169,13 +171,13 @@
             // 
             this.txtPlaybackData.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtPlaybackData.Location = new System.Drawing.Point(355, 497);
+            this.txtPlaybackData.Location = new System.Drawing.Point(355, 537);
             this.txtPlaybackData.Multiline = true;
             this.txtPlaybackData.Name = "txtPlaybackData";
             this.txtPlaybackData.ReadOnly = true;
             this.txtPlaybackData.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.txtPlaybackData.Size = new System.Drawing.Size(509, 72);
-            this.txtPlaybackData.TabIndex = 11;
+            this.txtPlaybackData.TabIndex = 13;
             this.tooltipsManager.SetToolTip(this.txtPlaybackData, "Information about playbacks of the BRB video (from chapter 1412 onwards). This is" +
         " updated automatically whenever the BRB player finishes playing the video file.");
             // 
@@ -197,10 +199,10 @@
             // btnReplaceBRB
             // 
             this.btnReplaceBRB.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnReplaceBRB.Location = new System.Drawing.Point(355, 590);
+            this.btnReplaceBRB.Location = new System.Drawing.Point(355, 630);
             this.btnReplaceBRB.Name = "btnReplaceBRB";
             this.btnReplaceBRB.Size = new System.Drawing.Size(178, 30);
-            this.btnReplaceBRB.TabIndex = 12;
+            this.btnReplaceBRB.TabIndex = 14;
             this.btnReplaceBRB.Text = "Replace with new version";
             this.tooltipsManager.SetToolTip(this.btnReplaceBRB, "Use this to tell the application a BRB file has changed (whether under the same o" +
         "r a different filename).");
@@ -210,10 +212,10 @@
             // btnRenameBRB
             // 
             this.btnRenameBRB.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnRenameBRB.Location = new System.Drawing.Point(686, 590);
+            this.btnRenameBRB.Location = new System.Drawing.Point(686, 630);
             this.btnRenameBRB.Name = "btnRenameBRB";
             this.btnRenameBRB.Size = new System.Drawing.Size(178, 30);
-            this.btnRenameBRB.TabIndex = 13;
+            this.btnRenameBRB.TabIndex = 15;
             this.btnRenameBRB.Text = "Rename BRB file";
             this.tooltipsManager.SetToolTip(this.btnRenameBRB, "Use this to rename the BRB file on disk. If the file has already been renamed out" +
         "side of this application, use the button \"Replace with new version\".");
@@ -252,20 +254,19 @@
             // 
             // txtSearch
             // 
-            this.txtSearch.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtSearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.txtSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSearch.Location = new System.Drawing.Point(261, 664);
+            this.txtSearch.Location = new System.Drawing.Point(261, 704);
             this.txtSearch.MaxLength = 100;
             this.txtSearch.Name = "txtSearch";
             this.txtSearch.Size = new System.Drawing.Size(361, 22);
-            this.txtSearch.TabIndex = 14;
+            this.txtSearch.TabIndex = 16;
             this.tooltipsManager.SetToolTip(this.txtSearch, "Enter some text to only display BRB videos that contain this text somewhere.");
             this.txtSearch.TextChanged += new System.EventHandler(this.txtSearch_TextChanged);
             // 
             // drpSearchWhere
             // 
-            this.drpSearchWhere.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.drpSearchWhere.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.drpSearchWhere.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.drpSearchWhere.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.drpSearchWhere.FormattingEnabled = true;
@@ -275,10 +276,10 @@
             "Title",
             "Authors",
             "Description"});
-            this.drpSearchWhere.Location = new System.Drawing.Point(701, 663);
+            this.drpSearchWhere.Location = new System.Drawing.Point(701, 703);
             this.drpSearchWhere.Name = "drpSearchWhere";
             this.drpSearchWhere.Size = new System.Drawing.Size(163, 24);
-            this.drpSearchWhere.TabIndex = 15;
+            this.drpSearchWhere.TabIndex = 17;
             this.tooltipsManager.SetToolTip(this.drpSearchWhere, "Select where the text you gave should be looked for");
             this.drpSearchWhere.SelectedIndexChanged += new System.EventHandler(this.drpSearchWhere_SelectedIndexChanged);
             // 
@@ -289,7 +290,7 @@
             this.lblTitle.Location = new System.Drawing.Point(352, 180);
             this.lblTitle.Name = "lblTitle";
             this.lblTitle.Size = new System.Drawing.Size(68, 16);
-            this.lblTitle.TabIndex = 18;
+            this.lblTitle.TabIndex = 20;
             this.lblTitle.Text = "BRB Title:";
             this.tooltipsManager.SetToolTip(this.lblTitle, "This title will be shown to viewers during the InterBRB screen. If empty, the fil" +
         "ename is displayed instead.");
@@ -301,7 +302,7 @@
             this.lblAuthors.Location = new System.Drawing.Point(352, 216);
             this.lblAuthors.Name = "lblAuthors";
             this.lblAuthors.Size = new System.Drawing.Size(56, 16);
-            this.lblAuthors.TabIndex = 19;
+            this.lblAuthors.TabIndex = 21;
             this.lblAuthors.Text = "Authors:";
             this.tooltipsManager.SetToolTip(this.lblAuthors, "If the authors of the BRB are entered here, they will be displayed to viewers dur" +
         "ing the InterBRB screen.");
@@ -313,7 +314,7 @@
             this.lblDescription.Location = new System.Drawing.Point(352, 248);
             this.lblDescription.Name = "lblDescription";
             this.lblDescription.Size = new System.Drawing.Size(79, 16);
-            this.lblDescription.TabIndex = 20;
+            this.lblDescription.TabIndex = 22;
             this.lblDescription.Text = "Description:";
             this.tooltipsManager.SetToolTip(this.lblDescription, "A description for the BRB where any additional information can be entered. This w" +
         "ill not be displayed in the BRB player.");
@@ -322,10 +323,10 @@
             // 
             this.lblPlaybackData.AutoSize = true;
             this.lblPlaybackData.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPlaybackData.Location = new System.Drawing.Point(352, 477);
+            this.lblPlaybackData.Location = new System.Drawing.Point(352, 517);
             this.lblPlaybackData.Name = "lblPlaybackData";
             this.lblPlaybackData.Size = new System.Drawing.Size(98, 16);
-            this.lblPlaybackData.TabIndex = 23;
+            this.lblPlaybackData.TabIndex = 25;
             this.lblPlaybackData.Text = "Playback data:";
             // 
             // lblDuration
@@ -335,7 +336,7 @@
             this.lblDuration.Location = new System.Drawing.Point(717, 143);
             this.lblDuration.Name = "lblDuration";
             this.lblDuration.Size = new System.Drawing.Size(61, 16);
-            this.lblDuration.TabIndex = 17;
+            this.lblDuration.TabIndex = 19;
             this.lblDuration.Text = "Duration:";
             // 
             // lblGuaranteedPlays
@@ -345,7 +346,7 @@
             this.lblGuaranteedPlays.Location = new System.Drawing.Point(352, 435);
             this.lblGuaranteedPlays.Name = "lblGuaranteedPlays";
             this.lblGuaranteedPlays.Size = new System.Drawing.Size(139, 16);
-            this.lblGuaranteedPlays.TabIndex = 21;
+            this.lblGuaranteedPlays.TabIndex = 23;
             this.lblGuaranteedPlays.Text = "Guaranteed Plays left:";
             // 
             // lblPriorityPlays
@@ -355,13 +356,13 @@
             this.lblPriorityPlays.Location = new System.Drawing.Point(601, 435);
             this.lblPriorityPlays.Name = "lblPriorityPlays";
             this.lblPriorityPlays.Size = new System.Drawing.Size(166, 16);
-            this.lblPriorityPlays.TabIndex = 22;
+            this.lblPriorityPlays.TabIndex = 24;
             this.lblPriorityPlays.Text = "After that, Priority Plays left:";
             // 
             // picSearch
             // 
-            this.picSearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.picSearch.Location = new System.Drawing.Point(12, 663);
+            this.picSearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.picSearch.Location = new System.Drawing.Point(12, 703);
             this.picSearch.Name = "picSearch";
             this.picSearch.Size = new System.Drawing.Size(24, 24);
             this.picSearch.TabIndex = 43;
@@ -369,22 +370,24 @@
             // 
             // lblFilterBRBs
             // 
+            this.lblFilterBRBs.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblFilterBRBs.AutoSize = true;
             this.lblFilterBRBs.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblFilterBRBs.Location = new System.Drawing.Point(42, 667);
+            this.lblFilterBRBs.Location = new System.Drawing.Point(42, 707);
             this.lblFilterBRBs.Name = "lblFilterBRBs";
             this.lblFilterBRBs.Size = new System.Drawing.Size(213, 16);
-            this.lblFilterBRBs.TabIndex = 24;
+            this.lblFilterBRBs.TabIndex = 26;
             this.lblFilterBRBs.Text = "Filter BRBs: Should contain the text";
             // 
             // lblFilterWhere
             // 
+            this.lblFilterWhere.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblFilterWhere.AutoSize = true;
             this.lblFilterWhere.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblFilterWhere.Location = new System.Drawing.Point(628, 667);
+            this.lblFilterWhere.Location = new System.Drawing.Point(628, 707);
             this.lblFilterWhere.Name = "lblFilterWhere";
             this.lblFilterWhere.Size = new System.Drawing.Size(67, 16);
-            this.lblFilterWhere.TabIndex = 25;
+            this.lblFilterWhere.TabIndex = 27;
             this.lblFilterWhere.Text = "in the field";
             // 
             // lblAvailableBRBs
@@ -395,7 +398,7 @@
             this.lblAvailableBRBs.Location = new System.Drawing.Point(12, 72);
             this.lblAvailableBRBs.Name = "lblAvailableBRBs";
             this.lblAvailableBRBs.Size = new System.Drawing.Size(100, 16);
-            this.lblAvailableBRBs.TabIndex = 16;
+            this.lblAvailableBRBs.TabIndex = 18;
             this.lblAvailableBRBs.Text = "BRB Episodes:";
             // 
             // lstAllBRBs
@@ -413,7 +416,7 @@
             this.lstAllBRBs.MultiSelect = false;
             this.lstAllBRBs.Name = "lstAllBRBs";
             this.lstAllBRBs.ShowItemToolTips = true;
-            this.lstAllBRBs.Size = new System.Drawing.Size(328, 524);
+            this.lstAllBRBs.Size = new System.Drawing.Size(328, 564);
             this.lstAllBRBs.TabIndex = 2;
             this.lstAllBRBs.UseCompatibleStateImageBehavior = false;
             this.lstAllBRBs.View = System.Windows.Forms.View.Details;
@@ -424,11 +427,40 @@
             this.tmrResetSaveButton.Interval = 5000;
             this.tmrResetSaveButton.Tick += new System.EventHandler(this.tmrResetSaveButton_Tick);
             // 
+            // chkEnableAutoMute
+            // 
+            this.chkEnableAutoMute.AutoSize = true;
+            this.chkEnableAutoMute.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkEnableAutoMute.Location = new System.Drawing.Point(355, 477);
+            this.chkEnableAutoMute.Name = "chkEnableAutoMute";
+            this.chkEnableAutoMute.Size = new System.Drawing.Size(201, 20);
+            this.chkEnableAutoMute.TabIndex = 11;
+            this.chkEnableAutoMute.Text = "Enable AutoMute for this BRB";
+            this.tooltipsManager.SetToolTip(this.chkEnableAutoMute, "Whether the data for AutoMute should actually be used by the player. Can only be " +
+        "activated if AutoMute data for the BRB has been specified.");
+            this.chkEnableAutoMute.UseVisualStyleBackColor = true;
+            this.chkEnableAutoMute.CheckedChanged += new System.EventHandler(this.chkEnableAutoMute_CheckedChanged);
+            // 
+            // btnEditAutoMuteData
+            // 
+            this.btnEditAutoMuteData.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnEditAutoMuteData.Location = new System.Drawing.Point(577, 471);
+            this.btnEditAutoMuteData.Name = "btnEditAutoMuteData";
+            this.btnEditAutoMuteData.Size = new System.Drawing.Size(190, 30);
+            this.btnEditAutoMuteData.TabIndex = 12;
+            this.btnEditAutoMuteData.Text = "Display AutoMute Data";
+            this.tooltipsManager.SetToolTip(this.btnEditAutoMuteData, "Display information on when the player should mute or unmute this BRB. Editing th" +
+        "is information is not implemented at this time.");
+            this.btnEditAutoMuteData.UseVisualStyleBackColor = true;
+            this.btnEditAutoMuteData.Click += new System.EventHandler(this.btnEditAutoMuteData_Click);
+            // 
             // FormManageBRBs
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(876, 735);
+            this.ClientSize = new System.Drawing.Size(876, 775);
+            this.Controls.Add(this.btnEditAutoMuteData);
+            this.Controls.Add(this.chkEnableAutoMute);
             this.Controls.Add(this.lstAllBRBs);
             this.Controls.Add(this.lblAvailableBRBs);
             this.Controls.Add(this.drpSearchWhere);
@@ -504,5 +536,7 @@
         private System.Windows.Forms.Label lblAvailableBRBs;
         private System.Windows.Forms.ListView lstAllBRBs;
         private System.Windows.Forms.Timer tmrResetSaveButton;
+        private System.Windows.Forms.CheckBox chkEnableAutoMute;
+        private System.Windows.Forms.Button btnEditAutoMuteData;
     }
 }
