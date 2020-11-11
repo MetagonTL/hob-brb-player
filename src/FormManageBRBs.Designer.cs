@@ -49,6 +49,8 @@
             this.lblTitle = new System.Windows.Forms.Label();
             this.lblAuthors = new System.Windows.Forms.Label();
             this.lblDescription = new System.Windows.Forms.Label();
+            this.chkEnableAutoMute = new System.Windows.Forms.CheckBox();
+            this.btnEditAutoMuteData = new System.Windows.Forms.Button();
             this.lblPlaybackData = new System.Windows.Forms.Label();
             this.lblDuration = new System.Windows.Forms.Label();
             this.lblGuaranteedPlays = new System.Windows.Forms.Label();
@@ -59,12 +61,16 @@
             this.lblAvailableBRBs = new System.Windows.Forms.Label();
             this.lstAllBRBs = new System.Windows.Forms.ListView();
             this.tmrResetSaveButton = new System.Windows.Forms.Timer(this.components);
-            this.chkEnableAutoMute = new System.Windows.Forms.CheckBox();
-            this.btnEditAutoMuteData = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.numGuaranteedPlays)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numPriorityPlays)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picSearch)).BeginInit();
             this.SuspendLayout();
+            // 
+            // tooltipsManager
+            // 
+            this.tooltipsManager.AutoPopDelay = 30000;
+            this.tooltipsManager.InitialDelay = 500;
+            this.tooltipsManager.ReshowDelay = 100;
             // 
             // btnReloadBRBList
             // 
@@ -319,6 +325,33 @@
             this.tooltipsManager.SetToolTip(this.lblDescription, "A description for the BRB where any additional information can be entered. This w" +
         "ill not be displayed in the BRB player.");
             // 
+            // chkEnableAutoMute
+            // 
+            this.chkEnableAutoMute.AutoSize = true;
+            this.chkEnableAutoMute.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkEnableAutoMute.Location = new System.Drawing.Point(355, 477);
+            this.chkEnableAutoMute.Name = "chkEnableAutoMute";
+            this.chkEnableAutoMute.Size = new System.Drawing.Size(201, 20);
+            this.chkEnableAutoMute.TabIndex = 11;
+            this.chkEnableAutoMute.Text = "Enable AutoMute for this BRB";
+            this.tooltipsManager.SetToolTip(this.chkEnableAutoMute, "Whether the data for AutoMute should actually be used by the player. Can only be " +
+        "activated if AutoMute data for the BRB has been specified.");
+            this.chkEnableAutoMute.UseVisualStyleBackColor = true;
+            this.chkEnableAutoMute.CheckedChanged += new System.EventHandler(this.chkEnableAutoMute_CheckedChanged);
+            // 
+            // btnEditAutoMuteData
+            // 
+            this.btnEditAutoMuteData.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnEditAutoMuteData.Location = new System.Drawing.Point(577, 471);
+            this.btnEditAutoMuteData.Name = "btnEditAutoMuteData";
+            this.btnEditAutoMuteData.Size = new System.Drawing.Size(190, 30);
+            this.btnEditAutoMuteData.TabIndex = 12;
+            this.btnEditAutoMuteData.Text = "Display AutoMute Data";
+            this.tooltipsManager.SetToolTip(this.btnEditAutoMuteData, "Display information on when the player should mute or unmute this BRB. Editing th" +
+        "is information is not implemented at this time.");
+            this.btnEditAutoMuteData.UseVisualStyleBackColor = true;
+            this.btnEditAutoMuteData.Click += new System.EventHandler(this.btnEditAutoMuteData_Click);
+            // 
             // lblPlaybackData
             // 
             this.lblPlaybackData.AutoSize = true;
@@ -426,33 +459,6 @@
             // 
             this.tmrResetSaveButton.Interval = 5000;
             this.tmrResetSaveButton.Tick += new System.EventHandler(this.tmrResetSaveButton_Tick);
-            // 
-            // chkEnableAutoMute
-            // 
-            this.chkEnableAutoMute.AutoSize = true;
-            this.chkEnableAutoMute.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkEnableAutoMute.Location = new System.Drawing.Point(355, 477);
-            this.chkEnableAutoMute.Name = "chkEnableAutoMute";
-            this.chkEnableAutoMute.Size = new System.Drawing.Size(201, 20);
-            this.chkEnableAutoMute.TabIndex = 11;
-            this.chkEnableAutoMute.Text = "Enable AutoMute for this BRB";
-            this.tooltipsManager.SetToolTip(this.chkEnableAutoMute, "Whether the data for AutoMute should actually be used by the player. Can only be " +
-        "activated if AutoMute data for the BRB has been specified.");
-            this.chkEnableAutoMute.UseVisualStyleBackColor = true;
-            this.chkEnableAutoMute.CheckedChanged += new System.EventHandler(this.chkEnableAutoMute_CheckedChanged);
-            // 
-            // btnEditAutoMuteData
-            // 
-            this.btnEditAutoMuteData.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnEditAutoMuteData.Location = new System.Drawing.Point(577, 471);
-            this.btnEditAutoMuteData.Name = "btnEditAutoMuteData";
-            this.btnEditAutoMuteData.Size = new System.Drawing.Size(190, 30);
-            this.btnEditAutoMuteData.TabIndex = 12;
-            this.btnEditAutoMuteData.Text = "Display AutoMute Data";
-            this.tooltipsManager.SetToolTip(this.btnEditAutoMuteData, "Display information on when the player should mute or unmute this BRB. Editing th" +
-        "is information is not implemented at this time.");
-            this.btnEditAutoMuteData.UseVisualStyleBackColor = true;
-            this.btnEditAutoMuteData.Click += new System.EventHandler(this.btnEditAutoMuteData_Click);
             // 
             // FormManageBRBs
             // 

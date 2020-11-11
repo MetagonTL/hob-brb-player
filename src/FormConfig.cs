@@ -135,7 +135,7 @@ namespace Hob_BRB_Player
             if (numChapter.Value - numChapterHistory.Value < 1412)
             {
                 MessageBox.Show("Could not apply your new settings. Reason: Your settings for chapter and chapter history mean the app should consider BRB playback data from chapter " +
-                                (int)(numChapter.Value - numChapterHistory.Value) + "and onwards, but this is not possible since no data exists for chapters earlier than 1412.",
+                                (int)(numChapter.Value - numChapterHistory.Value) + " and onwards, but this is not possible since no data exists for chapters earlier than 1412.",
                                 "Consistency error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return false;
             }

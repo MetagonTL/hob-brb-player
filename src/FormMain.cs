@@ -900,12 +900,13 @@ namespace Hob_BRB_Player
                             "App design and coding by MetagonTL, https://www.twitch.tv/metagontl . For any technical issues, questions or suggestions, MetagonTL can be reached on Twitch. " +
                             "For longer messages or emergencies, contact MetagonTL via e-mail.\r\n\r\n" +
                             "General app feedback, InterBRB screen design and graphics by KaufLive, https://www.twitch.tv/kauflive . " +
-                            "MetagonTL is very grateful to Kauf for his invaluable help while boosting the app to a stream-ready state.\r\n\r\n" +
-                            "He also thanks LadyZoe for providing further feedback and her work to establish communication pathways.\r\n\r\n" +
+                            "Further app feedback by LadyZoe, https://www.twitch.tv/ladyzoe . " +
+                            "MetagonTL is very grateful to Kauf and LadyZoe for their invaluable help while boosting the app to a stream-ready state, " +
+                            "and for their work to establish communication pathways.\r\n\r\n" +
                             "Icons for the various app buttons provided by Boxicons, https://boxicons.com , under the CC-BY 4.0 licence, https://creativecommons.org/licenses/by/4.0/ .\r\n\r\n" +
-                            "Made for the stream of The_Happy_Hob. MetagonTL thanks Hob himself, Megantron, LadyZoe, KaufLive, xMattMan, KittyPurrFace, all past and present mods and cycle mods, " +
-                            "and Chat for innumerable hours of entertainment. He also especially thanks the authors of all BRB videos for creating the \"Best Part Of The Stream\", " +
-                            "eventually inspiring him to develop this application.",
+                            "Made for the stream of The_Happy_Hob. MetagonTL thanks Hob himself, Megantron, LadyZoe, KaufLive, xMattMan, KittyPurrFace, " +
+                            "all other past and present mods and cycle mods, and Chat for innumerable hours of entertainment. " +
+                            "He also especially thanks the authors of all BRB videos for creating the \"Best Part Of The Stream\", eventually inspiring him to develop this application.",
                             "Application Credits", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
