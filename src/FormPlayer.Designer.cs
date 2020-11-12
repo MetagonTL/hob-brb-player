@@ -199,9 +199,9 @@
             // 
             this.lblBRBManagerCreditsInter.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.lblBRBManagerCreditsInter.Font = new System.Drawing.Font("Verdana", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblBRBManagerCreditsInter.Location = new System.Drawing.Point(1323, 137);
+            this.lblBRBManagerCreditsInter.Location = new System.Drawing.Point(1193, 137);
             this.lblBRBManagerCreditsInter.Name = "lblBRBManagerCreditsInter";
-            this.lblBRBManagerCreditsInter.Size = new System.Drawing.Size(590, 23);
+            this.lblBRBManagerCreditsInter.Size = new System.Drawing.Size(720, 23);
             this.lblBRBManagerCreditsInter.TabIndex = 0;
             this.lblBRBManagerCreditsInter.Text = "The_Happy_Hob BRB Manager and Player by MetagonTL – Version n/a";
             this.lblBRBManagerCreditsInter.TextAlign = System.Drawing.ContentAlignment.BottomRight;
@@ -275,9 +275,9 @@
             // 
             this.lblBRBManagerCreditsPre.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.lblBRBManagerCreditsPre.Font = new System.Drawing.Font("Verdana", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblBRBManagerCreditsPre.Location = new System.Drawing.Point(1323, 158);
+            this.lblBRBManagerCreditsPre.Location = new System.Drawing.Point(1196, 158);
             this.lblBRBManagerCreditsPre.Name = "lblBRBManagerCreditsPre";
-            this.lblBRBManagerCreditsPre.Size = new System.Drawing.Size(590, 23);
+            this.lblBRBManagerCreditsPre.Size = new System.Drawing.Size(717, 23);
             this.lblBRBManagerCreditsPre.TabIndex = 0;
             this.lblBRBManagerCreditsPre.Text = "The_Happy_Hob BRB Manager and Player by MetagonTL – Version n/a";
             this.lblBRBManagerCreditsPre.TextAlign = System.Drawing.ContentAlignment.BottomRight;
@@ -324,9 +324,9 @@
             // 
             this.lblBRBManagerCreditsError.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.lblBRBManagerCreditsError.Font = new System.Drawing.Font("Verdana", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblBRBManagerCreditsError.Location = new System.Drawing.Point(1323, 98);
+            this.lblBRBManagerCreditsError.Location = new System.Drawing.Point(1196, 98);
             this.lblBRBManagerCreditsError.Name = "lblBRBManagerCreditsError";
-            this.lblBRBManagerCreditsError.Size = new System.Drawing.Size(590, 23);
+            this.lblBRBManagerCreditsError.Size = new System.Drawing.Size(717, 23);
             this.lblBRBManagerCreditsError.TabIndex = 0;
             this.lblBRBManagerCreditsError.Text = "The_Happy_Hob BRB Manager and Player by MetagonTL – Version n/a";
             this.lblBRBManagerCreditsError.TextAlign = System.Drawing.ContentAlignment.BottomRight;
@@ -463,9 +463,9 @@
             // 
             this.lblBRBManagerCreditsHobbVLC.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.lblBRBManagerCreditsHobbVLC.Font = new System.Drawing.Font("Verdana", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblBRBManagerCreditsHobbVLC.Location = new System.Drawing.Point(1323, 137);
+            this.lblBRBManagerCreditsHobbVLC.Location = new System.Drawing.Point(1196, 137);
             this.lblBRBManagerCreditsHobbVLC.Name = "lblBRBManagerCreditsHobbVLC";
-            this.lblBRBManagerCreditsHobbVLC.Size = new System.Drawing.Size(590, 23);
+            this.lblBRBManagerCreditsHobbVLC.Size = new System.Drawing.Size(717, 23);
             this.lblBRBManagerCreditsHobbVLC.TabIndex = 0;
             this.lblBRBManagerCreditsHobbVLC.Text = "The_Happy_Hob BRB Manager and Player by MetagonTL – Version n/a";
             this.lblBRBManagerCreditsHobbVLC.TextAlign = System.Drawing.ContentAlignment.BottomRight;
@@ -527,9 +527,9 @@
             // 
             this.lblBRBManagerCreditsPost.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.lblBRBManagerCreditsPost.Font = new System.Drawing.Font("Verdana", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblBRBManagerCreditsPost.Location = new System.Drawing.Point(1323, 121);
+            this.lblBRBManagerCreditsPost.Location = new System.Drawing.Point(1199, 121);
             this.lblBRBManagerCreditsPost.Name = "lblBRBManagerCreditsPost";
-            this.lblBRBManagerCreditsPost.Size = new System.Drawing.Size(590, 23);
+            this.lblBRBManagerCreditsPost.Size = new System.Drawing.Size(714, 23);
             this.lblBRBManagerCreditsPost.TabIndex = 0;
             this.lblBRBManagerCreditsPost.Text = "The_Happy_Hob BRB Manager and Player by MetagonTL – Version n/a";
             this.lblBRBManagerCreditsPost.TextAlign = System.Drawing.ContentAlignment.BottomRight;

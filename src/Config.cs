@@ -12,7 +12,7 @@ namespace Hob_BRB_Player
 {
     static class Config
     {
-        public const string Version = "1.0beta"; // The current app version
+        public const string Version = "1.0.1beta"; // The current app version
 
         public const int CurrentReleaseChapter = 1750; // When the current app version was released; this is used as the minimum chapter the user can set in the app
 

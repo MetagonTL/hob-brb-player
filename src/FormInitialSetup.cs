@@ -604,7 +604,7 @@ namespace Hob_BRB_Player
             }
             else
             {
-                Program.OnInitialSetupCompleted();
+                // Program.OnInitialSetupCompleted(); Unnecessary, already called by Yes/No buttons in last step
             }
 
             playerTest.ConfirmClose(); // Release and close the player test form (it has its own protection from accidental Alt-F4)
