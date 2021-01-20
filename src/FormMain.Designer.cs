@@ -78,6 +78,7 @@
             this.dispRemainingBreakTime = new System.Windows.Forms.Label();
             this.tmrUpdateBRBPlaybackData = new System.Windows.Forms.Timer(this.components);
             this.tmrAllowChapterIncrement = new System.Windows.Forms.Timer(this.components);
+            this.btnSwitchScreen = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.numMinutes)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trkScrubber)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trkVolume)).BeginInit();
@@ -200,7 +201,7 @@
             this.btnStartOrAbortPlayer.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnStartOrAbortPlayer.Location = new System.Drawing.Point(305, 470);
             this.btnStartOrAbortPlayer.Name = "btnStartOrAbortPlayer";
-            this.btnStartOrAbortPlayer.Size = new System.Drawing.Size(364, 40);
+            this.btnStartOrAbortPlayer.Size = new System.Drawing.Size(318, 40);
             this.btnStartOrAbortPlayer.TabIndex = 16;
             this.btnStartOrAbortPlayer.Text = " Start BRB Player";
             this.btnStartOrAbortPlayer.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -661,11 +662,24 @@
             this.tmrAllowChapterIncrement.Interval = 29000;
             this.tmrAllowChapterIncrement.Tick += new System.EventHandler(this.tmrAllowChapterIncrement_Tick);
             // 
+            // btnSwitchScreen
+            // 
+            this.btnSwitchScreen.Enabled = false;
+            this.btnSwitchScreen.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSwitchScreen.Location = new System.Drawing.Point(629, 470);
+            this.btnSwitchScreen.Name = "btnSwitchScreen";
+            this.btnSwitchScreen.Size = new System.Drawing.Size(40, 40);
+            this.btnSwitchScreen.TabIndex = 43;
+            this.tooltipsManager.SetToolTip(this.btnSwitchScreen, "Move player to a different screen");
+            this.btnSwitchScreen.UseVisualStyleBackColor = true;
+            this.btnSwitchScreen.Click += new System.EventHandler(this.btnSwitchScreen_Click);
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1352, 642);
+            this.Controls.Add(this.btnSwitchScreen);
             this.Controls.Add(this.drpSearchWhere);
             this.Controls.Add(this.txtSearch);
             this.Controls.Add(this.picSearch);
@@ -777,5 +791,6 @@
         private System.Windows.Forms.PictureBox picSearch;
         private System.Windows.Forms.TextBox txtSearch;
         private System.Windows.Forms.ComboBox drpSearchWhere;
+        private System.Windows.Forms.Button btnSwitchScreen;
     }
 }

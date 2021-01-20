@@ -46,6 +46,7 @@ namespace Hob_BRB_Player
             btnSettings.Image = Image.FromFile("icons\\settings.png");
             btnGenerate.Image = Image.FromFile("icons\\generate.png");
             btnStartOrAbortPlayer.Image = iconStartPlayer;
+            btnSwitchScreen.Image = Image.FromFile("icons\\switchscreen.png");
             //btnStartPlayer.Image = new Bitmap(Image.FromFile("icons\\hobbVLC.ico"), 24, 24);
             btnCreditsAndSupport.Image = Image.FromFile("icons\\credits.png");
             btnExit.Image = Image.FromFile("icons\\exit.png");
@@ -564,6 +565,15 @@ namespace Hob_BRB_Player
             }
         }
 
+        private void btnSwitchScreen_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("Move the playback window to a different screen?", "Please confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)
+                == DialogResult.Yes)
+            {
+                Program.SwitchPlaybackScreen();
+            }
+        }
+
         // The following two methods are called by Program
         public void OnBeginBRBPlayback()
         {
@@ -596,6 +606,7 @@ namespace Hob_BRB_Player
             btnStartOrAbortPlayer.Text = "Abort BRB Playback";
             btnStartOrAbortPlayer.Image = iconAbortPlayer;
             tooltipsManager.SetToolTip(btnStartOrAbortPlayer, "Cancels the currently running break and BRB playback and closes the BRB player window");
+            btnSwitchScreen.Enabled = true;
 
             // Make sure "Pause" button is displayed
             btnPlayPause.Image = iconPause;
@@ -634,6 +645,7 @@ namespace Hob_BRB_Player
             btnStartOrAbortPlayer.Text = "Start BRB Player";
             btnStartOrAbortPlayer.Image = iconStartPlayer;
             tooltipsManager.SetToolTip(btnStartOrAbortPlayer, "Opens the player window. You will be able to confirm one last time before BRBs start playing");
+            btnSwitchScreen.Enabled = false;
 
             // Make sure "Play" button is displayed
             btnPlayPause.Image = iconPlay;
@@ -898,7 +910,7 @@ namespace Hob_BRB_Player
         {
             MessageBox.Show("The current app version is " + Config.Version + ".\r\n\r\n" +
                             "App design and coding by MetagonTL, https://www.twitch.tv/metagontl . For any technical issues, questions or suggestions, MetagonTL can be reached on Twitch. " +
-                            "For longer messages or emergencies, contact MetagonTL via e-mail.\r\n\r\n" +
+                            "For longer messages or emergencies, contact MetagonTL via e-mail or Discord.\r\n\r\n" +
                             "General app feedback, InterBRB screen design and graphics by KaufLive, https://www.twitch.tv/kauflive . " +
                             "Further app feedback by LadyZoe, https://www.twitch.tv/ladyzoe . " +
                             "MetagonTL is very grateful to Kauf and LadyZoe for their invaluable help while boosting the app to a stream-ready state, " +

@@ -191,7 +191,7 @@ namespace Hob_BRB_Player
             MainForm.OnBeginBRBPlayback();
         }
 
-        // Called if the respective button is clicked in the player form
+        // Called if the respective button is clicked in the player or main form
         public static void SwitchPlaybackScreen()
         {
             Screen mainFormScreen = Screen.FromControl(MainForm);

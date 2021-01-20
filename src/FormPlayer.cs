@@ -91,11 +91,14 @@ namespace Hob_BRB_Player
 		private bool muted = false;
 
 		private long lastScrubUpdateTicks = 0;
+		private double scrubBuffer = 0;
 
 		// Common = Wt 25, Uncommon = Wt 10, Rare = Wt 5, Epic = Wt 2, Legendary = Wt 1
 		private string[] hobEmotes = {
 			"E|2Head.png",
 			"C|AYAYA.png",
+			"E|BALDERS.gif",
+			"U|BOOBA.gif",
 			"U|FeelsMattMan.png",
 			"L|HeyListen.gif",
 			"U|haHAA.png",
@@ -121,6 +124,7 @@ namespace Hob_BRB_Player
 			"R|hobbEmo.png",
 			"E|hobbF.png",
 			"U|hobbFart.png",
+			"R|hobbFive.png",
 			"C|hobbGasm.png",
 			"C|hobbH.png",
 			"C|hobbHands.png",
@@ -153,6 +157,10 @@ namespace Hob_BRB_Player
 			"R|hobbRings.png",
 			"C|hobbS.png",
 			"C|hobbSif.png",
+			"C|hobbSleeper.png",
+			"L|hobbSmash.gif",
+			"E|hobbSmile.png",
+			"C|hobbStall.png",
 			"U|hobbT.png",
 			"C|hobbTos.png",
 			"C|hobbTroll.png",
@@ -167,20 +175,20 @@ namespace Hob_BRB_Player
 			"C|KEKW.png",
 			"C|PETHOB.gif",
 			"U|PETLINK.gif",
-			"R|PETTHEMATT.gif",
+			"E|PETTHEMATT.gif",
+			"R|PETTHEMEG.gif",
 			"E|PotPie.png",
-			"L|RareHob.gif",
-			"L|sumSmash.gif"
+			"L|RareHob.gif"
 		};
 
-		// Common: AYAYA, hobbBrit, hobbBrow, hobbCry, hobbDab, hobbDerp, hobbGasm, hobbH, hobbHands, hobbHi, hobbJedi, hobbLink, hobbLUL, hobbPega, hobbS, hobbSif, hobbTos, hobbTroll,
-		//         hobbWeird, hobbY, KEKW, PETHOB (22)
-		// Uncommon: FeelsMattMan, haHAA, hobbBlanket, hobbBrexit, hobbCray, hobbDuck, hobbFart, hobbHype, hobbIncel, hobbKeys, hobbNed, hobbNotes, hobbPoo, hobbRage, hobbRed, hobbT, hobbW,
-		//           hobbWoah, hobbYoda, PETLINK (20)
-		// Rare: hobbBald, hobbBowl, hobbBuffer, hobbClap, hobbCloud, hobbEmo, hobbHOP, hobbKEK, hobbLurk, hobbMind, hobbNan, hobbPride, hobbRings, hobbWheel, PETTHEMATT (15)
-		// Epic: 2Head, hobbAim, hobbBeep, hobbChoke, hobbCrazy, hobbF, hobbKet, hobbMan, hobbNGT, hobbPray, PotPie (11)
-		// Legendary: HeyListen, hobbDiva, hobbK, hobbMorg, hobbP, hobbUnagi, hobbVIP, RareHob, sumSmash (9)
-		// SUM: 77 with wt 856; Common 64.3 %, 2.92 % each; Uncommon 23.4 %, 1.17 % each; Rare 8.76 %, 0.58 % each; Epic 2.57 %, 0.23 % each; Legendary 1.05 %, 0.12 % each
+		// Common: AYAYA, hobbBrit, hobbBrow, hobbCry, hobbDab, hobbDerp, hobbGasm, hobbH, hobbHands, hobbHi, hobbJedi, hobbLink, hobbLUL, hobbPega, hobbS, hobbSif, hobbSleeper, hobbStall,
+		//         hobbStare, hobbTos, hobbTroll, hobbWeird, hobbY, KEKW, PETHOB (24)
+		// Uncommon: BOOBA, FeelsMattMan, haHAA, hobbBlanket, hobbBrexit, hobbCray, hobbDuck, hobbFart, hobbHype, hobbIncel, hobbKeys, hobbNed, hobbNotes, hobbPoo, hobbRage, hobbRed, hobbT, hobbW,
+		//           hobbWoah, hobbYoda, PETLINK (21)
+		// Rare: hobbBald, hobbBowl, hobbBuffer, hobbClap, hobbCloud, hobbEmo, hobbFive, hobbHOP, hobbKEK, hobbLurk, hobbMind, hobbNan, hobbPride, hobbRings, hobbWheel, PETTHEMEG (16)
+		// Epic: 2Head, BALDERS, hobbAim, hobbBeep, hobbChoke, hobbCrazy, hobbF, hobbKet, hobbMan, hobbNGT, hobbPray, hobbSmile, PETTHEMATT, PotPie (14)
+		// Legendary: HeyListen, hobbDiva, hobbK, hobbMorg, hobbP, hobbSmash, hobbUnagi, hobbVIP, RareHob (9)
+		// SUM: 84 with wt 927; Common 64.7 %, 2.70 % each; Uncommon 22.7 %, 1.08 % each; Rare 8.63 %, 0.54 % each; Epic 3.02 %, 0.22 % each; Legendary 0.97 %, 0.11 % each
 
 
 		private List<string> weightedHobEmotes = new List<string>(); // Compiled only once, then saved for future uses
@@ -625,9 +633,26 @@ namespace Hob_BRB_Player
 				{
 					VLCPlayer.Position = (float)seconds / ((float)VLCPlayer.Length / 1000.0f);
 					lastScrubUpdateTicks = DateTime.Now.Ticks;
+					scrubBuffer = seconds;
+					tmrUpdateScrub.Enabled = false;
 				}
+				else
+                {
+					scrubBuffer = seconds;
+					tmrUpdateScrub.Enabled = true;
+                }
 			}
-        }
+		}
+
+		private void tmrUpdateScrub_Tick(object sender, EventArgs e)
+		{
+			if ((DateTime.Now.Ticks - lastScrubUpdateTicks) / TimeSpan.TicksPerMillisecond >= 250)
+			{
+				VLCPlayer.Position = (float)scrubBuffer / ((float)VLCPlayer.Length / 1000.0f);
+				lastScrubUpdateTicks = DateTime.Now.Ticks;
+				tmrUpdateScrub.Enabled = false;
+			}
+		}
 
 		public void SetVolume(int volume)
         {

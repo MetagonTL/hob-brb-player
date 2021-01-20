@@ -12,9 +12,9 @@ namespace Hob_BRB_Player
 {
     static class Config
     {
-        public const string Version = "1.0.1beta"; // The current app version
+        public const string Version = "1.1beta"; // The current app version
 
-        public const int CurrentReleaseChapter = 1750; // When the current app version was released; this is used as the minimum chapter the user can set in the app
+        public const int CurrentReleaseChapter = 1804; // When the current app version was released; this is used as the minimum chapter the user can set in the app
 
         // Fills the config with standard values and saves it to file.
         // However, does not touch Initial Setup values (BRBDirectory, StartPlayerOnDifferentScreen, MakePlayerTopMost, Chapter), this should be done beforehand
@@ -206,8 +206,8 @@ namespace Hob_BRB_Player
                 JsonWriter jsonConfig = new JsonTextWriter(new StreamWriter(fs));
                 jsonConfig.Formatting = Formatting.Indented;
 
-                jsonConfig.WriteComment("DO NOT TOUCH THIS FILE. Only change settings via the application itself. "
-                                        + "Otherwise, you might accidentally destroy your configuration, render the video player useless, or cause corruption of BRB statistics.");
+                jsonConfig.WriteComment("Please don't edit the contents of this file directly and rather use the in-app Settings menu. " +
+                                        "Please mind that deleting this file will also reset BRB statistics.");
                 jsonConfig.WriteStartObject();
 
                 jsonConfig.WritePropertyName("ConfigVersion");

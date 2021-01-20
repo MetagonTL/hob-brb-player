@@ -104,6 +104,26 @@ namespace Hob_BRB_Player
             AutoMuteEnabled = false;
         }
 
+        // Constructor for importing BRB episodes
+        public BRBEpisode(string filename, bool treatAsNew)
+        {
+            Filename = filename;
+            Media media = new Media(Program.VLC, new Uri(Path.GetFullPath(Path.Combine(Config.BRBDirectory, filename))));
+            Task<MediaParsedStatus> parseTask = media.Parse();
+            parseTask.Wait();
+            Duration = new TimeSpan(media.Duration > -1 ? media.Duration * TimeSpan.TicksPerMillisecond : 0);
+            Favourite = false;
+            Title = "";
+            Description = "";
+            Credits = "";
+            IsNew = treatAsNew;
+            PlaybackChapters = new List<int>();
+            GuaranteedPlays = treatAsNew ? Config.AutoGuaranteedPlaysForNewBRBs : 0;
+            PriorityPlays = treatAsNew ? Config.AutoPriorityPlaysForNewBRBs : 0;
+            AutoMutes = new List<AutoMuteSpan>();
+            AutoMuteEnabled = false;
+        }
+
         // Constructor for already extant BRB episodes (on application load or information update)
         [JsonConstructor] public BRBEpisode(string filename, TimeSpan duration, bool favourite, string title, string description,
                                             string credits, bool isnew, List<int> playbackChapters, int guaranteedPlays, int priorityPlays,

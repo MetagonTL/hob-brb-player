@@ -30,10 +30,12 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormInitialSetup));
             this.pnlPanelContainer = new System.Windows.Forms.Panel();
-            this.pnlInitialSetupInfo = new System.Windows.Forms.Panel();
-            this.lblInitialSetupPrepare = new System.Windows.Forms.Label();
-            this.lblWelcome = new System.Windows.Forms.Label();
-            this.picHobbHi = new System.Windows.Forms.PictureBox();
+            this.pnlSavingConfig = new System.Windows.Forms.Panel();
+            this.btnSaveWithoutTestMode = new System.Windows.Forms.Button();
+            this.btnSaveWithTestMode = new System.Windows.Forms.Button();
+            this.picHob3YSub = new System.Windows.Forms.PictureBox();
+            this.lblSavingConfig2 = new System.Windows.Forms.Label();
+            this.lblSavingConfig1 = new System.Windows.Forms.Label();
             this.pnlOBSSetup = new System.Windows.Forms.Panel();
             this.lblOBSSetup2 = new System.Windows.Forms.Label();
             this.btnSwitchScreen = new System.Windows.Forms.Button();
@@ -50,12 +52,17 @@
             this.chkMakePlayerTopMost = new System.Windows.Forms.CheckBox();
             this.lblChapter = new System.Windows.Forms.Label();
             this.lblHowShouldThePlayerAct = new System.Windows.Forms.Label();
-            this.pnlSavingConfig = new System.Windows.Forms.Panel();
-            this.btnSaveWithoutTestMode = new System.Windows.Forms.Button();
-            this.btnSaveWithTestMode = new System.Windows.Forms.Button();
-            this.picHob3YSub = new System.Windows.Forms.PictureBox();
-            this.lblSavingConfig2 = new System.Windows.Forms.Label();
-            this.lblSavingConfig1 = new System.Windows.Forms.Label();
+            this.pnlBRBDirectory = new System.Windows.Forms.Panel();
+            this.lblUseWorkingDirRoot = new System.Windows.Forms.Label();
+            this.chkUseWorkingDirRoot = new System.Windows.Forms.CheckBox();
+            this.dispFilesInBRBDir = new System.Windows.Forms.Label();
+            this.btnBrowseForBRBDir = new System.Windows.Forms.Button();
+            this.txtBRBDirectory = new System.Windows.Forms.TextBox();
+            this.lblPointToBRBDirectory = new System.Windows.Forms.Label();
+            this.pnlInitialSetupInfo = new System.Windows.Forms.Panel();
+            this.lblInitialSetupPrepare = new System.Windows.Forms.Label();
+            this.lblWelcome = new System.Windows.Forms.Label();
+            this.picHobbHi = new System.Windows.Forms.PictureBox();
             this.pnlUnknownBRBImportPost = new System.Windows.Forms.Panel();
             this.picHob3MSub = new System.Windows.Forms.PictureBox();
             this.lblMatchingDone2 = new System.Windows.Forms.Label();
@@ -73,13 +80,6 @@
             this.lblLastKnownFilename = new System.Windows.Forms.Label();
             this.btnConfirmMatch = new System.Windows.Forms.Button();
             this.lblMatchTheFollowingBRB = new System.Windows.Forms.Label();
-            this.pnlBRBDirectory = new System.Windows.Forms.Panel();
-            this.lblUseWorkingDirRoot = new System.Windows.Forms.Label();
-            this.chkUseWorkingDirRoot = new System.Windows.Forms.CheckBox();
-            this.dispFilesInBRBDir = new System.Windows.Forms.Label();
-            this.btnBrowseForBRBDir = new System.Windows.Forms.Button();
-            this.txtBRBDirectory = new System.Windows.Forms.TextBox();
-            this.lblPointToBRBDirectory = new System.Windows.Forms.Label();
             this.pnlUnknownBRBImportPre = new System.Windows.Forms.Panel();
             this.btnBeginMatching = new System.Windows.Forms.Button();
             this.picHobbNotes = new System.Windows.Forms.PictureBox();
@@ -91,19 +91,19 @@
             this.prgStep = new System.Windows.Forms.ProgressBar();
             this.lblStep = new System.Windows.Forms.Label();
             this.pnlPanelContainer.SuspendLayout();
-            this.pnlInitialSetupInfo.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picHobbHi)).BeginInit();
+            this.pnlSavingConfig.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picHob3YSub)).BeginInit();
             this.pnlOBSSetup.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picHobbKet)).BeginInit();
             this.pnlPlayerAndChapter.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numChapter)).BeginInit();
             this.pnlPlayerWindowOpenLocation.SuspendLayout();
-            this.pnlSavingConfig.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picHob3YSub)).BeginInit();
+            this.pnlBRBDirectory.SuspendLayout();
+            this.pnlInitialSetupInfo.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picHobbHi)).BeginInit();
             this.pnlUnknownBRBImportPost.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picHob3MSub)).BeginInit();
             this.pnlUnknownBRBImport.SuspendLayout();
-            this.pnlBRBDirectory.SuspendLayout();
             this.pnlUnknownBRBImportPre.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picHobbNotes)).BeginInit();
             this.SuspendLayout();
@@ -113,57 +113,81 @@
             this.pnlPanelContainer.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.pnlPanelContainer.Controls.Add(this.pnlOBSSetup);
-            this.pnlPanelContainer.Controls.Add(this.pnlInitialSetupInfo);
-            this.pnlPanelContainer.Controls.Add(this.pnlPlayerAndChapter);
             this.pnlPanelContainer.Controls.Add(this.pnlSavingConfig);
+            this.pnlPanelContainer.Controls.Add(this.pnlOBSSetup);
+            this.pnlPanelContainer.Controls.Add(this.pnlPlayerAndChapter);
+            this.pnlPanelContainer.Controls.Add(this.pnlBRBDirectory);
+            this.pnlPanelContainer.Controls.Add(this.pnlInitialSetupInfo);
             this.pnlPanelContainer.Controls.Add(this.pnlUnknownBRBImportPost);
             this.pnlPanelContainer.Controls.Add(this.pnlUnknownBRBImport);
-            this.pnlPanelContainer.Controls.Add(this.pnlBRBDirectory);
             this.pnlPanelContainer.Controls.Add(this.pnlUnknownBRBImportPre);
             this.pnlPanelContainer.Location = new System.Drawing.Point(0, 46);
             this.pnlPanelContainer.Name = "pnlPanelContainer";
             this.pnlPanelContainer.Size = new System.Drawing.Size(780, 284);
             this.pnlPanelContainer.TabIndex = 0;
             // 
-            // pnlInitialSetupInfo
+            // pnlSavingConfig
             // 
-            this.pnlInitialSetupInfo.Controls.Add(this.lblInitialSetupPrepare);
-            this.pnlInitialSetupInfo.Controls.Add(this.lblWelcome);
-            this.pnlInitialSetupInfo.Controls.Add(this.picHobbHi);
-            this.pnlInitialSetupInfo.Location = new System.Drawing.Point(12, 20);
-            this.pnlInitialSetupInfo.Name = "pnlInitialSetupInfo";
-            this.pnlInitialSetupInfo.Size = new System.Drawing.Size(200, 100);
-            this.pnlInitialSetupInfo.TabIndex = 0;
-            this.pnlInitialSetupInfo.Visible = false;
+            this.pnlSavingConfig.Controls.Add(this.btnSaveWithoutTestMode);
+            this.pnlSavingConfig.Controls.Add(this.btnSaveWithTestMode);
+            this.pnlSavingConfig.Controls.Add(this.picHob3YSub);
+            this.pnlSavingConfig.Controls.Add(this.lblSavingConfig2);
+            this.pnlSavingConfig.Controls.Add(this.lblSavingConfig1);
+            this.pnlSavingConfig.Location = new System.Drawing.Point(487, 137);
+            this.pnlSavingConfig.Name = "pnlSavingConfig";
+            this.pnlSavingConfig.Size = new System.Drawing.Size(180, 99);
+            this.pnlSavingConfig.TabIndex = 10;
+            this.pnlSavingConfig.Visible = false;
             // 
-            // lblInitialSetupPrepare
+            // btnSaveWithoutTestMode
             // 
-            this.lblInitialSetupPrepare.AutoSize = true;
-            this.lblInitialSetupPrepare.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblInitialSetupPrepare.Location = new System.Drawing.Point(12, 96);
-            this.lblInitialSetupPrepare.Name = "lblInitialSetupPrepare";
-            this.lblInitialSetupPrepare.Size = new System.Drawing.Size(752, 176);
-            this.lblInitialSetupPrepare.TabIndex = 0;
-            this.lblInitialSetupPrepare.Text = resources.GetString("lblInitialSetupPrepare.Text");
+            this.btnSaveWithoutTestMode.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSaveWithoutTestMode.Location = new System.Drawing.Point(397, 158);
+            this.btnSaveWithoutTestMode.Name = "btnSaveWithoutTestMode";
+            this.btnSaveWithoutTestMode.Size = new System.Drawing.Size(87, 30);
+            this.btnSaveWithoutTestMode.TabIndex = 1;
+            this.btnSaveWithoutTestMode.Text = "No";
+            this.btnSaveWithoutTestMode.UseVisualStyleBackColor = true;
+            this.btnSaveWithoutTestMode.Click += new System.EventHandler(this.btnSaveWithoutTestMode_Click);
             // 
-            // lblWelcome
+            // btnSaveWithTestMode
             // 
-            this.lblWelcome.AutoSize = true;
-            this.lblWelcome.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblWelcome.Location = new System.Drawing.Point(108, 7);
-            this.lblWelcome.Name = "lblWelcome";
-            this.lblWelcome.Size = new System.Drawing.Size(547, 64);
-            this.lblWelcome.TabIndex = 2;
-            this.lblWelcome.Text = resources.GetString("lblWelcome.Text");
+            this.btnSaveWithTestMode.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSaveWithTestMode.Location = new System.Drawing.Point(296, 158);
+            this.btnSaveWithTestMode.Name = "btnSaveWithTestMode";
+            this.btnSaveWithTestMode.Size = new System.Drawing.Size(87, 30);
+            this.btnSaveWithTestMode.TabIndex = 0;
+            this.btnSaveWithTestMode.Text = "Yes";
+            this.btnSaveWithTestMode.UseVisualStyleBackColor = true;
+            this.btnSaveWithTestMode.Click += new System.EventHandler(this.btnSaveWithTestMode_Click);
             // 
-            // picHobbHi
+            // picHob3YSub
             // 
-            this.picHobbHi.Location = new System.Drawing.Point(19, 2);
-            this.picHobbHi.Name = "picHobbHi";
-            this.picHobbHi.Size = new System.Drawing.Size(72, 72);
-            this.picHobbHi.TabIndex = 1;
-            this.picHobbHi.TabStop = false;
+            this.picHob3YSub.Location = new System.Drawing.Point(15, 13);
+            this.picHob3YSub.Name = "picHob3YSub";
+            this.picHob3YSub.Size = new System.Drawing.Size(72, 72);
+            this.picHob3YSub.TabIndex = 9;
+            this.picHob3YSub.TabStop = false;
+            // 
+            // lblSavingConfig2
+            // 
+            this.lblSavingConfig2.AutoSize = true;
+            this.lblSavingConfig2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSavingConfig2.Location = new System.Drawing.Point(12, 100);
+            this.lblSavingConfig2.Name = "lblSavingConfig2";
+            this.lblSavingConfig2.Size = new System.Drawing.Size(717, 32);
+            this.lblSavingConfig2.TabIndex = 1;
+            this.lblSavingConfig2.Text = resources.GetString("lblSavingConfig2.Text");
+            // 
+            // lblSavingConfig1
+            // 
+            this.lblSavingConfig1.AutoSize = true;
+            this.lblSavingConfig1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSavingConfig1.Location = new System.Drawing.Point(97, 18);
+            this.lblSavingConfig1.Name = "lblSavingConfig1";
+            this.lblSavingConfig1.Size = new System.Drawing.Size(659, 64);
+            this.lblSavingConfig1.TabIndex = 0;
+            this.lblSavingConfig1.Text = resources.GetString("lblSavingConfig1.Text");
             // 
             // pnlOBSSetup
             // 
@@ -184,7 +208,7 @@
             this.lblOBSSetup2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblOBSSetup2.Location = new System.Drawing.Point(15, 87);
             this.lblOBSSetup2.Name = "lblOBSSetup2";
-            this.lblOBSSetup2.Size = new System.Drawing.Size(746, 192);
+            this.lblOBSSetup2.Size = new System.Drawing.Size(730, 192);
             this.lblOBSSetup2.TabIndex = 11;
             this.lblOBSSetup2.Text = resources.GetString("lblOBSSetup2.Text");
             // 
@@ -238,9 +262,9 @@
             this.pnlPlayerAndChapter.Controls.Add(this.chkMakePlayerTopMost);
             this.pnlPlayerAndChapter.Controls.Add(this.lblChapter);
             this.pnlPlayerAndChapter.Controls.Add(this.lblHowShouldThePlayerAct);
-            this.pnlPlayerAndChapter.Location = new System.Drawing.Point(437, 21);
+            this.pnlPlayerAndChapter.Location = new System.Drawing.Point(458, 3);
             this.pnlPlayerAndChapter.Name = "pnlPlayerAndChapter";
-            this.pnlPlayerAndChapter.Size = new System.Drawing.Size(180, 99);
+            this.pnlPlayerAndChapter.Size = new System.Drawing.Size(149, 105);
             this.pnlPlayerAndChapter.TabIndex = 8;
             this.pnlPlayerAndChapter.Visible = false;
             // 
@@ -267,9 +291,11 @@
             this.lblWhyTopmost.AutoSize = true;
             this.lblWhyTopmost.Location = new System.Drawing.Point(12, 167);
             this.lblWhyTopmost.Name = "lblWhyTopmost";
-            this.lblWhyTopmost.Size = new System.Drawing.Size(752, 26);
+            this.lblWhyTopmost.Size = new System.Drawing.Size(628, 26);
             this.lblWhyTopmost.TabIndex = 9;
-            this.lblWhyTopmost.Text = resources.GetString("lblWhyTopmost.Text");
+            this.lblWhyTopmost.Text = "If the player window is not in front of all other applications, the app cannot hi" +
+    "de your mouse cursor on stream while BRBs are playing.\r\nHence, MetagonTL highly " +
+    "recommends you enable this option.";
             // 
             // pnlPlayerWindowOpenLocation
             // 
@@ -309,7 +335,7 @@
             this.lblSameOrDifferentScreen.AutoSize = true;
             this.lblSameOrDifferentScreen.Location = new System.Drawing.Point(12, 87);
             this.lblSameOrDifferentScreen.Name = "lblSameOrDifferentScreen";
-            this.lblSameOrDifferentScreen.Size = new System.Drawing.Size(736, 26);
+            this.lblSameOrDifferentScreen.Size = new System.Drawing.Size(657, 26);
             this.lblSameOrDifferentScreen.TabIndex = 7;
             this.lblSameOrDifferentScreen.Text = resources.GetString("lblSameOrDifferentScreen.Text");
             // 
@@ -346,68 +372,123 @@
             this.lblHowShouldThePlayerAct.TabIndex = 0;
             this.lblHowShouldThePlayerAct.Text = "How should the player window behave?";
             // 
-            // pnlSavingConfig
+            // pnlBRBDirectory
             // 
-            this.pnlSavingConfig.Controls.Add(this.btnSaveWithoutTestMode);
-            this.pnlSavingConfig.Controls.Add(this.btnSaveWithTestMode);
-            this.pnlSavingConfig.Controls.Add(this.picHob3YSub);
-            this.pnlSavingConfig.Controls.Add(this.lblSavingConfig2);
-            this.pnlSavingConfig.Controls.Add(this.lblSavingConfig1);
-            this.pnlSavingConfig.Location = new System.Drawing.Point(487, 137);
-            this.pnlSavingConfig.Name = "pnlSavingConfig";
-            this.pnlSavingConfig.Size = new System.Drawing.Size(180, 99);
-            this.pnlSavingConfig.TabIndex = 10;
-            this.pnlSavingConfig.Visible = false;
+            this.pnlBRBDirectory.Controls.Add(this.lblUseWorkingDirRoot);
+            this.pnlBRBDirectory.Controls.Add(this.chkUseWorkingDirRoot);
+            this.pnlBRBDirectory.Controls.Add(this.dispFilesInBRBDir);
+            this.pnlBRBDirectory.Controls.Add(this.btnBrowseForBRBDir);
+            this.pnlBRBDirectory.Controls.Add(this.txtBRBDirectory);
+            this.pnlBRBDirectory.Controls.Add(this.lblPointToBRBDirectory);
+            this.pnlBRBDirectory.Location = new System.Drawing.Point(241, 3);
+            this.pnlBRBDirectory.Name = "pnlBRBDirectory";
+            this.pnlBRBDirectory.Size = new System.Drawing.Size(190, 117);
+            this.pnlBRBDirectory.TabIndex = 1;
+            this.pnlBRBDirectory.Visible = false;
             // 
-            // btnSaveWithoutTestMode
+            // lblUseWorkingDirRoot
             // 
-            this.btnSaveWithoutTestMode.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSaveWithoutTestMode.Location = new System.Drawing.Point(397, 229);
-            this.btnSaveWithoutTestMode.Name = "btnSaveWithoutTestMode";
-            this.btnSaveWithoutTestMode.Size = new System.Drawing.Size(87, 30);
-            this.btnSaveWithoutTestMode.TabIndex = 1;
-            this.btnSaveWithoutTestMode.Text = "No";
-            this.btnSaveWithoutTestMode.UseVisualStyleBackColor = true;
-            this.btnSaveWithoutTestMode.Click += new System.EventHandler(this.btnSaveWithoutTestMode_Click);
+            this.lblUseWorkingDirRoot.AutoSize = true;
+            this.lblUseWorkingDirRoot.Location = new System.Drawing.Point(12, 120);
+            this.lblUseWorkingDirRoot.Name = "lblUseWorkingDirRoot";
+            this.lblUseWorkingDirRoot.Size = new System.Drawing.Size(519, 13);
+            this.lblUseWorkingDirRoot.TabIndex = 7;
+            this.lblUseWorkingDirRoot.Text = "Useful if the drive letter of your BRB directory changes frequently (e.g. externa" +
+    "l hard drive without fixed letter).";
             // 
-            // btnSaveWithTestMode
+            // chkUseWorkingDirRoot
             // 
-            this.btnSaveWithTestMode.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSaveWithTestMode.Location = new System.Drawing.Point(296, 229);
-            this.btnSaveWithTestMode.Name = "btnSaveWithTestMode";
-            this.btnSaveWithTestMode.Size = new System.Drawing.Size(87, 30);
-            this.btnSaveWithTestMode.TabIndex = 0;
-            this.btnSaveWithTestMode.Text = "Yes";
-            this.btnSaveWithTestMode.UseVisualStyleBackColor = true;
-            this.btnSaveWithTestMode.Click += new System.EventHandler(this.btnSaveWithTestMode_Click);
+            this.chkUseWorkingDirRoot.AutoSize = true;
+            this.chkUseWorkingDirRoot.Enabled = false;
+            this.chkUseWorkingDirRoot.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkUseWorkingDirRoot.Location = new System.Drawing.Point(15, 97);
+            this.chkUseWorkingDirRoot.Name = "chkUseWorkingDirRoot";
+            this.chkUseWorkingDirRoot.Size = new System.Drawing.Size(266, 20);
+            this.chkUseWorkingDirRoot.TabIndex = 2;
+            this.chkUseWorkingDirRoot.Text = "Always use drive of application directory";
+            this.chkUseWorkingDirRoot.UseVisualStyleBackColor = true;
+            this.chkUseWorkingDirRoot.CheckedChanged += new System.EventHandler(this.chkUseWorkingDirRoot_CheckedChanged);
             // 
-            // picHob3YSub
+            // dispFilesInBRBDir
             // 
-            this.picHob3YSub.Location = new System.Drawing.Point(15, 13);
-            this.picHob3YSub.Name = "picHob3YSub";
-            this.picHob3YSub.Size = new System.Drawing.Size(72, 72);
-            this.picHob3YSub.TabIndex = 9;
-            this.picHob3YSub.TabStop = false;
+            this.dispFilesInBRBDir.AutoSize = true;
+            this.dispFilesInBRBDir.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dispFilesInBRBDir.Location = new System.Drawing.Point(12, 165);
+            this.dispFilesInBRBDir.Name = "dispFilesInBRBDir";
+            this.dispFilesInBRBDir.Size = new System.Drawing.Size(730, 16);
+            this.dispFilesInBRBDir.TabIndex = 3;
+            this.dispFilesInBRBDir.Text = "The application will automatically compare the videos in your directory with the " +
+    "data known to and provided by MetagonTL.";
             // 
-            // lblSavingConfig2
+            // btnBrowseForBRBDir
             // 
-            this.lblSavingConfig2.AutoSize = true;
-            this.lblSavingConfig2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSavingConfig2.Location = new System.Drawing.Point(12, 102);
-            this.lblSavingConfig2.Name = "lblSavingConfig2";
-            this.lblSavingConfig2.Size = new System.Drawing.Size(757, 112);
-            this.lblSavingConfig2.TabIndex = 1;
-            this.lblSavingConfig2.Text = resources.GetString("lblSavingConfig2.Text");
+            this.btnBrowseForBRBDir.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnBrowseForBRBDir.Location = new System.Drawing.Point(658, 58);
+            this.btnBrowseForBRBDir.Name = "btnBrowseForBRBDir";
+            this.btnBrowseForBRBDir.Size = new System.Drawing.Size(110, 26);
+            this.btnBrowseForBRBDir.TabIndex = 1;
+            this.btnBrowseForBRBDir.Text = "Browse...";
+            this.btnBrowseForBRBDir.UseVisualStyleBackColor = true;
+            this.btnBrowseForBRBDir.Click += new System.EventHandler(this.btnBrowseForBRBDir_Click);
             // 
-            // lblSavingConfig1
+            // txtBRBDirectory
             // 
-            this.lblSavingConfig1.AutoSize = true;
-            this.lblSavingConfig1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSavingConfig1.Location = new System.Drawing.Point(97, 18);
-            this.lblSavingConfig1.Name = "lblSavingConfig1";
-            this.lblSavingConfig1.Size = new System.Drawing.Size(636, 64);
-            this.lblSavingConfig1.TabIndex = 0;
-            this.lblSavingConfig1.Text = resources.GetString("lblSavingConfig1.Text");
+            this.txtBRBDirectory.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtBRBDirectory.Location = new System.Drawing.Point(15, 60);
+            this.txtBRBDirectory.Name = "txtBRBDirectory";
+            this.txtBRBDirectory.ReadOnly = true;
+            this.txtBRBDirectory.Size = new System.Drawing.Size(631, 22);
+            this.txtBRBDirectory.TabIndex = 0;
+            this.txtBRBDirectory.TextChanged += new System.EventHandler(this.txtBRBDirectory_TextChanged);
+            // 
+            // lblPointToBRBDirectory
+            // 
+            this.lblPointToBRBDirectory.AutoSize = true;
+            this.lblPointToBRBDirectory.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPointToBRBDirectory.Location = new System.Drawing.Point(12, 12);
+            this.lblPointToBRBDirectory.Name = "lblPointToBRBDirectory";
+            this.lblPointToBRBDirectory.Size = new System.Drawing.Size(434, 16);
+            this.lblPointToBRBDirectory.TabIndex = 0;
+            this.lblPointToBRBDirectory.Text = "Please point the application to the directory containing your BRB videos.";
+            // 
+            // pnlInitialSetupInfo
+            // 
+            this.pnlInitialSetupInfo.Controls.Add(this.lblInitialSetupPrepare);
+            this.pnlInitialSetupInfo.Controls.Add(this.lblWelcome);
+            this.pnlInitialSetupInfo.Controls.Add(this.picHobbHi);
+            this.pnlInitialSetupInfo.Location = new System.Drawing.Point(12, 20);
+            this.pnlInitialSetupInfo.Name = "pnlInitialSetupInfo";
+            this.pnlInitialSetupInfo.Size = new System.Drawing.Size(200, 100);
+            this.pnlInitialSetupInfo.TabIndex = 0;
+            this.pnlInitialSetupInfo.Visible = false;
+            // 
+            // lblInitialSetupPrepare
+            // 
+            this.lblInitialSetupPrepare.AutoSize = true;
+            this.lblInitialSetupPrepare.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblInitialSetupPrepare.Location = new System.Drawing.Point(12, 96);
+            this.lblInitialSetupPrepare.Name = "lblInitialSetupPrepare";
+            this.lblInitialSetupPrepare.Size = new System.Drawing.Size(752, 176);
+            this.lblInitialSetupPrepare.TabIndex = 0;
+            this.lblInitialSetupPrepare.Text = resources.GetString("lblInitialSetupPrepare.Text");
+            // 
+            // lblWelcome
+            // 
+            this.lblWelcome.AutoSize = true;
+            this.lblWelcome.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblWelcome.Location = new System.Drawing.Point(108, 7);
+            this.lblWelcome.Name = "lblWelcome";
+            this.lblWelcome.Size = new System.Drawing.Size(547, 64);
+            this.lblWelcome.TabIndex = 2;
+            this.lblWelcome.Text = resources.GetString("lblWelcome.Text");
+            // 
+            // picHobbHi
+            // 
+            this.picHobbHi.Location = new System.Drawing.Point(19, 2);
+            this.picHobbHi.Name = "picHobbHi";
+            this.picHobbHi.Size = new System.Drawing.Size(72, 72);
+            this.picHobbHi.TabIndex = 1;
+            this.picHobbHi.TabStop = false;
             // 
             // pnlUnknownBRBImportPost
             // 
@@ -476,7 +557,6 @@
             this.btnPlayWithStdProgram.TabIndex = 4;
             this.btnPlayWithStdProgram.Text = "Play selected file";
             this.btnPlayWithStdProgram.UseVisualStyleBackColor = true;
-            this.btnPlayWithStdProgram.Click += new System.EventHandler(this.btnPlayWithStdProgram_Click);
             // 
             // txtDuration
             // 
@@ -508,7 +588,6 @@
             this.drpCurrentFilename.Name = "drpCurrentFilename";
             this.drpCurrentFilename.Size = new System.Drawing.Size(488, 24);
             this.drpCurrentFilename.TabIndex = 3;
-            this.drpCurrentFilename.SelectedIndexChanged += new System.EventHandler(this.drpCurrentFilename_SelectedIndexChanged);
             // 
             // lblCurrentFilename
             // 
@@ -529,7 +608,6 @@
             this.btnSkipMatch.TabIndex = 5;
             this.btnSkipMatch.Text = "Skip this BRB and discard data";
             this.btnSkipMatch.UseVisualStyleBackColor = true;
-            this.btnSkipMatch.Click += new System.EventHandler(this.btnSkipMatch_Click);
             // 
             // txtDescription
             // 
@@ -579,7 +657,6 @@
             this.btnConfirmMatch.TabIndex = 6;
             this.btnConfirmMatch.Text = "Confirm match";
             this.btnConfirmMatch.UseVisualStyleBackColor = true;
-            this.btnConfirmMatch.Click += new System.EventHandler(this.btnConfirmMatch_Click);
             // 
             // lblMatchTheFollowingBRB
             // 
@@ -590,85 +667,6 @@
             this.lblMatchTheFollowingBRB.Size = new System.Drawing.Size(327, 16);
             this.lblMatchTheFollowingBRB.TabIndex = 0;
             this.lblMatchTheFollowingBRB.Text = "Please match the following BRB to its current filename.";
-            // 
-            // pnlBRBDirectory
-            // 
-            this.pnlBRBDirectory.Controls.Add(this.lblUseWorkingDirRoot);
-            this.pnlBRBDirectory.Controls.Add(this.chkUseWorkingDirRoot);
-            this.pnlBRBDirectory.Controls.Add(this.dispFilesInBRBDir);
-            this.pnlBRBDirectory.Controls.Add(this.btnBrowseForBRBDir);
-            this.pnlBRBDirectory.Controls.Add(this.txtBRBDirectory);
-            this.pnlBRBDirectory.Controls.Add(this.lblPointToBRBDirectory);
-            this.pnlBRBDirectory.Location = new System.Drawing.Point(237, 20);
-            this.pnlBRBDirectory.Name = "pnlBRBDirectory";
-            this.pnlBRBDirectory.Size = new System.Drawing.Size(174, 93);
-            this.pnlBRBDirectory.TabIndex = 1;
-            this.pnlBRBDirectory.Visible = false;
-            // 
-            // lblUseWorkingDirRoot
-            // 
-            this.lblUseWorkingDirRoot.AutoSize = true;
-            this.lblUseWorkingDirRoot.Location = new System.Drawing.Point(12, 120);
-            this.lblUseWorkingDirRoot.Name = "lblUseWorkingDirRoot";
-            this.lblUseWorkingDirRoot.Size = new System.Drawing.Size(698, 26);
-            this.lblUseWorkingDirRoot.TabIndex = 7;
-            this.lblUseWorkingDirRoot.Text = resources.GetString("lblUseWorkingDirRoot.Text");
-            // 
-            // chkUseWorkingDirRoot
-            // 
-            this.chkUseWorkingDirRoot.AutoSize = true;
-            this.chkUseWorkingDirRoot.Enabled = false;
-            this.chkUseWorkingDirRoot.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkUseWorkingDirRoot.Location = new System.Drawing.Point(15, 97);
-            this.chkUseWorkingDirRoot.Name = "chkUseWorkingDirRoot";
-            this.chkUseWorkingDirRoot.Size = new System.Drawing.Size(266, 20);
-            this.chkUseWorkingDirRoot.TabIndex = 2;
-            this.chkUseWorkingDirRoot.Text = "Always use drive of application directory";
-            this.chkUseWorkingDirRoot.UseVisualStyleBackColor = true;
-            this.chkUseWorkingDirRoot.CheckedChanged += new System.EventHandler(this.chkUseWorkingDirRoot_CheckedChanged);
-            // 
-            // dispFilesInBRBDir
-            // 
-            this.dispFilesInBRBDir.AutoSize = true;
-            this.dispFilesInBRBDir.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dispFilesInBRBDir.Location = new System.Drawing.Point(12, 177);
-            this.dispFilesInBRBDir.Name = "dispFilesInBRBDir";
-            this.dispFilesInBRBDir.Size = new System.Drawing.Size(725, 48);
-            this.dispFilesInBRBDir.TabIndex = 3;
-            this.dispFilesInBRBDir.Text = "The application will automatically compare the videos in that directory with the " +
-    "data known to and provided by MetagonTL.\r\n\r\nYou will be able to amend some missi" +
-    "ng data in the next step.";
-            // 
-            // btnBrowseForBRBDir
-            // 
-            this.btnBrowseForBRBDir.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnBrowseForBRBDir.Location = new System.Drawing.Point(658, 58);
-            this.btnBrowseForBRBDir.Name = "btnBrowseForBRBDir";
-            this.btnBrowseForBRBDir.Size = new System.Drawing.Size(110, 26);
-            this.btnBrowseForBRBDir.TabIndex = 1;
-            this.btnBrowseForBRBDir.Text = "Browse...";
-            this.btnBrowseForBRBDir.UseVisualStyleBackColor = true;
-            this.btnBrowseForBRBDir.Click += new System.EventHandler(this.btnBrowseForBRBDir_Click);
-            // 
-            // txtBRBDirectory
-            // 
-            this.txtBRBDirectory.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtBRBDirectory.Location = new System.Drawing.Point(15, 60);
-            this.txtBRBDirectory.Name = "txtBRBDirectory";
-            this.txtBRBDirectory.ReadOnly = true;
-            this.txtBRBDirectory.Size = new System.Drawing.Size(631, 22);
-            this.txtBRBDirectory.TabIndex = 0;
-            this.txtBRBDirectory.TextChanged += new System.EventHandler(this.txtBRBDirectory_TextChanged);
-            // 
-            // lblPointToBRBDirectory
-            // 
-            this.lblPointToBRBDirectory.AutoSize = true;
-            this.lblPointToBRBDirectory.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPointToBRBDirectory.Location = new System.Drawing.Point(12, 12);
-            this.lblPointToBRBDirectory.Name = "lblPointToBRBDirectory";
-            this.lblPointToBRBDirectory.Size = new System.Drawing.Size(434, 16);
-            this.lblPointToBRBDirectory.TabIndex = 0;
-            this.lblPointToBRBDirectory.Text = "Please point the application to the directory containing your BRB videos.";
             // 
             // pnlUnknownBRBImportPre
             // 
@@ -691,7 +689,6 @@
             this.btnBeginMatching.TabIndex = 0;
             this.btnBeginMatching.Text = "Begin matching";
             this.btnBeginMatching.UseVisualStyleBackColor = true;
-            this.btnBeginMatching.Click += new System.EventHandler(this.btnBeginMatching_Click);
             // 
             // picHobbNotes
             // 
@@ -768,7 +765,7 @@
             this.lblStep.Name = "lblStep";
             this.lblStep.Size = new System.Drawing.Size(55, 13);
             this.lblStep.TabIndex = 25;
-            this.lblStep.Text = "Step 0 / 6";
+            this.lblStep.Text = "Step 0 / 5";
             // 
             // FormInitialSetup
             // 
@@ -789,9 +786,9 @@
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormInitialSetup_FormClosing);
             this.Shown += new System.EventHandler(this.FormInitialSetup_Shown);
             this.pnlPanelContainer.ResumeLayout(false);
-            this.pnlInitialSetupInfo.ResumeLayout(false);
-            this.pnlInitialSetupInfo.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picHobbHi)).EndInit();
+            this.pnlSavingConfig.ResumeLayout(false);
+            this.pnlSavingConfig.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picHob3YSub)).EndInit();
             this.pnlOBSSetup.ResumeLayout(false);
             this.pnlOBSSetup.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picHobbKet)).EndInit();
@@ -800,16 +797,16 @@
             ((System.ComponentModel.ISupportInitialize)(this.numChapter)).EndInit();
             this.pnlPlayerWindowOpenLocation.ResumeLayout(false);
             this.pnlPlayerWindowOpenLocation.PerformLayout();
-            this.pnlSavingConfig.ResumeLayout(false);
-            this.pnlSavingConfig.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picHob3YSub)).EndInit();
+            this.pnlBRBDirectory.ResumeLayout(false);
+            this.pnlBRBDirectory.PerformLayout();
+            this.pnlInitialSetupInfo.ResumeLayout(false);
+            this.pnlInitialSetupInfo.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picHobbHi)).EndInit();
             this.pnlUnknownBRBImportPost.ResumeLayout(false);
             this.pnlUnknownBRBImportPost.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picHob3MSub)).EndInit();
             this.pnlUnknownBRBImport.ResumeLayout(false);
             this.pnlUnknownBRBImport.PerformLayout();
-            this.pnlBRBDirectory.ResumeLayout(false);
-            this.pnlBRBDirectory.PerformLayout();
             this.pnlUnknownBRBImportPre.ResumeLayout(false);
             this.pnlUnknownBRBImportPre.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picHobbNotes)).EndInit();

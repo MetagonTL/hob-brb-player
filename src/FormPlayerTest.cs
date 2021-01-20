@@ -40,7 +40,10 @@ namespace Hob_BRB_Player
         // Automatically redraw lines every second (just to make sure)
         private void tmrRefresh_Tick(object sender, EventArgs e)
         {
-            this.Refresh();
+            if (this.Visible)
+            {
+                this.Refresh();
+            }
         }
 
         // Called by Initial Setup once it finishes and this form is no longer needed

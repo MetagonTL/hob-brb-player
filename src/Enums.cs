@@ -12,11 +12,11 @@
     public enum InitialSetupState
     {
         Undefined,
-        Welcome, // 15 %
-        BRBDirectory, // 5 %
-        UnknownBRBImport, // 60 %
-        PlayerAndChapter, // 10 %
-        OBSSetup, // 10 %
+        Welcome, // 35 %
+        BRBDirectory, // 15 %
+        // UnknownBRBImport, // 60 %
+        PlayerAndChapter, // 25 %
+        OBSSetup, // 25 %
         SavingConfig // 0 %
     };
 
