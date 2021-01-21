@@ -147,8 +147,10 @@ namespace Hob_BRB_Player
                                     "and the application has read permissions on it. If it is not supposed to be a BRB episode, please move it out of the BRB directory.",
                                     "Registering BRB failed", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
-
-                BRBManager.BRBEpisodes.Add(episode);
+                else
+                {
+                    BRBManager.BRBEpisodes.Add(episode);
+                }
             }
 
             BRBManager.BRBEpisodes.Sort();
