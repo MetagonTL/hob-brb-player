@@ -89,6 +89,7 @@ namespace Hob_BRB_Player
             if (txtBRBDirectory.Text == "")
             {
                 btnNext.Enabled = false;
+                chkUseWorkingDirRoot.Enabled = false;
                 dispFilesInBRBDir.Text = "The application will automatically analyze the files in your directory and compile your list of BRB videos.";
             }
             else if (Directory.Exists(txtBRBDirectory.Text))
@@ -104,6 +105,7 @@ namespace Hob_BRB_Player
             else
             {
                 btnNext.Enabled = false;
+                chkUseWorkingDirRoot.Enabled = false;
                 dispFilesInBRBDir.Text = "The provided path could not be found. Please select your desired BRB directory again.";
             }
         }

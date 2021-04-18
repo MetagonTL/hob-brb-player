@@ -12,9 +12,9 @@ namespace Hob_BRB_Player
 {
     static class Config
     {
-        public const string Version = "1.1.1beta"; // The current app version
+        public const string Version = "1.1.2"; // The current app version
 
-        public const int CurrentReleaseChapter = 1804; // When the current app version was released; this is used as the minimum chapter the user can set in the app
+        public const int CurrentReleaseChapter = 1864; // When the current app version was released; this is used as the minimum chapter the user can set in the app
 
         // Fills the config with standard values and saves it to file.
         // However, does not touch Initial Setup values (BRBDirectory, StartPlayerOnDifferentScreen, MakePlayerTopMost, Chapter), this should be done beforehand
@@ -32,7 +32,7 @@ namespace Hob_BRB_Player
             FavouriteMultiplier = 1.5;
             SortingMode = BRBPlaylistSortingMode.Interwoven;
             StandardPlayerVolume = 80;
-            InterBRBCountdown = 10;
+            InterBRBCountdown = 15;
             TimeUntilHobbVLC = 20;
             HobbVLCCountdown = 10;
             HobbVLCMaxDuration = 2;

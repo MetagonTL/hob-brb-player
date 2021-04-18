@@ -184,8 +184,8 @@
             this.txtPlaybackData.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.txtPlaybackData.Size = new System.Drawing.Size(509, 72);
             this.txtPlaybackData.TabIndex = 13;
-            this.tooltipsManager.SetToolTip(this.txtPlaybackData, "Information about playbacks of the BRB video (from chapter 1412 onwards). This is" +
-        " updated automatically whenever the BRB player finishes playing the video file.");
+            this.tooltipsManager.SetToolTip(this.txtPlaybackData, "Information about playbacks of the BRB video. This is updated automatically whene" +
+        "ver the BRB player finishes playing the video file.");
             // 
             // txtDuration
             // 

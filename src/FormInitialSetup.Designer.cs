@@ -291,11 +291,11 @@
             this.lblWhyTopmost.AutoSize = true;
             this.lblWhyTopmost.Location = new System.Drawing.Point(12, 167);
             this.lblWhyTopmost.Name = "lblWhyTopmost";
-            this.lblWhyTopmost.Size = new System.Drawing.Size(628, 26);
+            this.lblWhyTopmost.Size = new System.Drawing.Size(552, 26);
             this.lblWhyTopmost.TabIndex = 9;
-            this.lblWhyTopmost.Text = "If the player window is not in front of all other applications, the app cannot hi" +
-    "de your mouse cursor on stream while BRBs are playing.\r\nHence, MetagonTL highly " +
-    "recommends you enable this option.";
+            this.lblWhyTopmost.Text = "If the player window is not in front of all other applications, the app cannot re" +
+    "liably hide your mouse cursor on stream.\r\nHence, MetagonTL highly recommends you" +
+    " enable this option.";
             // 
             // pnlPlayerWindowOpenLocation
             // 
@@ -415,10 +415,10 @@
             this.dispFilesInBRBDir.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dispFilesInBRBDir.Location = new System.Drawing.Point(12, 165);
             this.dispFilesInBRBDir.Name = "dispFilesInBRBDir";
-            this.dispFilesInBRBDir.Size = new System.Drawing.Size(730, 16);
+            this.dispFilesInBRBDir.Size = new System.Drawing.Size(616, 16);
             this.dispFilesInBRBDir.TabIndex = 3;
-            this.dispFilesInBRBDir.Text = "The application will automatically compare the videos in your directory with the " +
-    "data known to and provided by MetagonTL.";
+            this.dispFilesInBRBDir.Text = "The application will automatically analyze the files in your directory and compil" +
+    "e your list of BRB videos.";
             // 
             // btnBrowseForBRBDir
             // 

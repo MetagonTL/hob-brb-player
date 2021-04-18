@@ -99,14 +99,16 @@ namespace Hob_BRB_Player
 			"C|AYAYA.png",
 			"E|BALDERS.gif",
 			"U|BOOBA.gif",
+			"C|COPIUM.png",
 			"U|FeelsMattMan.png",
-			"L|HeyListen.gif",
 			"U|haHAA.png",
+			"L|HeyListen.gif",
 			"E|hobbAim.gif",
 			"R|hobbBald.png",
 			"E|hobbBeep.png",
 			"U|hobbBlanket.png",
 			"R|hobbBowl.png",
+			"R|hobbBR.gif",
 			"U|hobbBrexit.png",
 			"C|hobbBrit.png",
 			"C|hobbBrow.png",
@@ -122,6 +124,7 @@ namespace Hob_BRB_Player
 			"L|hobbDiva.png",
 			"U|hobbDuck.png",
 			"R|hobbEmo.png",
+			"R|hobbers.gif",
 			"E|hobbF.png",
 			"U|hobbFart.png",
 			"R|hobbFive.png",
@@ -160,17 +163,22 @@ namespace Hob_BRB_Player
 			"C|hobbSleeper.png",
 			"L|hobbSmash.gif",
 			"E|hobbSmile.png",
+			"U|hobbSoy.png",
 			"C|hobbStall.png",
+			"E|hobbStalling.gif",
+			"R|hobbStare.png",
 			"U|hobbT.png",
 			"C|hobbTos.png",
 			"C|hobbTroll.png",
 			"L|hobbUnagi.png",
+			"R|hobbV.gif",
 			"L|hobbVIP.png",
 			"U|hobbW.png",
 			"C|hobbWeird.png",
 			"R|hobbWheel.gif",
 			"U|hobbWoah.png",
 			"C|hobbY.png",
+			"C|hobbYay.png",
 			"U|hobbYoda.png",
 			"C|KEKW.png",
 			"C|PETHOB.gif",
@@ -181,14 +189,15 @@ namespace Hob_BRB_Player
 			"L|RareHob.gif"
 		};
 
-		// Common: AYAYA, hobbBrit, hobbBrow, hobbCry, hobbDab, hobbDerp, hobbGasm, hobbH, hobbHands, hobbHi, hobbJedi, hobbLink, hobbLUL, hobbPega, hobbS, hobbSif, hobbSleeper, hobbStall,
-		//         hobbStare, hobbTos, hobbTroll, hobbWeird, hobbY, KEKW, PETHOB (24)
-		// Uncommon: BOOBA, FeelsMattMan, haHAA, hobbBlanket, hobbBrexit, hobbCray, hobbDuck, hobbFart, hobbHype, hobbIncel, hobbKeys, hobbNed, hobbNotes, hobbPoo, hobbRage, hobbRed, hobbT, hobbW,
-		//           hobbWoah, hobbYoda, PETLINK (21)
-		// Rare: hobbBald, hobbBowl, hobbBuffer, hobbClap, hobbCloud, hobbEmo, hobbFive, hobbHOP, hobbKEK, hobbLurk, hobbMind, hobbNan, hobbPride, hobbRings, hobbWheel, PETTHEMEG (16)
-		// Epic: 2Head, BALDERS, hobbAim, hobbBeep, hobbChoke, hobbCrazy, hobbF, hobbKet, hobbMan, hobbNGT, hobbPray, hobbSmile, PETTHEMATT, PotPie (14)
+		// Common: AYAYA, COPIUM, hobbBrit, hobbBrow, hobbCry, hobbDab, hobbDerp, hobbGasm, hobbH, hobbHands, hobbHi, hobbJedi, hobbLink, hobbLUL, hobbPega, hobbS, hobbSif, hobbSleeper, hobbStall,
+		//         hobbTos, hobbTroll, hobbWeird, hobbY, hobbYay, KEKW, PETHOB (26)
+		// Uncommon: BOOBA, FeelsMattMan, haHAA, hobbBlanket, hobbBrexit, hobbCray, hobbDuck, hobbFart, hobbHype, hobbIncel, hobbKeys, hobbNed, hobbNotes, hobbPoo, hobbRage, hobbRed, hobbSoy,
+		//           hobbT, hobbW, hobbWoah, hobbYoda, PETLINK (22)
+		// Rare: hobbBald, hobbBowl, hobbBR, hobbBuffer, hobbClap, hobbCloud, hobbEmo, hobbers, hobbFive, hobbHOP, hobbKEK, hobbLurk, hobbMind, hobbNan, hobbPride, hobbRings, hobbStare, hobbV,
+		//       hobbWheel, PETTHEMEG (20)
+		// Epic: 2Head, BALDERS, hobbAim, hobbBeep, hobbChoke, hobbCrazy, hobbF, hobbKet, hobbMan, hobbNGT, hobbPray, hobbSmile, hobbStalling, PETTHEMATT, PotPie (15)
 		// Legendary: HeyListen, hobbDiva, hobbK, hobbMorg, hobbP, hobbSmash, hobbUnagi, hobbVIP, RareHob (9)
-		// SUM: 84 with wt 927; Common 64.7 %, 2.70 % each; Uncommon 22.7 %, 1.08 % each; Rare 8.63 %, 0.54 % each; Epic 3.02 %, 0.22 % each; Legendary 0.97 %, 0.11 % each
+		// SUM: 92 with wt 1009; Common 64.4 %, 2.58 % each; Uncommon 21.8 %, 0.99 % each; Rare 9.91 %, 0.50 % each; Epic 2.97 %, 0.20 % each; Legendary 0.89 %, 0.10 % each
 
 
 		private List<string> weightedHobEmotes = new List<string>(); // Compiled only once, then saved for future uses
@@ -199,12 +208,8 @@ namespace Hob_BRB_Player
 			InitializeComponent();
 			ReCenterControls();
 
-			// Display correct app version at the bottom in every screen
-			lblBRBManagerCreditsPre.Text = "The_Happy_Hob BRB Manager and Player by MetagonTL – Version " + Config.Version;
-			lblBRBManagerCreditsInter.Text = "The_Happy_Hob BRB Manager and Player by MetagonTL – Version " + Config.Version;
-			lblBRBManagerCreditsPost.Text = "The_Happy_Hob BRB Manager and Player by MetagonTL – Version " + Config.Version;
-			lblBRBManagerCreditsHobbVLC.Text = "The_Happy_Hob BRB Manager and Player by MetagonTL – Version " + Config.Version;
-			lblBRBManagerCreditsError.Text = "The_Happy_Hob BRB Manager and Player by MetagonTL – Version " + Config.Version;
+			// Display correct app version at the bottom
+			lblBRBManagerCredits.Text = "Chapter " + Config.Chapter + ". App by MetagonTL (Version " + Config.Version + "). Design by KaufLive.";
 
 			// Load the VLC media player in for convenience
 			VLCPlayer = Program.VLCPlayer;
@@ -224,9 +229,10 @@ namespace Hob_BRB_Player
 			btnConfirmBRBPlayback.Image = Image.FromFile("icons\\checklistok.png");
 			btnSwitchScreen.Image = Image.FromFile("icons\\switchscreen.png");
 			btnFinishBRBPlayback.Image = Image‌.FromFile("icons\\closeplayer.png");
-			picHobbVLC.Image = new Bitmap(Image.FromFile("images\\hobEmotes\\hobbVLC.png"), 100, 100);
+			picHobbVLC.Image = new Bitmap(Image.FromFile("images\\hobEmotes\\hobbVLC.png"), 90, 90);
 		}
 
+		// As of the design change 20210417, this only applies to the pause / test mode overlays and the error panel
 		public void ReCenterControls()
         {
 			// Make sure "PAUSED" (and "TEST MODE") are centered properly
@@ -235,14 +241,6 @@ namespace Hob_BRB_Player
 			oldbounds = pnlTestMode.Bounds;
 			pnlTestMode.SetBounds(Screen.FromControl(this).Bounds.Width / 2 - pnlTestMode.Width / 2, oldbounds.Y, oldbounds.Width, oldbounds.Height);
 
-			oldbounds = pnlUIPreBRB.Bounds;
-			pnlUIPreBRB.SetBounds(0, Screen.FromControl(this).Bounds.Height / 2 - pnlUIPreBRB.Height / 2, Screen.FromControl(this).Bounds.Width, oldbounds.Height);
-			oldbounds = pnlUIInterBRB.Bounds;
-			pnlUIInterBRB.SetBounds(0, Screen.FromControl(this).Bounds.Height / 2 - pnlUIInterBRB.Height / 2, Screen.FromControl(this).Bounds.Width, oldbounds.Height);
-			oldbounds = pnlUIPostBRB.Bounds;
-			pnlUIPostBRB.SetBounds(0, Screen.FromControl(this).Bounds.Height / 2 - pnlUIPostBRB.Height / 2, Screen.FromControl(this).Bounds.Width, oldbounds.Height);
-			oldbounds = pnlUIHobbVLC.Bounds;
-			pnlUIHobbVLC.SetBounds(0, Screen.FromControl(this).Bounds.Height / 2 - pnlUIHobbVLC.Height / 2, Screen.FromControl(this).Bounds.Width, oldbounds.Height);
 			oldbounds = pnlUIError.Bounds;
 			pnlUIError.SetBounds(0, Screen.FromControl(this).Bounds.Height / 2 - pnlUIError.Height / 2, Screen.FromControl(this).Bounds.Width, oldbounds.Height);
 		}
@@ -252,21 +250,23 @@ namespace Hob_BRB_Player
 			ChangePlayerState(BRBPlayerState.BeginningOfBreak);
 		}
 
-        // This method is called every 1/10 second. Depending on BRB stage, handle countdown timer or activate the next stage
-        private void tmrTenthSecond_Tick(object sender, EventArgs e)
+		// This method is called every 1/10 second. Depending on BRB stage, handle countdown timer or activate the next stage
+		private void tmrTenthSecond_Tick(object sender, EventArgs e)
 		{
 			switch (PlayerState)
-            {
+			{
 				case BRBPlayerState.InBetweenBRBs:
 					if (secondCountdown <= 0)
 					{
 						ChangePlayerState(BRBPlayerState.Playback);
 					}
 					else
-                    {
+					{
 						secondCountdown -= 0.1;
-						dispNextBRBName.Text = NextOrCurrentBRB.Title != "" ? NextOrCurrentBRB.Title : NextOrCurrentBRB.Filename;
-						dispCountdown.Text = ((int)Math.Ceiling(secondCountdown)).ToString();
+						string brbText = NextOrCurrentBRB.Title != "" ? "Filename: " + NextOrCurrentBRB.Filename + "  –  " : "";
+						brbText += NextOrCurrentBRB.Credits != "" ? "Authors: " + NextOrCurrentBRB‌.Credits + "  –  " : "";
+						brbText += "Starting in " + ((int)Math.Ceiling(secondCountdown)).ToString();
+						dispNextBRBMoreInfo.Text = brbText;
 					}
 					break;
 
@@ -276,9 +276,9 @@ namespace Hob_BRB_Player
 						ChangePlayerState(BRBPlayerState.HobbVLC);
 					}
 					else
-                    {
+					{
 						secondCountdown -= 0.1;
-                    }
+					}
 					break;
 
 				case BRBPlayerState.HobbVLC:
@@ -289,15 +289,17 @@ namespace Hob_BRB_Player
 					else
 					{
 						secondCountdown -= 0.1;
-						dispNextBRBNameHobbVLC.Text = NextOrCurrentBRB.Title != "" ? NextOrCurrentBRB.Title : NextOrCurrentBRB.Filename;
-						dispCountdownHobbVLC.Text = ((int)Math.Ceiling(secondCountdown)).ToString();
+						string brbText = NextOrCurrentBRB.Title != "" ? "Filename: " + NextOrCurrentBRB.Filename + "  –  " : "";
+						brbText += NextOrCurrentBRB.Credits != "" ? "Authors: " + NextOrCurrentBRB‌.Credits + "  –  " : "";
+						brbText += "Starting in " + ((int)Math.Ceiling(secondCountdown)).ToString();
+						dispNextBRBMoreInfo.Text = brbText;
 					}
 					break;
 			}
 		}
 
-		// Gives an approximation of how much time there is left in the break
-		public TimeSpan GetRemainingBreakTime()
+        // Gives an approximation of how much time there is left in the break
+        public TimeSpan GetRemainingBreakTime()
         {
 			double remSecsBRBPlaytime = RemSecsInCurrentBRB;
 			double remSecsInterBRBs = RemSecsInCurrentInterBRB;
@@ -333,28 +335,56 @@ namespace Hob_BRB_Player
 					// For InterBRBs etc., loop the background video (but that should rarely happen)
 				case BRBPlayerState.BeginningOfBreak:
 					ThreadPool.QueueUserWorkItem((o) => {
-						VLCPlayer.Media = new Media(Program.VLC, new Uri(Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), "images\\screens\\preBRB.mkv")));
+						if (File.Exists(Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), "images\\screens\\universal.mp4")))
+                        {
+							VLCPlayer.Media = new Media(Program.VLC, new Uri(Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), "images\\screens\\universal.mp4")));
+						}
+						else
+						{
+							VLCPlayer.Media = new Media(Program.VLC, new Uri(Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), "images\\screens\\preBRB.mkv")));
+						}
 						VLCPlayer.Play();
 					});
 					break;
 
 				case BRBPlayerState.InBetweenBRBs:
 					ThreadPool.QueueUserWorkItem((o) => {
-						VLCPlayer.Media = new Media(Program.VLC, new Uri(Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), "images\\screens\\interBRB.mkv")));
+						if (File.Exists(Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), "images\\screens\\universal.mp4")))
+						{
+							VLCPlayer.Media = new Media(Program.VLC, new Uri(Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), "images\\screens\\universal.mp4")));
+						}
+						else
+						{
+							VLCPlayer.Media = new Media(Program.VLC, new Uri(Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), "images\\screens\\interBRB.mkv")));
+						}
 						VLCPlayer.Play();
 					});
 					break;
 
 				case BRBPlayerState.EndOfBreak:
 					ThreadPool.QueueUserWorkItem((o) => {
-						VLCPlayer.Media = new Media(Program.VLC, new Uri(Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), "images\\screens\\postBRB.mkv")));
+						if (File.Exists(Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), "images\\screens\\universal.mp4")))
+						{
+							VLCPlayer.Media = new Media(Program.VLC, new Uri(Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), "images\\screens\\universal.mp4")));
+						}
+						else
+						{
+							VLCPlayer.Media = new Media(Program.VLC, new Uri(Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), "images\\screens\\postBRB.mkv")));
+						}
 						VLCPlayer.Play();
 					});
 					break;
 
 				case BRBPlayerState.HobbVLC:
 					ThreadPool.QueueUserWorkItem((o) => {
-						VLCPlayer.Media = new Media(Program.VLC, new Uri(Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), "images\\screens\\hobbVLC.mkv")));
+						if (File.Exists(Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), "images\\screens\\universal.mp4")))
+						{
+							VLCPlayer.Media = new Media(Program.VLC, new Uri(Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), "images\\screens\\universal.mp4")));
+						}
+						else
+						{
+							VLCPlayer.Media = new Media(Program.VLC, new Uri(Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), "images\\screens\\hobbVLC.mkv")));
+						}
 						VLCPlayer.Play();
 					});
 					break;
@@ -376,41 +406,47 @@ namespace Hob_BRB_Player
 		// Shows screen at beginning with pre-playback checklist and break duration information for Chat
 		private void DisplayPreBRBScreen()
 		{
-			Rectangle oldbounds = pnlUIPreBRB.Bounds;
-			pnlUIPreBRB.SetBounds(0, Screen.FromControl(this).Bounds.Height / 2 - pnlUIPreBRB.Height / 2, Screen.FromControl(this).Bounds.Width, oldbounds.Height);
-			int remMins = (int)Math.Round(GetRemainingBreakTime().TotalMinutes);
-			dispWelcomeToBRBBreak.Text = "Welcome to the best part of the stream. Hob will now take a break for about "
-										 + remMins + " minute" + (remMins == 1 ? "" : "s") + " and BRB videos will play.";
+			//Rectangle oldbounds = pnlUIPreBRB.Bounds;
+			//pnlUIPreBRB.SetBounds(0, Screen.FromControl(this).Bounds.Height / 2 - pnlUIPreBRB.Height / 2, Screen.FromControl(this).Bounds.Width, oldbounds.Height);
 
 			ThreadPool.QueueUserWorkItem((o) => {
-				VLCPlayer.Media = new Media(Program.VLC, new Uri(Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), "images\\screens\\preBRB.mkv")));
+				if (File.Exists(Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), "images\\screens\\universal.mp4")))
+				{
+					VLCPlayer.Media = new Media(Program.VLC, new Uri(Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), "images\\screens\\universal.mp4")));
+				}
+				else
+				{
+					VLCPlayer.Media = new Media(Program.VLC, new Uri(Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), "images\\screens\\preBRB.mkv")));
+				}
 				VLCPlayer.Play();
 			});
 
-			pnlUIPreBRB.Visible = true;
+			btnConfirmBRBPlayback.Visible = true;
+			btnSwitchScreen.Visible = true;
+			lblBRBManagerCredits.Visible = true;
 		}
 
 		// Shows screen between BRBs with countdown timer and information on next BRB
-		private void DisplayBetweenBRBScreen()
+		private void DisplayBetweenBRBScreen(bool reloadBackground)
 		{
-			Rectangle oldbounds = pnlUIInterBRB.Bounds;
-			pnlUIInterBRB.SetBounds(0, Screen.FromControl(this).Bounds.Height / 2 - pnlUIInterBRB.Height / 2, Screen.FromControl(this).Bounds.Width, oldbounds.Height);
+			//Rectangle oldbounds = pnlUIInterBRB.Bounds;
+			//pnlUIInterBRB.SetBounds(0, Screen.FromControl(this).Bounds.Height / 2 - pnlUIInterBRB.Height / 2, Screen.FromControl(this).Bounds.Width, oldbounds.Height);
 			int remMins = (int)Math.Round(GetRemainingBreakTime().TotalMinutes);
-			dispHobIsTakingABreak.Text = "Hob is taking a break. He will be back in about " + remMins + " minute" + (remMins == 1 ? "" : "s") + ". In the meantime, please enjoy the memes.";
+			dispBreakInfo.Text = "Warning: High meme density for " + remMins + " minute" + (remMins == 1 ? "" : "s");
 
-			dispNextBRBName.Text = NextOrCurrentBRB.Title != "" ? NextOrCurrentBRB.Title : NextOrCurrentBRB.Filename;
-			dispCountdown.Text = ((int)Math.Ceiling(secondCountdown)).ToString();
-			dispMoreInfoOnBRB.Text = NextOrCurrentBRB.Title != "" ? "Filename: " + NextOrCurrentBRB.Filename + (NextOrCurrentBRB.Credits != "" ? "  –  " : "") : "";
-			dispMoreInfoOnBRB.Text += NextOrCurrentBRB.Credits != "" ? "Authors: " + NextOrCurrentBRB‌.Credits : "";
+			dispNextBRBInfo.Text = "Next up: " + (NextOrCurrentBRB.Title != "" ? NextOrCurrentBRB.Title : NextOrCurrentBRB.Filename);
+			string brbText = NextOrCurrentBRB.Title != "" ? "Filename: " + NextOrCurrentBRB.Filename + "  –  " : "";
+			brbText += NextOrCurrentBRB.Credits != "" ? "Authors: " + NextOrCurrentBRB‌.Credits + "  –  " : "";
+			brbText += "Starting in " + ((int)Math.Ceiling(secondCountdown)).ToString();
 			if (NextOrCurrentBRB.AutoMuteEnabled)
 			{
-				dispMoreInfoOnBRB.Text += dispMoreInfoOnBRB.Text != "" ? "  –  " : "";
-				dispMoreInfoOnBRB.Text += "[AutoMute on]";
+				brbText += "  –  [AutoMute on]";
 			}
+			dispNextBRBMoreInfo.Text = brbText;
 
 			string randomEmote = GetRandomHobEmote();
 			picRandomHobEmote.Image = Image.FromFile("images\\hobEmotes\\" + randomEmote.Split('|')[1]);
-			lblRandomHobEmote.Text = "Random Hob Emote –\r\n";
+			/*lblRandomHobEmote.Text = "Random Hob Emote –\r\n";
 			switch (randomEmote.Split('|')[0])
 			{
 				case "C": lblRandomHobEmote.Text += "Common"; break;
@@ -418,59 +454,88 @@ namespace Hob_BRB_Player
 				case "R": lblRandomHobEmote.Text += "Rare"; break;
 				case "E": lblRandomHobEmote.Text += "Epic"; break;
 				case "L": default: lblRandomHobEmote.Text += "Legendary"; break;
+			}*/
+
+			if (reloadBackground)
+            {
+				ThreadPool.QueueUserWorkItem((o) => {
+					if (File.Exists(Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), "images\\screens\\universal.mp4")))
+					{
+						VLCPlayer.Media = new Media(Program.VLC, new Uri(Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), "images\\screens\\universal.mp4")));
+					}
+					else
+					{
+						VLCPlayer.Media = new Media(Program.VLC, new Uri(Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), "images\\screens\\interBRB.mkv")));
+					}
+					VLCPlayer.Play();
+				});
 			}
 
-			dispCurrentChapterNumber.Text = "The current chapter is " + Config.Chapter + ". If this is wrong, please remind Hob to update it.";
-
-			ThreadPool.QueueUserWorkItem((o) => {
-				VLCPlayer.Media = new Media(Program.VLC, new Uri(Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), "images\\screens\\interBRB.mkv")));
-				VLCPlayer.Play();
-			});
-
-			pnlUIInterBRB.Visible = true;
+			picRandomHobEmote.Visible = true;
+			dispBreakInfo.Visible = true;
+			dispNextBRBInfo.Visible = true;
+			dispNextBRBMoreInfo.Visible = true;
+			lblBRBManagerCredits.Visible = true;
 		}
 
 		// Shows screen after the last BRB with post-playback checklist
-		private void DisplayPostBRBScreen()
+		private void DisplayPostBRBScreen(bool reloadBackground)
 		{
-			Rectangle oldbounds = pnlUIPostBRB.Bounds;
-			pnlUIPostBRB.SetBounds(0, Screen.FromControl(this).Bounds.Height / 2 - pnlUIPostBRB.Height / 2, Screen.FromControl(this).Bounds.Width, oldbounds.Height);
+			//Rectangle oldbounds = pnlUIPostBRB.Bounds;
+			//pnlUIPostBRB.SetBounds(0, Screen.FromControl(this).Bounds.Height / 2 - pnlUIPostBRB.Height / 2, Screen.FromControl(this).Bounds.Width, oldbounds.Height);
 
-			ThreadPool.QueueUserWorkItem((o) => {
-				VLCPlayer.Media = new Media(Program.VLC, new Uri(Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), "images\\screens\\postBRB.mkv")));
-				VLCPlayer.Play();
-			});
+			if (reloadBackground)
+			{
+				ThreadPool.QueueUserWorkItem((o) =>
+				{
+					if (File.Exists(Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), "images\\screens\\universal.mp4")))
+					{
+						VLCPlayer.Media = new Media(Program.VLC, new Uri(Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), "images\\screens\\universal.mp4")));
+					}
+					else
+					{
+						VLCPlayer.Media = new Media(Program.VLC, new Uri(Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), "images\\screens\\postBRB.mkv")));
+					}
+					VLCPlayer.Play();
+				});
+			}
 
-			pnlUIPostBRB.Visible = true;
+			btnFinishBRBPlayback.Visible = true;
+			lblBRBManagerCredits.Visible = true;
 		}
 
 		// Shows a modified InterBRB screen for the special case of HobbVLC autoplay
 		private void DisplayHobbVLCScreen()
 		{
-			Rectangle oldbounds = pnlUIHobbVLC.Bounds;
-			pnlUIHobbVLC.SetBounds(0, Screen.FromControl(this).Bounds.Height / 2 - pnlUIHobbVLC.Height / 2, Screen.FromControl(this).Bounds.Width, oldbounds.Height);
+			//Rectangle oldbounds = pnlUIHobbVLC.Bounds;
+			//pnlUIHobbVLC.SetBounds(0, Screen.FromControl(this).Bounds.Height / 2 - pnlUIHobbVLC.Height / 2, Screen.FromControl(this).Bounds.Width, oldbounds.Height);
 			int remMins = (int)Math.Round(GetRemainingBreakTime().TotalMinutes);
-			dispWelcomeToHobbVLC.Text = "Maybe not – it seems we have a hobbVLC situation on our hands. Please enjoy one more BRB video of about "
-				                        + remMins + " minute" + (remMins == 1 ? "" : "s") + ".";
+			dispBreakInfo.Text = "hobbVLC mode automatically activated. Please have " + remMins + " more minute" + (remMins == 1 ? "" : "s") + " of memes.";
 
-			dispNextBRBNameHobbVLC.Text = NextOrCurrentBRB.Title != "" ? NextOrCurrentBRB.Title : NextOrCurrentBRB.Filename;
-			dispCountdownHobbVLC.Text = ((int)Math.Ceiling(secondCountdown)).ToString();
-			dispMoreInfoOnBRBHobbVLC.Text = NextOrCurrentBRB.Title != "" ? "Filename: " + NextOrCurrentBRB.Filename + (NextOrCurrentBRB.Credits != "" ? "  –  " : "") : "";
-			dispMoreInfoOnBRBHobbVLC.Text += NextOrCurrentBRB.Credits != "" ? "Authors: " + NextOrCurrentBRB‌.Credits : "";
+			dispNextBRBInfo.Text = "Next up: " + (NextOrCurrentBRB.Title != "" ? NextOrCurrentBRB.Title : NextOrCurrentBRB.Filename);
+			string brbText = NextOrCurrentBRB.Title != "" ? "Filename: " + NextOrCurrentBRB.Filename + "  –  " : "";
+			brbText += NextOrCurrentBRB.Credits != "" ? "Authors: " + NextOrCurrentBRB‌.Credits + "  –  " : "";
+			brbText += "Starting in " + ((int)Math.Ceiling(secondCountdown)).ToString();
 			if (NextOrCurrentBRB.AutoMuteEnabled)
 			{
-				dispMoreInfoOnBRBHobbVLC.Text += dispMoreInfoOnBRBHobbVLC.Text != "" ? "  –  " : "";
-				dispMoreInfoOnBRBHobbVLC.Text += "[AutoMute on]";
+				brbText += "  –  [AutoMute on]";
 			}
-
-			dispCurrentChapterNumberHobbVLC.Text = "The current chapter is " + Config.Chapter + ". If this is wrong, please remind Hob to update it.";
+			dispNextBRBMoreInfo.Text = brbText;
 
 			ThreadPool.QueueUserWorkItem((o) => {
-				VLCPlayer.Media = new Media(Program.VLC, new Uri(Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), "images\\screens\\hobbVLC.mkv")));
-				VLCPlayer.Play();
+				// Since hobbVLC is not triggered out of a video, don't reload the universal screen to avoid visible jumps
+				if (!File.Exists(Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), "images\\screens\\universal.mp4")))
+				{
+					VLCPlayer.Media = new Media(Program.VLC, new Uri(Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), "images\\screens\\hobbVLC.mkv")));
+					VLCPlayer.Play();
+				}
 			});
 
-			pnlUIHobbVLC.Visible = true;
+			picHobbVLC.Visible = true;
+			dispBreakInfo.Visible = true;
+			dispNextBRBInfo.Visible = true;
+			dispNextBRBMoreInfo.Visible = true;
+			lblBRBManagerCredits.Visible = true;
 		}
 
 		// Shows screen informing Chat of the fact that the media player encountered an error
@@ -484,10 +549,22 @@ namespace Hob_BRB_Player
 
 		private void HideAllUIScreens()
         {
-			pnlUIPreBRB.Visible = false;
-			pnlUIInterBRB.Visible = false;
-			pnlUIPostBRB.Visible = false;
-			pnlUIHobbVLC.Visible = false;
+			// PreBRB
+			btnConfirmBRBPlayback.Visible = false;
+			btnSwitchScreen.Visible = false;
+
+			// InterBRB / hobbVLC
+			picRandomHobEmote.Visible = false;
+			picHobbVLC.Visible = false;
+			dispBreakInfo.Visible = false;
+			dispNextBRBInfo.Visible = false;
+			dispNextBRBMoreInfo.Visible = false;
+
+			// PostBRB
+			btnFinishBRBPlayback.Visible = false;
+
+			lblBRBManagerCredits.Visible = false;
+
 			pnlUIError.Visible = false;
         }
 
@@ -734,9 +811,11 @@ namespace Hob_BRB_Player
 		// Changes the player to the next state, updates the player form accordingly and informs the control form of the fact
 		private void ChangePlayerState(BRBPlayerState newState)
 		{
+			// When not coming from a video, don't reload the background video (causes jumps and black frames)
+			bool shouldReloadBackground = PlayerState == BRBPlayerState.Playback;
 			PlayerState = newState;
 
-			if (VLCPlayer.Media != null)
+			if (VLCPlayer.Media != null && (newState == BRBPlayerState.Playback || newState == BRBPlayerState.BeginningOfBreak || shouldReloadBackground))
 			{
 				ThreadPool.QueueUserWorkItem((o) => { VLCPlayer.Stop(); });
 			}
@@ -758,7 +837,7 @@ namespace Hob_BRB_Player
                     {
 						tmrTenthSecond.Start();
 					}
-					DisplayBetweenBRBScreen();
+					DisplayBetweenBRBScreen(shouldReloadBackground);
 					break;
 
 				case BRBPlayerState.Playback:
@@ -776,7 +855,7 @@ namespace Hob_BRB_Player
 					secondCountdown = Config.TimeUntilHobbVLC;
 					PauseAndShowControls();
 					tmrTenthSecond.Start();
-					DisplayPostBRBScreen();
+					DisplayPostBRBScreen(shouldReloadBackground);
 					break;
 
 				case BRBPlayerState.HobbVLC:
